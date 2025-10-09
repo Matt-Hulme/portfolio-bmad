@@ -24,12 +24,12 @@ describe('Contact', () => {
     ).toBeInTheDocument();
   });
 
-  it('uses container layout', () => {
+  it('uses container layout with background', () => {
     const { container } = render(
       <BrowserRouter>
         <Contact />
       </BrowserRouter>,
     );
-    expect(container.querySelector('.min-h-screen')).toBeInTheDocument();
+    expect(container.querySelector('.bg-background')).toBeInTheDocument();
   });
 });

@@ -51,7 +51,7 @@ describe('NotFound', () => {
       </BrowserRouter>,
     );
     expect(
-      container.querySelector('.flex.min-h-screen.items-center.justify-center'),
+      container.querySelector('.flex.items-center.justify-center'),
     ).toBeInTheDocument();
   });
 });
