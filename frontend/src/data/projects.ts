@@ -1,4 +1,4 @@
-import type { Project } from '@/types/project';
+import type { Project, Technology, Role } from '@/types/project';
 
 export const projects: Project[] = [
   // Project 1: Frontend - React Portfolio (live link + images)
@@ -471,3 +471,42 @@ Enterprise-grade Kubernetes platform enabling rapid, reliable deployments with G
     dateCompleted: '2024-07-20',
   },
 ];
+
+// Helper function: Get all projects
+export function getAllProjects(): Project[] {
+  return projects;
+}
+
+// Helper function: Get project by slug
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}
+
+// Helper function: Get unique technologies from all projects
+export function getUniqueTechnologies(): Technology[] {
+  const techs = new Set<Technology>();
+  projects.forEach((p) => p.technologies.forEach((t) => techs.add(t)));
+  return Array.from(techs).sort();
+}
+
+// Helper function: Get unique roles from all projects
+export function getUniqueRoles(): Role[] {
+  const roles = new Set<Role>();
+  projects.forEach((p) => p.roles.forEach((r) => roles.add(r)));
+  return Array.from(roles).sort();
+}
+
+// Helper function: Filter projects by technology and/or role
+export function filterProjects(filters?: {
+  technology?: Technology;
+  role?: Role;
+}): Project[] {
+  if (!filters) return projects;
+
+  return projects.filter((project) => {
+    const matchesTech =
+      !filters.technology || project.technologies.includes(filters.technology);
+    const matchesRole = !filters.role || project.roles.includes(filters.role);
+    return matchesTech && matchesRole;
+  });
+}
