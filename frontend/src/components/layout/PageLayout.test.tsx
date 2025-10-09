@@ -90,4 +90,18 @@ describe('PageLayout', () => {
     expect(wrapper).toBeInTheDocument();
     expect(main?.className).toContain('flex-1');
   });
+
+  it('has skip to content link for accessibility', () => {
+    renderWithRouter();
+    const skipLink = screen.getByRole('link', { name: /skip to main content/i });
+    expect(skipLink).toBeInTheDocument();
+    expect(skipLink).toHaveAttribute('href', '#main-content');
+  });
+
+  it('main content has id for skip link target', () => {
+    renderWithRouter();
+    const main = document.querySelector('main');
+    expect(main).toHaveAttribute('id', 'main-content');
+    expect(main).toHaveAttribute('tabIndex', '-1');
+  });
 });
