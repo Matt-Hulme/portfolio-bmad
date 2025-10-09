@@ -1,6 +1,5 @@
-import { X } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { MultiSelect } from '@/components/ui/multi-select';
 import type { Technology, Role } from '@/types/project';
 
 export interface ProjectFiltersProps {
@@ -26,7 +25,7 @@ export function ProjectFilters({
     selectedTechnologies.length > 0 || selectedRoles.length > 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header with Clear Filters button */}
       <div className="flex items-center justify-between">
         <h2 className="text-primary text-xl font-semibold">Filters</h2>
@@ -42,69 +41,25 @@ export function ProjectFilters({
         )}
       </div>
 
-      {/* Technology Filters */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-medium text-gray-300">Technology</h3>
-        <div className="flex flex-wrap gap-2">
-          {availableTechnologies.map((tech) => {
-            const isSelected = selectedTechnologies.includes(tech);
-            return (
-              <Badge
-                key={tech}
-                variant={isSelected ? 'default' : 'outline'}
-                className={`cursor-pointer transition-all ${
-                  isSelected
-                    ? 'bg-primary/20 text-primary hover:bg-primary/30'
-                    : 'hover:border-primary/50 hover:text-primary border-gray-600 text-gray-400'
-                }`}
-                onClick={() => onTechnologyToggle(tech)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    onTechnologyToggle(tech);
-                  }
-                }}
-              >
-                {tech}
-                {isSelected && <X size={14} className="ml-1" />}
-              </Badge>
-            );
-          })}
+      {/* Filter Dropdowns */}
+      <div className="flex gap-4">
+        <div className="w-64">
+          <MultiSelect
+            label="Technology"
+            options={availableTechnologies}
+            selectedValues={selectedTechnologies}
+            onValueToggle={onTechnologyToggle}
+            placeholder="Select technologies..."
+          />
         </div>
-      </div>
-
-      {/* Role Filters */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-medium text-gray-300">Role</h3>
-        <div className="flex flex-wrap gap-2">
-          {availableRoles.map((role) => {
-            const isSelected = selectedRoles.includes(role);
-            return (
-              <Badge
-                key={role}
-                variant={isSelected ? 'default' : 'outline'}
-                className={`cursor-pointer transition-all ${
-                  isSelected
-                    ? 'bg-primary/20 text-primary hover:bg-primary/30'
-                    : 'hover:border-primary/50 hover:text-primary border-gray-600 text-gray-400'
-                }`}
-                onClick={() => onRoleToggle(role)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    onRoleToggle(role);
-                  }
-                }}
-              >
-                {role}
-                {isSelected && <X size={14} className="ml-1" />}
-              </Badge>
-            );
-          })}
+        <div className="w-64">
+          <MultiSelect
+            label="Role"
+            options={availableRoles}
+            selectedValues={selectedRoles}
+            onValueToggle={onRoleToggle}
+            placeholder="Select roles..."
+          />
         </div>
       </div>
 
