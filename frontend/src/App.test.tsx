@@ -3,21 +3,27 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe('App', () => {
-  it('renders without crashing', () => {
+  it('renders component showcase', () => {
     render(<App />);
-    expect(screen.getByText('Design System Test')).toBeInTheDocument();
+    expect(screen.getByText('Design System Showcase')).toBeInTheDocument();
   });
 
-  it('renders shadcn/ui components', () => {
+  it('displays color palette section', () => {
     render(<App />);
+    expect(screen.getByText('Color Palette')).toBeInTheDocument();
+    expect(screen.getByText('Primary Colors')).toBeInTheDocument();
+    expect(screen.getByText('Gray Scale')).toBeInTheDocument();
+  });
 
-    // Check for badges (use getAllByText since some labels appear multiple times)
-    expect(screen.getAllByText('Default').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('Secondary').length).toBe(2); // Badge + Button
+  it('displays typography section', () => {
+    render(<App />);
+    expect(screen.getByText('Typography')).toBeInTheDocument();
+  });
 
-    // Check for buttons
-    expect(screen.getByRole('button', { name: 'Primary' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Secondary' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Outline' })).toBeInTheDocument();
+  it('displays component sections', () => {
+    render(<App />);
+    expect(screen.getByText('Buttons')).toBeInTheDocument();
+    expect(screen.getByText('Badges')).toBeInTheDocument();
+    expect(screen.getByText('Cards')).toBeInTheDocument();
   });
 });
