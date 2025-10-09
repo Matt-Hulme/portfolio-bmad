@@ -9,9 +9,9 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Container } from '@/components/layout/Container';
 
-export function ComponentShowcase() {
+export function Home() {
   return (
-    <div className="min-h-screen bg-background py-12">
+    <div className="bg-background py-12">
       <Container>
         <div className="space-y-12">
           {/* Header */}

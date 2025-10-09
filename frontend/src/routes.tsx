@@ -1,0 +1,53 @@
+import { lazy, Suspense } from 'react';
+import type { RouteObject } from 'react-router-dom';
+import { RouteLoading } from '@/components/layout/RouteLoading';
+
+// Lazy load page components for code splitting
+const Home = lazy(() =>
+  import('@/pages/Home').then((module) => ({ default: module.Home })),
+);
+const Resume = lazy(() =>
+  import('@/pages/Resume').then((module) => ({ default: module.Resume })),
+);
+const Contact = lazy(() =>
+  import('@/pages/Contact').then((module) => ({ default: module.Contact })),
+);
+const NotFound = lazy(() =>
+  import('@/pages/NotFound').then((module) => ({ default: module.NotFound })),
+);
+
+// Wrap lazy components in Suspense
+function withSuspense(
+  Component: React.LazyExoticComponent<() => React.ReactElement>,
+) {
+  return (
+    <Suspense fallback={<RouteLoading />}>
+      <Component />
+    </Suspense>
+  );
+}
+
+export const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: withSuspense(Home),
+  },
+  {
+    path: '/resume',
+    element: withSuspense(Resume),
+  },
+  {
+    path: '/contact',
+    element: withSuspense(Contact),
+  },
+  {
+    path: '*',
+    element: withSuspense(NotFound),
+  },
+];
+
+export const navLinks = [
+  { path: '/', label: 'Projects' },
+  { path: '/resume', label: 'Resume' },
+  { path: '/contact', label: 'Contact' },
+];
