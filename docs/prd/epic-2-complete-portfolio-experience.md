@@ -72,7 +72,11 @@
 2. Vite proxy configuration routes `/api/*` requests to FastAPI backend during development
 3. Project grid fetches data from `GET /api/projects` on page load
 4. Modal fetches detailed data from `GET /api/projects/{slug}` when opened (or uses cached list data)
-5. Loading states displayed while API requests are in progress
+5. Enhanced loading states displayed while API requests are in progress:
+   - Progress bar that fills (not simple spinner)
+   - Skeleton screens for content loading
+   - Smooth transitions between loading and loaded states
+   - Loading indicators appropriate for each context (grid vs modal)
 6. Error states handled gracefully (show user-friendly message if API fails)
 7. Mock data from Story 1.4 removed and replaced with API calls
 8. TypeScript interfaces updated if needed to match API response schemas
