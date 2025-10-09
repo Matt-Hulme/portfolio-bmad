@@ -1,0 +1,35 @@
+{
+  "name": "portfolio-bmad",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "pre-pr": "bash scripts/smart-pre-pr-check.sh",
+    "pre-pr:frontend": "cd frontend && npm run build && npm run lint && npx tsc --noEmit",
+    "pre-pr:backend": "echo 'Backend pre-PR checks will be added in backend stories'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3"
+  },
+  "lint-staged": {
+    "frontend/**/*.{ts,tsx}": [
+      "cd frontend && npm run format",
+      "cd frontend && npm run lint --fix",
+      "cd frontend && npx tsc --noEmit"
+    ],
+    "backend/**/*.py": [
+      "cd backend && black .",
+      "cd backend && ruff check --fix .",
+      "cd backend && mypy ."
+    ]
+  }
+}
