@@ -11,44 +11,45 @@ describe('App', () => {
       </BrowserRouter>,
     );
     await waitFor(() => {
-      expect(screen.getByText('Design System Showcase')).toBeInTheDocument();
+      expect(screen.getByText('Portfolio')).toBeInTheDocument();
     });
   });
 
-  it('displays color palette section on home page', async () => {
+  it('displays portfolio description on home page', async () => {
     render(
       <BrowserRouter>
         <App />
       </BrowserRouter>,
     );
     await waitFor(() => {
-      expect(screen.getByText('Color Palette')).toBeInTheDocument();
+      expect(
+        screen.getByText(/A showcase of diverse projects/),
+      ).toBeInTheDocument();
     });
-    expect(screen.getByText('Primary Colors')).toBeInTheDocument();
-    expect(screen.getByText('Gray Scale')).toBeInTheDocument();
   });
 
-  it('displays typography section on home page', async () => {
+  it('displays project grid on home page', async () => {
     render(
       <BrowserRouter>
         <App />
       </BrowserRouter>,
     );
     await waitFor(() => {
-      expect(screen.getByText('Typography')).toBeInTheDocument();
+      // Check for first project card
+      expect(screen.getByText('Modern Portfolio Website')).toBeInTheDocument();
     });
   });
 
-  it('displays component sections on home page', async () => {
+  it('displays multiple project cards', async () => {
     render(
       <BrowserRouter>
         <App />
       </BrowserRouter>,
     );
     await waitFor(() => {
-      expect(screen.getByText('Buttons')).toBeInTheDocument();
+      const projectCards = screen.getAllByRole('button');
+      // Should have at least 7 project cards
+      expect(projectCards.length).toBeGreaterThanOrEqual(7);
     });
-    expect(screen.getByText('Badges')).toBeInTheDocument();
-    expect(screen.getByText('Cards')).toBeInTheDocument();
   });
 });

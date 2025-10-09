@@ -31,8 +31,8 @@ describe('projects data', () => {
     });
 
     it('at least 2 projects have live links', () => {
-      const projectsWithLiveLinks = projects.filter(
-        (p) => p.links?.some((link) => link.type === 'live'),
+      const projectsWithLiveLinks = projects.filter((p) =>
+        p.links?.some((link) => link.type === 'live'),
       );
       expect(projectsWithLiveLinks.length).toBeGreaterThanOrEqual(2);
     });
@@ -46,7 +46,9 @@ describe('projects data', () => {
 
     it('at least 2 projects have neither links nor images', () => {
       const projectsWithoutLinksOrImages = projects.filter(
-        (p) => (!p.links || p.links.length === 0) && (!p.images || p.images.length === 0),
+        (p) =>
+          (!p.links || p.links.length === 0) &&
+          (!p.images || p.images.length === 0),
       );
       expect(projectsWithoutLinksOrImages.length).toBeGreaterThanOrEqual(2);
     });
@@ -269,8 +271,7 @@ describe('projects data', () => {
     it('includes Data projects', () => {
       const dataProjects = projects.filter(
         (p) =>
-          p.roles.includes('Data Analyst') ||
-          p.roles.includes('Data Engineer'),
+          p.roles.includes('Data Analyst') || p.roles.includes('Data Engineer'),
       );
       expect(dataProjects.length).toBeGreaterThan(0);
     });

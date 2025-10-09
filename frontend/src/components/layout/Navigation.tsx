@@ -61,10 +61,10 @@ export function Navigation({ className }: NavigationProps) {
         </SheetTrigger>
         <SheetContent
           side="right"
-          className="w-[250px] bg-background border-muted"
+          className="bg-background border-muted w-[250px]"
         >
           <SheetHeader>
-            <SheetTitle className="font-mono text-primary">Menu</SheetTitle>
+            <SheetTitle className="text-primary font-mono">Menu</SheetTitle>
             <SheetDescription>Navigate to different sections</SheetDescription>
           </SheetHeader>
           <nav
@@ -76,8 +76,8 @@ export function Navigation({ className }: NavigationProps) {
                 key={link.path}
                 onClick={() => handleMobileNavClick(link.path)}
                 className={cn(
-                  'font-mono text-left text-sm transition-colors hover:text-primary',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+                  'hover:text-primary text-left font-mono text-sm transition-colors',
+                  'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                   'text-foreground',
                 )}
               >
