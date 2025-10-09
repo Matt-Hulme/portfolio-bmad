@@ -581,13 +581,13 @@ import type { ComponentProps } from 'react';
 
 ## Future Improvements to Track
 
-### Loading States Enhancement (Story TBD)
+### Loading States Enhancement
 - Replace spinner with progress bar that fills
 - Add skeleton screens for content loading
 - More sophisticated loading states
 - Smoother transitions
 
-**Status:** Noted for future story (Epic 2 or later)
+**Status:** ✅ Added to Story 2.4: Frontend API Integration (Epic 2)
 
 ---
 
