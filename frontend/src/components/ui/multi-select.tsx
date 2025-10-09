@@ -8,21 +8,21 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
-export interface MultiSelectProps {
+export interface MultiSelectProps<T extends string = string> {
   label: string;
-  options: string[];
-  selectedValues: string[];
-  onValueToggle: (value: string) => void;
+  options: T[];
+  selectedValues: T[];
+  onValueToggle: (value: T) => void;
   placeholder?: string;
 }
 
-export function MultiSelect({
+export function MultiSelect<T extends string = string>({
   label,
   options,
   selectedValues,
   onValueToggle,
   placeholder = 'Select...',
-}: MultiSelectProps) {
+}: MultiSelectProps<T>) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -34,7 +34,7 @@ export function MultiSelect({
           <button
             role="combobox"
             aria-expanded={open}
-            className="focus:ring-primary flex h-9 w-full items-center justify-between rounded-md border border-gray-700 bg-gray-900/50 px-3 py-2 text-sm shadow-sm hover:bg-gray-800/50 hover:text-gray-100 focus:ring-1 focus:outline-none"
+            className="focus:ring-primary flex h-9 w-full items-center justify-between rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 shadow-sm hover:bg-gray-700 hover:text-gray-100 focus:ring-1 focus:outline-none"
           >
             {selectedValues.length > 0
               ? `${selectedValues.length} selected`

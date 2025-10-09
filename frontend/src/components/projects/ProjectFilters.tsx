@@ -42,25 +42,21 @@ export function ProjectFilters({
       </div>
 
       {/* Filter Dropdowns */}
-      <div className="flex gap-4">
-        <div className="w-64">
-          <MultiSelect
-            label="Technology"
-            options={availableTechnologies}
-            selectedValues={selectedTechnologies}
-            onValueToggle={onTechnologyToggle}
-            placeholder="Select technologies..."
-          />
-        </div>
-        <div className="w-64">
-          <MultiSelect
-            label="Role"
-            options={availableRoles}
-            selectedValues={selectedRoles}
-            onValueToggle={onRoleToggle}
-            placeholder="Select roles..."
-          />
-        </div>
+      <div className="flex flex-row items-start gap-6">
+        <MultiSelect
+          label="Technology"
+          options={availableTechnologies}
+          selectedValues={selectedTechnologies}
+          onValueToggle={onTechnologyToggle}
+          placeholder="Select technologies..."
+        />
+        <MultiSelect
+          label="Role"
+          options={availableRoles}
+          selectedValues={selectedRoles}
+          onValueToggle={onRoleToggle}
+          placeholder="Select roles..."
+        />
       </div>
 
       {/* Active filters summary */}
