@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
@@ -28,6 +29,9 @@ export function ProjectDetailModal({
       <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
         <DialogHeader className="space-y-3">
           <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {project.summary}
+          </DialogDescription>
           {project.dateCompleted && (
             <p className="text-muted-foreground text-sm">
               Completed:{' '}

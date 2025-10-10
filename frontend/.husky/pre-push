@@ -2,7 +2,7 @@
 
 echo "🔍 Running pre-push checks..."
 
-# Run the same checks as pre-commit but add build
+# Run linting, formatting, type checking, unit tests, and build
 npm run lint && \
 npm run format:check && \
 npx tsc --noEmit && \
@@ -12,6 +12,17 @@ npm run build
 if [ $? -ne 0 ]; then
   echo "❌ Pre-push checks failed! Push aborted."
   exit 1
+fi
+
+# Run Playwright E2E tests if they exist
+if [ -d "e2e" ] && [ -f "playwright.config.ts" ]; then
+  echo "🎭 Running Playwright E2E tests..."
+  npx playwright test
+
+  if [ $? -ne 0 ]; then
+    echo "❌ E2E tests failed! Push aborted."
+    exit 1
+  fi
 fi
 
 echo "✅ All pre-push checks passed!"
