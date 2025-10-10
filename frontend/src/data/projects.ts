@@ -496,17 +496,27 @@ export function getUniqueRoles(): Role[] {
   return Array.from(roles).sort();
 }
 
-// Helper function: Filter projects by technology and/or role
+// Helper function: Filter projects by technology and/or role (supports multiple selections with AND logic)
 export function filterProjects(filters?: {
-  technology?: Technology;
-  role?: Role;
+  technologies?: Technology[];
+  roles?: Role[];
 }): Project[] {
-  if (!filters) return projects;
+  if (!filters || (!filters.technologies?.length && !filters.roles?.length)) {
+    return projects;
+  }
 
   return projects.filter((project) => {
+    // AND logic: If technologies are selected, project must have ALL selected technologies
     const matchesTech =
-      !filters.technology || project.technologies.includes(filters.technology);
-    const matchesRole = !filters.role || project.roles.includes(filters.role);
+      !filters.technologies?.length ||
+      filters.technologies.every((tech) => project.technologies.includes(tech));
+
+    // AND logic: If roles are selected, project must have ALL selected roles
+    const matchesRole =
+      !filters.roles?.length ||
+      filters.roles.every((role) => project.roles.includes(role));
+
+    // Project must match both technology AND role filters
     return matchesTech && matchesRole;
   });
 }

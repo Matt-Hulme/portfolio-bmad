@@ -1,9 +1,29 @@
 import { Container } from '@/components/layout/Container';
 import { ProjectGrid } from '@/components/projects/ProjectGrid';
-import { getAllProjects } from '@/data/projects';
+import { ProjectFilters } from '@/components/projects/ProjectFilters';
+import {
+  filterProjects,
+  getUniqueTechnologies,
+  getUniqueRoles,
+} from '@/data/projects';
+import { useProjectFilters } from '@/hooks/useProjectFilters';
 
 export function Home() {
-  const projects = getAllProjects();
+  const {
+    selectedTechnologies,
+    selectedRoles,
+    toggleTechnology,
+    toggleRole,
+    clearFilters,
+  } = useProjectFilters();
+
+  const availableTechnologies = getUniqueTechnologies();
+  const availableRoles = getUniqueRoles();
+
+  const filteredProjects = filterProjects({
+    technologies: selectedTechnologies,
+    roles: selectedRoles,
+  });
 
   return (
     <div className="bg-background py-12">
@@ -20,10 +40,23 @@ export function Home() {
             </p>
           </div>
 
+          {/* Filters Section */}
+          <aside className="rounded-lg border border-gray-800 bg-gray-900/30 p-6">
+            <ProjectFilters
+              selectedTechnologies={selectedTechnologies}
+              selectedRoles={selectedRoles}
+              availableTechnologies={availableTechnologies}
+              availableRoles={availableRoles}
+              onTechnologyToggle={toggleTechnology}
+              onRoleToggle={toggleRole}
+              onClearFilters={clearFilters}
+            />
+          </aside>
+
           {/* Projects Grid */}
           <section>
             <ProjectGrid
-              projects={projects}
+              projects={filteredProjects}
               onProjectClick={(project) => {
                 // TODO: Open modal in Story 1.7
                 console.log('Project clicked:', project.slug);

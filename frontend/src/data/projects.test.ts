@@ -171,26 +171,51 @@ describe('projects data', () => {
       expect(result).toHaveLength(7);
     });
 
-    it('filters by technology only', () => {
-      const result = filterProjects({ technology: 'React' });
+    it('returns all projects when empty arrays provided', () => {
+      const result = filterProjects({ technologies: [], roles: [] });
+      expect(result).toHaveLength(7);
+    });
+
+    it('filters by single technology', () => {
+      const result = filterProjects({ technologies: ['React'] });
       expect(result.length).toBeGreaterThan(0);
       result.forEach((project) => {
         expect(project.technologies).toContain('React');
       });
     });
 
-    it('filters by role only', () => {
-      const result = filterProjects({ role: 'Backend Developer' });
+    it('filters by multiple technologies with AND logic', () => {
+      const result = filterProjects({ technologies: ['React', 'TypeScript'] });
+      expect(result.length).toBeGreaterThan(0);
+      result.forEach((project) => {
+        expect(project.technologies).toContain('React');
+        expect(project.technologies).toContain('TypeScript');
+      });
+    });
+
+    it('filters by single role', () => {
+      const result = filterProjects({ roles: ['Backend Developer'] });
       expect(result.length).toBeGreaterThan(0);
       result.forEach((project) => {
         expect(project.roles).toContain('Backend Developer');
       });
     });
 
-    it('filters by both technology and role (AND logic)', () => {
+    it('filters by multiple roles with AND logic', () => {
       const result = filterProjects({
-        technology: 'React',
-        role: 'Frontend Developer',
+        roles: ['Frontend Developer', 'Full-Stack Developer'],
+      });
+      // Projects must have BOTH roles
+      result.forEach((project) => {
+        expect(project.roles).toContain('Frontend Developer');
+        expect(project.roles).toContain('Full-Stack Developer');
+      });
+    });
+
+    it('filters by both technologies and roles with AND logic', () => {
+      const result = filterProjects({
+        technologies: ['React'],
+        roles: ['Frontend Developer'],
       });
       expect(result.length).toBeGreaterThan(0);
       result.forEach((project) => {
@@ -201,27 +226,27 @@ describe('projects data', () => {
 
     it('returns empty array when no projects match technology filter', () => {
       const result = filterProjects({
-        technology: 'NonExistentTech' as Technology,
+        technologies: ['NonExistentTech' as Technology],
       });
       expect(result).toHaveLength(0);
     });
 
     it('returns empty array when no projects match role filter', () => {
-      const result = filterProjects({ role: 'NonExistentRole' as Role });
+      const result = filterProjects({ roles: ['NonExistentRole' as Role] });
       expect(result).toHaveLength(0);
     });
 
     it('returns empty array when no projects match combined filters', () => {
       // Find a technology and role that don't appear together
       const result = filterProjects({
-        technology: 'Python',
-        role: 'UI/UX Designer',
+        technologies: ['Python'],
+        roles: ['UI/UX Designer'],
       });
       expect(result).toHaveLength(0);
     });
 
     it('filters TypeScript projects', () => {
-      const result = filterProjects({ technology: 'TypeScript' });
+      const result = filterProjects({ technologies: ['TypeScript'] });
       expect(result.length).toBeGreaterThan(0);
       result.forEach((project) => {
         expect(project.technologies).toContain('TypeScript');
@@ -229,7 +254,7 @@ describe('projects data', () => {
     });
 
     it('filters Full-Stack Developer role', () => {
-      const result = filterProjects({ role: 'Full-Stack Developer' });
+      const result = filterProjects({ roles: ['Full-Stack Developer'] });
       expect(result.length).toBeGreaterThan(0);
       result.forEach((project) => {
         expect(project.roles).toContain('Full-Stack Developer');
@@ -237,11 +262,40 @@ describe('projects data', () => {
     });
 
     it('handles multiple projects matching same filter', () => {
-      const techResult = filterProjects({ technology: 'Docker' });
-      const roleResult = filterProjects({ role: 'DevOps Engineer' });
+      const techResult = filterProjects({ technologies: ['Docker'] });
+      const roleResult = filterProjects({ roles: ['DevOps Engineer'] });
 
       expect(techResult.length).toBeGreaterThan(0);
       expect(roleResult.length).toBeGreaterThan(0);
+    });
+
+    it('requires ALL selected technologies (AND logic)', () => {
+      const result = filterProjects({
+        technologies: ['React', 'TypeScript', 'TailwindCSS'],
+      });
+      result.forEach((project) => {
+        expect(project.technologies).toContain('React');
+        expect(project.technologies).toContain('TypeScript');
+        expect(project.technologies).toContain('TailwindCSS');
+      });
+    });
+
+    it('returns specific project when filtered precisely', () => {
+      const result = filterProjects({ technologies: ['TensorFlow'] });
+      expect(result.length).toBe(1);
+      expect(result[0].title).toBe('Real-Time Sentiment Analysis Pipeline');
+    });
+
+    it('handles complex multi-filter scenario', () => {
+      const result = filterProjects({
+        technologies: ['Docker', 'Kubernetes'],
+        roles: ['DevOps Engineer'],
+      });
+      result.forEach((project) => {
+        expect(project.technologies).toContain('Docker');
+        expect(project.technologies).toContain('Kubernetes');
+        expect(project.roles).toContain('DevOps Engineer');
+      });
     });
   });
 
