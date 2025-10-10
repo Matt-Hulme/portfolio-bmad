@@ -26,7 +26,7 @@ export function Home() {
   });
 
   return (
-    <div className="bg-background py-12">
+    <div className="bg-background overflow-x-hidden py-8 md:py-12">
       <Container>
         <div className="space-y-8">
           {/* Hero Section */}
@@ -41,7 +41,7 @@ export function Home() {
           </div>
 
           {/* Filters Section */}
-          <aside className="rounded-lg border border-gray-800 bg-gray-900/30 p-6">
+          <aside className="p-y-4 md:p-y-6 bg-gray-900/30">
             <ProjectFilters
               selectedTechnologies={selectedTechnologies}
               selectedRoles={selectedRoles}
