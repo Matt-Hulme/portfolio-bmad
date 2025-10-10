@@ -1,0 +1,72 @@
+echo "🚀 Running pre-push checks..."
+
+# Get the current branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Get list of commits being pushed
+COMMITS=$(git log @{u}..HEAD --oneline 2>/dev/null || git log HEAD --oneline)
+
+echo "📋 Branch: $CURRENT_BRANCH"
+echo "📦 Commits to push:"
+echo "$COMMITS"
+
+# Detect if frontend or backend files changed in commits being pushed
+FRONTEND_CHANGED=$(git diff @{u}..HEAD --name-only --diff-filter=ACM 2>/dev/null | grep -q "^frontend/" && echo "true" || echo "false")
+BACKEND_CHANGED=$(git diff @{u}..HEAD --name-only --diff-filter=ACM 2>/dev/null | grep -q "^backend/" && echo "true" || echo "false")
+
+# If no upstream, check all files in HEAD
+if [ $? -ne 0 ]; then
+  FRONTEND_CHANGED=$(git diff --name-only --diff-filter=ACM | grep -q "^frontend/" && echo "true" || echo "false")
+  BACKEND_CHANGED=$(git diff --name-only --diff-filter=ACM | grep -q "^backend/" && echo "true" || echo "false")
+fi
+
+# Track if any checks fail
+CHECKS_FAILED=0
+
+# Frontend checks (full test suite)
+if [ "$FRONTEND_CHANGED" = "true" ]; then
+  echo "📦 Frontend files changed, running full test suite..."
+
+  cd frontend || exit 1
+
+  echo "  ✓ Running ESLint..."
+  npm run lint || CHECKS_FAILED=1
+
+  echo "  ✓ Running Prettier..."
+  npm run format:check || CHECKS_FAILED=1
+
+  echo "  ✓ Running TypeScript check..."
+  npx tsc --noEmit || CHECKS_FAILED=1
+
+  echo "  ✓ Running full test suite..."
+  npm test -- --run || CHECKS_FAILED=1
+
+  cd ..
+fi
+
+# Backend checks (full test suite)
+if [ "$BACKEND_CHANGED" = "true" ]; then
+  echo "🐍 Backend files changed, running full test suite..."
+
+  cd backend || exit 1
+
+  echo "  ✓ Running Ruff..."
+  venv/bin/ruff check . || CHECKS_FAILED=1
+
+  echo "  ✓ Running Black..."
+  venv/bin/black --check . || CHECKS_FAILED=1
+
+  echo "  ✓ Running full test suite..."
+  venv/bin/pytest -v || CHECKS_FAILED=1
+
+  cd ..
+fi
+
+# Exit with failure if any checks failed
+if [ $CHECKS_FAILED -eq 1 ]; then
+  echo "❌ Pre-push checks failed! Fix the issues above before pushing."
+  exit 1
+fi
+
+echo "✅ All pre-push checks passed! Ready to push."
+exit 0
