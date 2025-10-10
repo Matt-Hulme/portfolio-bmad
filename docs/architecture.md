@@ -131,19 +131,25 @@ portfolio-bmad/
 
 ### 3.1 Frontend Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| React | 19.1.1 | UI framework |
-| TypeScript | 5.8+ | Type safety |
-| Vite | 7.1.4 | Build tool & dev server |
-| TailwindCSS | 4.1.13 | Utility-first styling |
-| shadcn/ui | 3.0+ | Component library |
-| React Router | 6.x | Client-side routing |
-| React Query | 5.x | Server state management |
-| Vitest | 2.x | Unit & integration testing |
-| Playwright | 1.x | E2E testing |
-| ESLint | 9.x | Linting |
-| Prettier | 3.x | Code formatting |
+| Technology | Version | Purpose | Documentation |
+|------------|---------|---------|---------------|
+| React | 19.1.1 | UI framework | [React Docs](https://react.dev) |
+| TypeScript | 5.8+ | Type safety | [TS Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) |
+| Vite | 7.1.4 | Build tool & dev server | [Vite Guide](https://vite.dev/guide/) |
+| TailwindCSS | 4.1.13 | Utility-first styling | [Tailwind v4 Docs](https://tailwindcss.com/docs), [v4 Upgrade Guide](https://tailwindcss.com/docs/upgrade-guide) |
+| shadcn/ui | 3.0+ | Component library | [shadcn/ui](https://ui.shadcn.com) |
+| React Router | 6.x | Client-side routing | [React Router](https://reactrouter.com) |
+| React Query | 5.x | Server state management | [TanStack Query](https://tanstack.com/query/latest) |
+| Vitest | 2.x | Unit & integration testing | [Vitest Docs](https://vitest.dev) |
+| Playwright | 1.x | E2E testing | [Playwright](https://playwright.dev) |
+| ESLint | 9.x | Linting | [ESLint Docs](https://eslint.org/docs/latest/) |
+| Prettier | 3.x | Code formatting | [Prettier](https://prettier.io/docs/en/) |
+
+**Critical Note - Tailwind v4:**
+- We use Tailwind v4 which has significant syntax changes from v3
+- **DO NOT** use `@tailwind base`, `@tailwind components`, `@tailwind utilities`
+- **CORRECT v4 syntax:** `@import "tailwindcss";`
+- See [v4 Upgrade Guide](https://tailwindcss.com/docs/upgrade-guide) for complete migration details
 
 ### 3.2 Backend Stack
 
@@ -1408,6 +1414,26 @@ python scripts/seed_db.py                  # Seed database
 
 ### 12.4 Git Workflow
 
+**Branch Strategy:**
+- **ALWAYS** work in feature branches, never directly in `main`
+- **ALWAYS** fetch latest `main` before creating a new branch
+- Branch naming: `story/{story-number}-{brief-description}` (e.g., `story/1.7-project-detail-modal`)
+- Create feature branches from latest `main` to avoid merge conflicts
+
+**Creating a New Feature Branch:**
+```bash
+# 1. Fetch latest changes from origin
+git fetch origin
+
+# 2. Create and checkout new branch from origin/main
+git checkout -b story/1.X-feature-name origin/main
+
+# OR if already on main:
+git checkout main
+git pull origin main
+git checkout -b story/1.X-feature-name
+```
+
 **Commit Message Convention:**
 ```
 <type>(<scope>): <subject>
@@ -1422,6 +1448,20 @@ fix(api): correct 404 response format for invalid slug
 docs(architecture): update testing strategy section
 test(projects): add integration tests for ProjectsPage
 chore(deps): update React to 19.1.1
+```
+
+**Pull Request Workflow:**
+```bash
+# 1. Push feature branch to remote
+git push -u origin story/1.X-feature-name
+
+# 2. Create PR via gh CLI or GitHub UI
+gh pr create --title "Story 1.X: Feature Name" --body "PR description"
+
+# 3. After PR approval, merge via GitHub UI
+# 4. Delete feature branch after merge
+git branch -d story/1.X-feature-name
+git push origin --delete story/1.X-feature-name
 ```
 
 ---

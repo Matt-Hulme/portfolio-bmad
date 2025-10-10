@@ -1,0 +1,176 @@
+import type { Project, ProjectLink } from '@/types/project';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { ExternalLink, Github } from 'lucide-react';
+
+interface ProjectDetailModalProps {
+  project: Project | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function ProjectDetailModal({
+  project,
+  isOpen,
+  onClose,
+}: ProjectDetailModalProps) {
+  if (!project) return null;
+
+  return (
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
+        <DialogHeader className="space-y-3">
+          <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+          <DialogDescription className="sr-only">
+            {project.summary}
+          </DialogDescription>
+          {project.dateCompleted && (
+            <p className="text-muted-foreground text-sm">
+              Completed:{' '}
+              {new Date(project.dateCompleted).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+              })}
+            </p>
+          )}
+        </DialogHeader>
+
+        {/* Description with markdown */}
+        <div className="prose prose-sm prose-neutral dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-a:text-primary max-w-none">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {project.description}
+          </ReactMarkdown>
+        </div>
+
+        {/* Metadata Section */}
+        <div className="border-border bg-muted/30 space-y-4 rounded-lg border p-4">
+          {/* Roles */}
+          {project.roles && project.roles.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-foreground text-sm font-semibold">Roles</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.roles.map((role) => (
+                  <Badge key={role} variant="default">
+                    {role}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Technologies */}
+          {project.technologies && project.technologies.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-foreground text-sm font-semibold">
+                Technologies
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <Badge key={tech} variant="outline">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Industry */}
+          {project.industry && (
+            <div className="space-y-2">
+              <h3 className="text-foreground text-sm font-semibold">
+                Industry
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                {project.industry}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Links Section */}
+        {project.links && project.links.length > 0 && (
+          <div className="border-border bg-muted/30 space-y-3 rounded-lg border p-4">
+            <h3 className="text-foreground text-sm font-semibold">
+              Project Links
+            </h3>
+            <div className="flex flex-col gap-3">
+              {project.links.map((link, index) => (
+                <ProjectLinkItem key={index} link={link} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Media Section */}
+        {project.images && project.images.length > 0 && (
+          <div className="space-y-3">
+            <h3 className="text-foreground text-sm font-semibold">Gallery</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {project.images.map((image, index) => (
+                <div
+                  key={index}
+                  className="group border-border bg-muted/20 hover:border-primary/50 space-y-2 overflow-hidden rounded-lg border transition-all"
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  {image.caption && (
+                    <p className="text-muted-foreground px-3 pb-3 text-xs">
+                      {image.caption}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// Helper component for rendering project links with icons
+function ProjectLinkItem({ link }: { link: ProjectLink }) {
+  const getIcon = () => {
+    switch (link.type) {
+      case 'github':
+        return <Github className="h-4 w-4" />;
+      case 'live':
+      case 'demo':
+      case 'case-study':
+      case 'other':
+      default:
+        return <ExternalLink className="h-4 w-4" />;
+    }
+  };
+
+  return (
+    <a
+      href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group hover:border-primary/30 hover:bg-primary/5 flex items-center gap-3 rounded-md border border-transparent px-3 py-2 text-sm transition-all"
+    >
+      <span className="text-primary flex-shrink-0">{getIcon()}</span>
+      <span className="text-foreground group-hover:text-primary flex-1">
+        {link.label}
+      </span>
+      <span className="text-muted-foreground text-xs capitalize">
+        {link.type === 'live' ? '🟢 Live' : link.type}
+      </span>
+    </a>
+  );
+}

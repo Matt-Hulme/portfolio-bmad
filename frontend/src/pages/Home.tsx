@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { Container } from '@/components/layout/Container';
 import { ProjectGrid } from '@/components/projects/ProjectGrid';
 import { ProjectFilters } from '@/components/projects/ProjectFilters';
+import { ProjectDetailModal } from '@/components/projects/ProjectDetailModal';
 import {
   filterProjects,
   getUniqueTechnologies,
   getUniqueRoles,
 } from '@/data/projects';
 import { useProjectFilters } from '@/hooks/useProjectFilters';
+import type { Project } from '@/types/project';
 
 export function Home() {
   const {
@@ -17,6 +20,9 @@ export function Home() {
     clearFilters,
   } = useProjectFilters();
 
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const availableTechnologies = getUniqueTechnologies();
   const availableRoles = getUniqueRoles();
 
@@ -24,6 +30,16 @@ export function Home() {
     technologies: selectedTechnologies,
     roles: selectedRoles,
   });
+
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 200);
+  };
 
   return (
     <div className="bg-background overflow-x-hidden py-8 md:py-12">
@@ -57,14 +73,18 @@ export function Home() {
           <section>
             <ProjectGrid
               projects={filteredProjects}
-              onProjectClick={(project) => {
-                // TODO: Open modal in Story 1.7
-                console.log('Project clicked:', project.slug);
-              }}
+              onProjectClick={handleProjectClick}
             />
           </section>
         </div>
       </Container>
+
+      {/* Project Detail Modal */}
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

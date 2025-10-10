@@ -1,11 +1,7 @@
-@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss";
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @theme inline {
   /* Hacker Minimalist Design Tokens */
@@ -133,40 +129,15 @@
 }
 
 @layer base {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
   * {
     border-color: var(--border);
     outline-color: var(--ring);
-  }
-
-  html {
-    overflow-x: hidden;
-    overflow-y: scroll; /* Force vertical scrollbar to prevent layout shift */
-    width: 100%;
-    max-width: 100vw;
-  }
-
-  body {
-    overflow-x: hidden;
-    width: 100%;
-    max-width: 100vw;
   }
 
   body {
     background-color: #0f0f0f;
     color: var(--foreground);
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
-  }
-
-  #root {
-    overflow-x: hidden;
-    width: 100%;
-    max-width: 100vw;
   }
 
   /* Headings */
