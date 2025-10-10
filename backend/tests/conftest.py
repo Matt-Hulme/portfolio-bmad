@@ -7,14 +7,24 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.database import Base
-from app.models import Project, ProjectImage, Role, Technology
+
+# Import models FIRST to register them with Base.metadata
+from app.models import Project, ProjectImage, Role, Technology  # noqa: F401
 
 
 @pytest.fixture(scope="function")
 def test_db():
     """Create an in-memory SQLite database for testing."""
-    # Create in-memory database
-    engine = create_engine("sqlite:///:memory:", connect_args={"check_same_thread": False})
+    # Use file-based SQLite for testing to avoid connection issues
+    # The file will be deleted after the test
+    import os
+    import tempfile
+
+    # Create a temporary database file
+    db_fd, db_path = tempfile.mkstemp(suffix=".db")
+    os.close(db_fd)
+
+    engine = create_engine(f"sqlite:///{db_path}", connect_args={"check_same_thread": False})
 
     # Create tables
     Base.metadata.create_all(bind=engine)
@@ -23,6 +33,8 @@ def test_db():
 
     # Clean up
     Base.metadata.drop_all(bind=engine)
+    engine.dispose()
+    os.unlink(db_path)
 
 
 @pytest.fixture(scope="function")
