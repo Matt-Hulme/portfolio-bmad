@@ -1,8 +1,11 @@
-# Development Workflow & Process
+# Project Conventions
 
-This document defines the core development workflow and process. It is **technology-agnostic** and applies to any project regardless of tech stack.
+**This document defines project-specific conventions that extend the standard BMAD Method.**
 
-For tech-specific setup (pre-commit hooks, linting, formatting, etc.), see the project's tech-specific documentation.
+These are **custom additions** for this project and can be easily extracted for reuse in other projects.
+
+> **Base BMAD Method:** See `.bmad-core/enhanced-ide-development-workflow.md` for the standard workflow
+> **This Document:** Project-specific git workflow, quality gates, and commit protocols
 
 ---
 
@@ -488,3 +491,5 @@ Check the project's tech-specific documentation for:
 | 2025-10-08 | Added task completion protocol | Dev Agent (Claude) |
 | 2025-10-10 | Enhanced task completion protocol with MANDATORY commit-per-task rule | Dev Agent (Claude) |
 | 2025-10-10 | Removed tech-specific content to keep workflow tech-agnostic | Dev Agent (Claude) |
+| 2025-10-10 | **Renamed to project-conventions.md and added to devLoadAlwaysFiles** | Dev Agent (Claude) |
+| 2025-10-10 | Clarified this extends BMAD Method as custom additions for easy extraction | Dev Agent (Claude) |
