@@ -1,0 +1,262 @@
+Project Title,Project Slug,Summary,Full Description,Role(s),Live Site URL,GH Repo
+TP Lists,Travelpass Lists,"An interactive travel guide builder that enables users to create, organize, and share curated destination lists with photos and notes.","### Overview
+The List Builder is an interactive feature that enables Travelpass users to transform travel ideas into shareable guides. I developed the frontend experience to consolidate photo uploads, event management, and social sharing into a cohesive workflow.
+
+### Features
+Users can:
+- Add a **cover photo** that displays in the list header
+- Add any number of **events** with photos and notes
+- Create **custom sections** to group events by theme
+- **Drag and drop** to reorder sections or events
+- Add **tags** to improve list discoverability
+- **Like, share, and save** lists with other Travelpass users
+- View metrics for **likes, shares, saves, and views**
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Data Layer:** GraphQL",Frontend Dev,https://travelpass.com/lists/01J8G9JTNFA2J0?name=Star-Wars-Filming-Locations,None
+TP Dashboard,Travelpass Dashboard,"A central hub that enables Travelpass users to manage their profile, lists, saved content, and bookings in one unified interface.","### Overview
+The Dashboard is a personalized home base that consolidates profile management, content discovery, and bookings into a single interface. I designed and built the frontend to provide seamless access to all core user actions.
+
+### Features
+Users can:
+- See **profile completion status** and fill out missing information
+- View **suggested travelers** and follow/unfollow them
+- Browse a live **Feed** of followed users and their updates to Lists
+- View and manage their own **Lists** (create, edit, and update in one place)
+- Access all **Saved content** (Hotels, Experiences, Lists, and List Events) in a unified view
+- See and manage **upcoming and past bookings** directly in the dashboard
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Data Layer:** GraphQL",Frontend Dev,https://travelpass.com/dashboard,None
+TP Profiles Refactor,Travelpass Profiles,"A user profile system that enables travelers to manage their identity, connections, and shared content in one place.","### Overview
+The Profiles feature is a personal space where Travelpass users manage their information, showcase their travel style, and connect with other travelers. I refactored the frontend to improve profile editing, follower management, and list visibility.
+
+### Features
+Users can:
+- View and edit their **profile information** (if viewing their own page)
+- **Share** their profile with others
+- Manage **followers and following** lists
+- View and edit **Travel Style tags**
+- Track and update **Countries Visited**
+- View and edit all their **Lists** in one place
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Data Layer:** GraphQL",Frontend Dev,https://travelpass.com/profile/matt,None
+SW 1,Star Wars Archive 1,"A Star Wars reference archive that enables fans to explore films, characters, planets, species, vehicles, and starships through an interactive UI.","### Overview
+SW-Archive is a Star Wars reference tool that lets fans explore films, characters, planets, species, vehicles, and starships in a pokedex-style interface. I built this as my first solo React project to practice component-based architecture and REST API integration.
+
+### Features
+Users can:
+- Browse categories like **Films, Characters, Planets, Species, Vehicles, Starships**
+- Click into entries to view metadata, descriptions, and related connections
+- Explore relationships (e.g. which characters appear in which films)
+- Share direct links to specific entries
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Data Layer:** REST API (SWAPI)
+- **Deployment:** Vercel
+
+### Notes
+- This project served as a foundational learning exercise while teaching myself React.",Frontend Dev,https://sw-archive.vercel.app/,https://github.com/Matt-Hulme/sw-archive
+SW 2,Star Wars Archive 2,"A rebuilt Star Wars archive that demonstrates growth in React, TypeScript, and modern frontend practices one year after the original version.","### Overview
+Star Wars Archive V2 is a complete rebuild of my first React project, created one year later to measure technical growth. The project functions as a Star Wars reference tool, letting users browse films, characters, planets, starships, and more through an improved interface and architecture.
+
+### Improvements from V1 → V2
+- **TypeScript vs JavaScript**: V2 fully typed for better maintainability
+- **Responsive Design**: V2 optimized for mobile; V1 was desktop-only
+- **Data Layer**: V2 used GraphQL (all data at once); V1 used Fetch + pagination
+- **Styling**: V2 used TailwindCSS; V1 relied on a single monolithic CSS file
+- **Component Libraries**: V2 integrated Material UI; V1 was fully custom-built
+- **Reusable Components**: V2 introduced shared components (e.g. `DetailsHeaderPanel`) to reduce duplication
+- **Routing & Params**: V2 improved URL handling and navbar highlighting
+- **Error Handling**: V2 added styled 404 and "not found" pages instead of Vercel defaults
+- **Design Choices**: V2 adopted a cleaner design (less border-radius overuse)
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Data Layer:** GraphQL
+- **UI Library:** Material UI
+- **Deployment:** Vercel
+
+### Notes
+- The GraphQL endpoint used by V2 has lost support, so some detail queries return null fields.",Frontend Dev,https://starwars-archive.vercel.app/,https://github.com/Matt-Hulme/starwars-archive
+React Scratch Map,Where Have You Traveled,"An interactive travel tracker that enables users to visualize visited countries, view stats, and save progress with Firebase.","### Overview
+Scratch Map is an interactive travel tracker that helps users visualize where they've been around the world. The tool combines data visualization with persistence through account-based saving. I built this project to practice API integration, authentication, and state management with Firebase.
+
+### Features
+Users can:
+- Click on countries to **mark them as visited**
+- See live updates in the **visited countries panel** with counts and a personalized list
+- **Save their selections** by creating an account with Firebase Auth
+- Sync and load saved data through the **Firebase Realtime Database**
+- Explore their travel history through an integrated **Google Maps API**
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Auth & Database:** Firebase Auth, Firebase Realtime Database
+- **APIs:** Google Maps API
+- **Deployment:** Vercel
+
+### Notes
+- This project prioritized functionality over aesthetics as a deliberate learning focus on technical integration rather than visual design.",Frontend Dev,https://scratch-map-react.vercel.app/,https://github.com/Matt-Hulme/scratch-map-react
+Brainstormer,Brainstormer,"An AI-powered creative assistant that generates related or overlapping concepts to help users explore new ideas through OR and AND mode brainstorming.","### Overview
+Brainstormer is an AI-powered ideation tool that helps users explore creative connections between concepts. The system uses a large language model to generate either related ideas (OR mode) or overlapping connections (AND mode), supporting writers, entrepreneurs, and creatives during early brainstorming. Though my brother and I closed the project after early user testing, it served as an important full-stack and AI integration learning experience.
+
+### Features
+Users can:
+- Enter one or more **concepts** to generate new, related ideas
+- Switch between **OR mode** (connections to either concept) and **AND mode** (overlapping aspects of both)
+- Explore generated lists of concepts and refine their brainstorming process
+- Interact with a lightweight, responsive interface optimized for creative flow
+
+### Tech Stack
+- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Backend:** FastAPI, Pydantic, Python-Multipart, Uvicorn
+- **AI Integration:** OpenAI API
+- **Deployment:** Dockerized and hosted on a private VPS
+
+### Notes
+- Early user testing provided valuable lessons on product-market fit, prompting a pivot away from the concept.
+- The project sharpened AI integration skills and full-stack deployment experience despite not reaching production scale.",Fullstack Dev,None,https://github.com/Matt-Hulme/brainstormer
+Deliberate Agentic Development,Deliberate Agentic Development,"An AI-assisted development framework that guides AI coding assistants through structured checkpoints with human oversight to improve reliability and quality.","### Overview
+Deliberate Agentic Development is an open-source framework that brings structure and accountability to AI-assisted software development. Instead of letting AI coding agents operate freely, it provides a deliberate methodology with checkpoints, reviews, and human-in-the-loop oversight. I built this framework to make AI pair programming more reliable, transparent, and maintainable while keeping developers in control.
+
+### Features
+The framework provides:
+- A **Plan → Build → Ship** workflow for AI-assisted coding tasks
+- Defined **checkpoints** where outputs must be reviewed before proceeding
+- Clear **human oversight points** to reduce risk and improve quality
+- Guidance for using AI tools such as **Claude Code, Cursor, and Codex**
+- A repeatable methodology to improve trust, reproducibility, and maintainability
+
+### Tech Stack
+- **Format:** Markdown Agentic Instructions files
+
+### Notes
+- This project is not a traditional codebase, but a set of instructions and best practices.
+- It reflects an ongoing focus on AI developer tooling and how to align emerging agentic workflows with real-world software engineering standards.",Fullstack Dev; AI Engineer,None,https://github.com/Matt-Hulme/deliberate-agentic-development
+Hotel Name Shortener,Hotel Name Shortener,"An AI-powered automation tool that abbreviates hotel names for Google and Bing Ads character limit compliance using LLM-powered text processing.","### Overview
+The Hotel Name Shortener is a Python + AWS Lambda service that automatically abbreviates hotel names to comply with Google and Bing Ads character limits. I designed the system architecture, established coding standards, and managed a developer while contributing to core implementation. The tool preserves marketing value while ensuring policy compliance at scale.
+
+### Features
+The tool:
+- Accepts **unformatted, long hotel names** as input
+- Generates **abbreviated hotel names** within policy limits
+- Applies **priority rules** defined by the SEM team to preserve key content
+- Runs as an **automated Lambda function**, processing names at scale
+- Stores and logs results in **Snowflake** for auditing and analysis
+- Feeds standardized output into **Tableau dashboards** for monitoring and analysis
+
+### Tech Stack
+- **Language/Framework:** Python, LangChain, OpenAI API
+- **Infrastructure:** AWS Lambda
+- **Database:** Snowflake
+- **Analytics & Visualization:** Tableau
+
+### Notes
+- Led the project while managing another developer and maintaining code quality standards.
+- Significantly reduced manual editing time for the SEM team while guaranteeing ad policy compliance.",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
+Hotel Address Shortener,Hotel Address Shortener,"An AI-powered automation tool that abbreviates hotel addresses for Google and Bing Ads character limit compliance using LLM-powered text processing.","### Overview
+The Hotel Address Shortener is a Python + AWS Lambda service that automatically abbreviates hotel addresses to comply with Google and Bing Ads character limits. I designed the system architecture, maintained coding standards, and contributed major portions of the implementation while managing another developer. The tool ensures concise, compliant addresses at scale while preserving key travel information.
+
+### Features
+The tool:
+- Accepts **raw hotel addresses** as input
+- Generates **shortened, standardized addresses** within ad limits
+- Follows **SEM team rules** for prioritizing address elements (city, state, landmark, etc.)
+- Runs as an **AWS Lambda** for seamless automation
+- Writes results to **Snowflake** for reporting and QA
+- Feeds standardized output into **Tableau dashboards** for monitoring and analysis
+
+### Tech Stack
+- **Language/Framework:** Python, LangChain, OpenAI API
+- **Infrastructure:** AWS Lambda
+- **Database:** Snowflake
+- **Analytics & Visualization:** Tableau
+
+### Notes
+- Led the project while managing another developer and contributing heavily to architecture and core implementation.
+- Reduced compliance issues in ads by standardizing addresses and helped scale SEM campaigns by automating manual QA.",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
+RSA Generator,RSA Generator,"An AI-powered automation tool that extracts high-quality, validated ad headlines from hotel descriptions and amenities for responsive search ads.","### Overview
+The RSA (Responsive Search Ad) Generator is a Python + AWS Lambda service that automates the creation of ad headlines for hotel campaigns. The tool takes hotel descriptions and amenities as input and generates marketable headlines that comply with Google Ads policies while staying accurate to the source content. I built this end-to-end to ensure factual accuracy through strict validation, preventing hallucinations—a key requirement for large-scale SEM automation.
+
+### Features
+The tool:
+- Accepts **hotel descriptions and amenities** as input
+- Extracts potential **marketable headlines** directly from the text
+- Runs each headline through a **validation process** to ensure factual accuracy
+- Guarantees **policy compliance** by filtering invalid or risky text
+- Deploys as an **AWS Lambda** to integrate seamlessly with SEM workflows
+
+### Tech Stack
+- **Language/Framework:** Python, LangChain, OpenAI API
+- **Infrastructure:** AWS Lambda
+- **Database:** Snowflake",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
+Asset Frequency Report,Asset Frequency Report,"An AI-powered analysis tool that identifies underperforming ad assets and enables brand-specific and device-specific ad copy optimization at scale.","### Overview
+The Asset Frequency Report is an AI-powered tool that analyzes the performance of ad assets at scale for Search Engine Marketing. The tool queries every headline and description across all Google Ads accounts, identifies which assets are winners or wasting space, and determines what should replace them. I built this to unlock brand-specific and device-specific ad copy optimization, enabling more precise campaign tailoring than ever before.
+
+### Features
+The tool:
+1. **Queries** – Fetches performance metrics for every headline/description across all Google Ads accounts
+2. **Categorizes** – Uses GPT-4o-mini to classify each asset into a predefined taxonomy
+3. **Derives Efficiency** – Calculates efficiency for each asset, identifying winners vs. losers
+
+What this enables:
+- **Replace dead-weight assets** that are wasting space
+- Create **brand-specific ad copy** (e.g., Motel 6 vs. Four Seasons)
+- Optimize **device-specific ad copy**, tailoring for mobile vs. desktop
+
+### Tech Stack
+- **Language/Framework:** Python 3.11, LangChain, LangSmith, OpenAI API
+- **Infrastructure:** AWS Lambda, AWS S3
+- **Integrations:** Google Ads API
+- **Database:** Snowflake
+- **Analytics & Visualization:** Tableau
+
+### Notes
+- Identified hundreds of thousands (if not millions) of assets for replacement.
+- Represents one of the most impactful SEM automation systems delivered to date.",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
+Slack -> Linear Workflow,Slack to Linear Workflow,"An AI-powered workflow automation that categorizes Slack project requests and auto-creates Linear tickets for review, reducing manual project intake work.","### Overview
+The Slack → Linear Workflow is an automation that streamlines how coworkers submit project requests. Instead of manually formatting and logging details, teammates fill out a Slack form, which is then processed by an LLM. I built this workflow to categorize, format, and automatically enter requests into Linear as projects for review, saving time and ensuring consistency.
+
+### Features
+The tool:
+- Accepts **project requests via a Slack form**
+- Sends form data to an **LLM for categorization and formatting**
+- Automatically creates a **Linear project** with the cleaned details
+- Stores request logs in **Google Sheets** for tracking and transparency
+- Runs fully automated through **n8n**
+
+### Tech Stack
+- **Workflow Automation:** n8n
+- **Integrations:** Slack, Linear, Google Sheets
+- **AI Integration:** OpenAI API
+
+### Notes
+- Eliminates manual copy/paste of Slack requests into Linear.
+- Ensures that projects are consistently formatted and categorized before review.
+- Demonstrates the power of combining AI with workflow automation to reduce friction in everyday processes.",AI Engineer; Product Manager,None,None
+This website!,Matt-Hulme.com,"A professional portfolio website with filterable projects, modal details, resume page, and contact page to showcase frontend, AI, and SEM automation work.","### Overview
+Portfolio Site v2 is a professional showcase that highlights work across frontend development, AI engineering, product management, and SEM automation. I built this site to help hiring managers, industry colleagues, and others quickly understand skills, experience, and impact through a curated set of projects. The experience is polished, responsive, and optimized for clarity: a project grid for browsing, filter-driven exploration, and modal-based detail views that let users dive deeper without losing context.
+
+### Features
+The site includes:
+- **Filterable project grid** with technology and role tags
+- **Project detail modals** with summaries, full descriptions, and media
+- **Resume page** (`/resume`) with styled HTML and PDF download
+- **Contact page** (`/contact`) linking to LinkedIn, X, and email
+- **Responsive design** across desktop, tablet, and mobile
+- **Accessibility compliance** with keyboard navigation and WCAG AA standards
+
+### Tech Stack
+- **Frontend:** TypeScript, React, Vite, TailwindCSS, shadcn/ui, React Router
+- **Backend:** FastAPI, Python, SQLAlchemy, SQLite
+- **Testing:** Vitest, React Testing Library, Playwright
+- **Infrastructure:** VPS deployment, Nginx reverse proxy, systemd
+
+### Notes
+- Designed for clarity and speed: fast-loading, responsive, and accessible.",Fullstack Dev; AI Engineer,Matt-Hulme.com,https://github.com/Matt-Hulme/portfolio-bmad

@@ -156,6 +156,7 @@ portfolio-bmad/
 | Technology | Version | Purpose |
 |------------|---------|---------|
 | Python | 3.13.7 | Language |
+| uv | 0.9.1+ | Package installer & manager (Rust-based, 10-100x faster than pip) |
 | FastAPI | 0.115.5 | Web framework |
 | Uvicorn | 0.34.0 | ASGI server |
 | SQLAlchemy | 2.0.36 | ORM |
@@ -1356,9 +1357,9 @@ cd portfolio-bmad
 **2. Backend Setup:**
 ```bash
 cd backend
-python -m venv venv
+uv venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements-dev.txt
+uv pip install -r requirements-dev.txt
 python scripts/init_db.py
 python scripts/seed_db.py
 ```
@@ -1605,9 +1606,9 @@ npm run build
 
 # 3. Setup backend
 cd ../backend
-python3.13 -m venv venv
+uv venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 python scripts/seed_db.py
 
 # 4. Configure Nginx

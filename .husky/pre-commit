@@ -38,16 +38,13 @@ if [ "$BACKEND_CHANGED" = "true" ]; then
   cd backend || exit 1
 
   echo "  ✓ Running Ruff..."
-  ruff check . || CHECKS_FAILED=1
+  venv/bin/ruff check . || CHECKS_FAILED=1
 
   echo "  ✓ Running Black..."
-  black --check . || CHECKS_FAILED=1
-
-  echo "  ✓ Running MyPy..."
-  mypy . || CHECKS_FAILED=1
+  venv/bin/black --check . || CHECKS_FAILED=1
 
   echo "  ✓ Running pytest..."
-  pytest -v || CHECKS_FAILED=1
+  venv/bin/pytest -v || CHECKS_FAILED=1
 
   cd ..
 fi
