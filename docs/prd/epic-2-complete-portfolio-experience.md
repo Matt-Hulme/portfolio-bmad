@@ -13,14 +13,15 @@
 ### Acceptance Criteria
 
 1. FastAPI 0.115.5 project initialized in backend/ directory (or similar structure within monorepo)
-2. Python 3.13.7 virtual environment configured with dependencies (FastAPI, SQLAlchemy 2.0.36, pytest, pytest-asyncio)
-3. Basic FastAPI app created with health check endpoint (`GET /api/health`)
-4. Ruff and Black configured for Python linting and formatting
-5. Basic folder structure created (app/routers, app/models, app/schemas, tests/)
-6. CORS middleware configured to allow frontend development server origin
-7. Backend dev server runs successfully and health check returns 200 OK
-8. pytest setup complete with basic health check test passing
-9. README or docs include instructions for running backend server
+2. Python 3.13.7 virtual environment configured with `uv` (10-100x faster than pip)
+3. Dependencies installed via uv: FastAPI, Uvicorn, SQLAlchemy 2.0.36, pytest, pytest-asyncio, Ruff, Black
+4. Basic FastAPI app created with health check endpoint (`GET /api/health`)
+5. Ruff and Black configured for Python linting and formatting
+6. Basic folder structure created (app/routers, app/models, app/schemas, tests/)
+7. CORS middleware configured to allow frontend development server origin
+8. Backend dev server runs successfully and health check returns 200 OK
+9. pytest setup complete with basic health check test passing
+10. README or docs include instructions for running backend server with uv
 
 ## Story 2.2: Database Models & SQLAlchemy Setup
 
