@@ -1,4 +1,4 @@
-import { Project, ProjectLink } from '@/types/project';
+import type { Project, ProjectLink } from '@/types/project';
 import {
   Dialog,
   DialogContent,
@@ -25,51 +25,79 @@ export function ProjectDetailModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>{project.title}</DialogTitle>
+      <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
+        <DialogHeader className="space-y-3">
+          <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+          {project.dateCompleted && (
+            <p className="text-muted-foreground text-sm">
+              Completed:{' '}
+              {new Date(project.dateCompleted).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+              })}
+            </p>
+          )}
         </DialogHeader>
 
         {/* Description with markdown */}
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
+        <div className="prose prose-sm prose-neutral dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-a:text-primary max-w-none">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {project.description}
           </ReactMarkdown>
         </div>
 
-        {/* Roles */}
-        {project.roles && project.roles.length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-sm font-semibold">Roles</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.roles.map((role) => (
-                <Badge key={role} variant="default">
-                  {role}
-                </Badge>
-              ))}
+        {/* Metadata Section */}
+        <div className="border-border bg-muted/30 space-y-4 rounded-lg border p-4">
+          {/* Roles */}
+          {project.roles && project.roles.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-foreground text-sm font-semibold">Roles</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.roles.map((role) => (
+                  <Badge key={role} variant="default">
+                    {role}
+                  </Badge>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Technologies */}
-        {project.technologies && project.technologies.length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-sm font-semibold">Technologies</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <Badge key={tech} variant="outline">
-                  {tech}
-                </Badge>
-              ))}
+          {/* Technologies */}
+          {project.technologies && project.technologies.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-foreground text-sm font-semibold">
+                Technologies
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <Badge key={tech} variant="outline">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* Industry */}
+          {project.industry && (
+            <div className="space-y-2">
+              <h3 className="text-foreground text-sm font-semibold">
+                Industry
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                {project.industry}
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* Links Section */}
         {project.links && project.links.length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-sm font-semibold">Links</h3>
-            <div className="flex flex-col gap-2">
+          <div className="border-border bg-muted/30 space-y-3 rounded-lg border p-4">
+            <h3 className="text-foreground text-sm font-semibold">
+              Project Links
+            </h3>
+            <div className="flex flex-col gap-3">
               {project.links.map((link, index) => (
                 <ProjectLinkItem key={index} link={link} />
               ))}
@@ -79,18 +107,24 @@ export function ProjectDetailModal({
 
         {/* Media Section */}
         {project.images && project.images.length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-sm font-semibold">Gallery</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="space-y-3">
+            <h3 className="text-foreground text-sm font-semibold">Gallery</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {project.images.map((image, index) => (
-                <div key={index} className="space-y-1">
-                  <img
-                    src={image.url}
-                    alt={image.alt}
-                    className="h-auto w-full rounded-lg border"
-                  />
+                <div
+                  key={index}
+                  className="group border-border bg-muted/20 hover:border-primary/50 space-y-2 overflow-hidden rounded-lg border transition-all"
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
                   {image.caption && (
-                    <p className="text-muted-foreground text-xs">
+                    <p className="text-muted-foreground px-3 pb-3 text-xs">
                       {image.caption}
                     </p>
                   )}
@@ -124,10 +158,15 @@ function ProjectLinkItem({ link }: { link: ProjectLink }) {
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-primary flex items-center gap-2 text-sm hover:underline"
+      className="group hover:border-primary/30 hover:bg-primary/5 flex items-center gap-3 rounded-md border border-transparent px-3 py-2 text-sm transition-all"
     >
-      {getIcon()}
-      <span>{link.label}</span>
+      <span className="text-primary flex-shrink-0">{getIcon()}</span>
+      <span className="text-foreground group-hover:text-primary flex-1">
+        {link.label}
+      </span>
+      <span className="text-muted-foreground text-xs capitalize">
+        {link.type === 'live' ? '🟢 Live' : link.type}
+      </span>
     </a>
   );
 }
