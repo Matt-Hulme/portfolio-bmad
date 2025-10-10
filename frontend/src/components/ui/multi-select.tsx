@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Check, ChevronDown, X } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
 export interface MultiSelectProps<T extends string = string> {
@@ -26,8 +25,10 @@ export function MultiSelect<T extends string = string>({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="space-y-2">
-      <label className="text-sm font-medium text-gray-300">{label}</label>
+    <div className="w-full md:w-64 md:flex-shrink-0">
+      <label className="mb-2 block text-sm font-medium text-gray-300">
+        {label}
+      </label>
 
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
@@ -43,7 +44,7 @@ export function MultiSelect<T extends string = string>({
           </button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[--radix-popover-trigger-width] p-0"
+          className="w-[--radix-popover-trigger-width] border-gray-700 bg-gray-900 p-0"
           align="start"
         >
           <div className="max-h-[300px] overflow-y-auto p-1">
@@ -53,36 +54,21 @@ export function MultiSelect<T extends string = string>({
                 <div
                   key={option}
                   className={cn(
-                    'hover:bg-accent flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm',
-                    isSelected && 'bg-accent/50',
+                    'text-primary flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-gray-800',
+                    isSelected && 'bg-gray-800/70',
                   )}
                   onClick={() => onValueToggle(option)}
                 >
                   <span className="flex-1">{option}</span>
-                  {isSelected && <Check className="text-primary h-4 w-4" />}
+                  {isSelected && (
+                    <Check className="text-primary h-5 w-5 stroke-[3]" />
+                  )}
                 </div>
               );
             })}
           </div>
         </PopoverContent>
       </Popover>
-
-      {/* Selected values as dismissible chips */}
-      {selectedValues.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {selectedValues.map((value) => (
-            <Badge
-              key={value}
-              variant="default"
-              className="bg-primary/20 text-primary hover:bg-primary/30 cursor-pointer"
-              onClick={() => onValueToggle(value)}
-            >
-              {value}
-              <X size={14} className="ml-1" />
-            </Badge>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { Container } from './Container';
 
 export function PageLayout() {
   return (
-    <div className="bg-background flex min-h-screen flex-col">
+    <div className="bg-background flex min-h-screen w-full flex-col overflow-x-hidden">
       {/* Skip to content link for screen readers */}
       <a
         href="#main-content"
