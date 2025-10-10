@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routers import projects_router
+
 app = FastAPI(
     title="Portfolio API",
     version="1.0.0",
@@ -17,6 +19,9 @@ app.add_middleware(
     allow_methods=["GET", "HEAD", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# Register routers
+app.include_router(projects_router, prefix="/api", tags=["projects"])
 
 
 @app.get("/api/health")
