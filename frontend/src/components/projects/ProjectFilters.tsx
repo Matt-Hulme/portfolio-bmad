@@ -42,7 +42,7 @@ export function ProjectFilters({
       </div>
 
       {/* Filter Dropdowns */}
-      <div className="flex flex-row items-start gap-6">
+      <div className="flex gap-6">
         <MultiSelect
           label="Technology"
           options={availableTechnologies}

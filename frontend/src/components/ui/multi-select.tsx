@@ -26,8 +26,10 @@ export function MultiSelect<T extends string = string>({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="space-y-2">
-      <label className="text-sm font-medium text-gray-300">{label}</label>
+    <div className="w-64 flex-shrink-0">
+      <label className="mb-2 block text-sm font-medium text-gray-300">
+        {label}
+      </label>
 
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
