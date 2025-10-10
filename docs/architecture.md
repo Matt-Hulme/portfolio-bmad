@@ -131,19 +131,25 @@ portfolio-bmad/
 
 ### 3.1 Frontend Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| React | 19.1.1 | UI framework |
-| TypeScript | 5.8+ | Type safety |
-| Vite | 7.1.4 | Build tool & dev server |
-| TailwindCSS | 4.1.13 | Utility-first styling |
-| shadcn/ui | 3.0+ | Component library |
-| React Router | 6.x | Client-side routing |
-| React Query | 5.x | Server state management |
-| Vitest | 2.x | Unit & integration testing |
-| Playwright | 1.x | E2E testing |
-| ESLint | 9.x | Linting |
-| Prettier | 3.x | Code formatting |
+| Technology | Version | Purpose | Documentation |
+|------------|---------|---------|---------------|
+| React | 19.1.1 | UI framework | [React Docs](https://react.dev) |
+| TypeScript | 5.8+ | Type safety | [TS Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) |
+| Vite | 7.1.4 | Build tool & dev server | [Vite Guide](https://vite.dev/guide/) |
+| TailwindCSS | 4.1.13 | Utility-first styling | [Tailwind v4 Docs](https://tailwindcss.com/docs), [v4 Upgrade Guide](https://tailwindcss.com/docs/upgrade-guide) |
+| shadcn/ui | 3.0+ | Component library | [shadcn/ui](https://ui.shadcn.com) |
+| React Router | 6.x | Client-side routing | [React Router](https://reactrouter.com) |
+| React Query | 5.x | Server state management | [TanStack Query](https://tanstack.com/query/latest) |
+| Vitest | 2.x | Unit & integration testing | [Vitest Docs](https://vitest.dev) |
+| Playwright | 1.x | E2E testing | [Playwright](https://playwright.dev) |
+| ESLint | 9.x | Linting | [ESLint Docs](https://eslint.org/docs/latest/) |
+| Prettier | 3.x | Code formatting | [Prettier](https://prettier.io/docs/en/) |
+
+**Critical Note - Tailwind v4:**
+- We use Tailwind v4 which has significant syntax changes from v3
+- **DO NOT** use `@tailwind base`, `@tailwind components`, `@tailwind utilities`
+- **CORRECT v4 syntax:** `@import "tailwindcss";`
+- See [v4 Upgrade Guide](https://tailwindcss.com/docs/upgrade-guide) for complete migration details
 
 ### 3.2 Backend Stack
 
