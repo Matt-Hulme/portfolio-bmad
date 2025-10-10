@@ -5,10 +5,27 @@ on:
     branches: [ main, master ]
 
 jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend: ${{ steps.filter.outputs.backend }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+            backend:
+              - 'backend/**'
+
   frontend-checks:
     name: Frontend Build & Tests
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.changed_files, 'frontend/')
+    needs: detect-changes
+    if: needs.detect-changes.outputs.frontend == 'true'
 
     defaults:
       run:
@@ -46,7 +63,8 @@ jobs:
   backend-checks:
     name: Backend Build & Tests
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.changed_files, 'backend/')
+    needs: detect-changes
+    if: needs.detect-changes.outputs.backend == 'true'
 
     defaults:
       run:

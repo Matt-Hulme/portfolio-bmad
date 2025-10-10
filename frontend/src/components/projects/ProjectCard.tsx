@@ -21,7 +21,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   return (
     <Card
-      className="group border-l-primary/40 hover:border-l-primary hover:shadow-primary/5 h-full cursor-pointer border-l-4 bg-gray-900/50 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
+      className="group border-l-primary/40 hover:border-l-primary hover:shadow-primary/5 h-full min-w-0 cursor-pointer border-l-4 bg-gray-900/50 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
       onClick={onClick}
       role="button"
       tabIndex={0}
