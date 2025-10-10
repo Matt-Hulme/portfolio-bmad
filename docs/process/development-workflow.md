@@ -4,6 +4,19 @@ This document captures all process improvements, validation checks, and workflow
 
 ---
 
+## ⚠️ CRITICAL: Read This First
+
+**Before starting ANY story, you MUST:**
+
+1. Read this entire workflow document
+2. Create a feature branch FIRST: `git checkout -b story/X.Y-story-name`
+3. Commit after EACH task (not at the end)
+4. Follow the Task Completion Protocol below
+
+**If you skip these steps, the PR will be rejected and redone.**
+
+---
+
 ## Git Workflow
 
 ### Branch Protection
@@ -248,59 +261,131 @@ exit 0
 
 ---
 
-## Task Completion Protocol
+## 🚨 Task Completion Protocol (MANDATORY)
 
-### Critical Rule
-**You MUST commit after completing each task before moving to the next task.**
+### CRITICAL RULE - READ THIS
 
-Never batch multiple tasks into one commit unless explicitly instructed.
+**You MUST commit after completing EACH task before moving to the next task.**
 
-### Correct Flow
+This is NOT optional. This is NOT a suggestion. This is MANDATORY.
 
-```
-1. Mark task as in_progress
-2. Work on task (write code, modify files)
-3. Test (if applicable)
-4. Verify task is complete
-5. **COMMIT** with descriptive message
-6. Mark task as completed in TodoWrite
-7. Move to next task
-```
+### Why This Matters
 
-### Incorrect Flow (❌ Don't Do This)
+1. **Code Review** - Easier to review 5 focused commits than 1 giant blob
+2. **History** - Clear progression shows how the feature was built
+3. **Debugging** - Can revert or bisect specific changes
+4. **Accountability** - Shows incremental progress
+5. **Standards** - This is how professional teams work
+
+### ✅ CORRECT Flow (Follow This Exactly)
 
 ```
-1. Work on task
-2. Mark task as completed
-3. Work on next task
-4. Commit both tasks together ❌
+BEFORE STARTING:
+0. Read this entire document
+1. Create feature branch: git checkout -b story/X.Y-story-name
+2. Create TodoWrite list with all tasks
+
+FOR EACH TASK:
+3. Mark task as in_progress in TodoWrite
+4. Work on task (write code, modify files)
+5. Test (if applicable)
+6. Verify task is complete
+7. **GIT ADD + GIT COMMIT** with descriptive message ⭐ MANDATORY ⭐
+8. Mark task as completed in TodoWrite
+9. Move to next task
+
+AFTER ALL TASKS:
+10. Run pre-PR validation
+11. Push branch: git push -u origin story/X.Y-story-name
+12. Create PR with gh pr create
 ```
 
-### Commit Timing
+### ❌ INCORRECT Flow (Never Do This)
 
-**When to Commit:**
-- ✅ After completing each task
-- ✅ After fixing a bug
-- ✅ After adding a feature
+```
+❌ Work on multiple tasks
+❌ Mark all as completed
+❌ Commit everything at once
+❌ Create PR with 1 giant commit
+```
+
+**If you do this, the PR WILL BE REJECTED and you will redo it properly.**
+
+### Commit Timing - When to Commit
+
+**ALWAYS Commit After:**
+- ✅ Completing each task (MANDATORY)
+- ✅ Creating a new component
+- ✅ Adding a new feature
+- ✅ Fixing a bug
+- ✅ Writing tests
 - ✅ Before switching tasks
 - ✅ Before creating a PR
 
-**When NOT to Commit:**
+**NEVER Commit:**
 - ❌ In the middle of a task (unless it's a logical sub-step)
 - ❌ With failing tests
 - ❌ With unresolved errors
 - ❌ With incomplete work
+- ❌ Multiple completed tasks at once
 
-### Commit Checklist
+### Pre-Commit Checklist (Before EVERY Commit)
 
-Before every commit:
+Before you run `git commit`:
+- [ ] This commit represents ONE completed task
 - [ ] Code is working
 - [ ] Tests pass (if applicable)
 - [ ] No TypeScript errors
 - [ ] No ESLint errors
-- [ ] Code is formatted
+- [ ] Code is formatted (Ruff/Black for Python, Prettier for TypeScript)
 - [ ] Commit message follows format
 - [ ] Task is actually complete
+- [ ] NOT bundling multiple tasks
+
+### Example: Correct Commit History for Story 2.3
+
+```bash
+# Start
+git checkout -b story/2.3-projects-api
+
+# Task 1: Schemas
+# ... create schemas ...
+git add backend/app/schemas/
+git commit -m "Add Pydantic response schemas for projects API"
+
+# Task 2: Repository
+# ... create repository ...
+git add backend/app/repositories/
+git commit -m "Add ProjectRepository with eager loading"
+
+# Task 3: Router
+# ... create router ...
+git add backend/app/routers/ backend/app/main.py
+git commit -m "Add projects API endpoints"
+
+# Task 4: Tests
+# ... create tests ...
+git add backend/tests/
+git commit -m "Add integration tests for projects API"
+
+# Create PR
+git push -u origin story/2.3-projects-api
+gh pr create ...
+```
+
+This creates **4 commits** showing the logical progression of work.
+
+### Example: What NOT To Do
+
+```bash
+# ❌ WRONG - Everything in one commit
+git checkout -b story/2.3-projects-api
+# ... create schemas, repository, router, tests ...
+git add backend/
+git commit -m "Story 2.3: Projects API Endpoints"  # ❌ BAD
+```
+
+This creates **1 commit** that bundles everything together. DO NOT DO THIS.
 
 ---
 
@@ -347,7 +432,10 @@ Brief description of what this story implements.
 ✅ Pre-commit hooks passed
 
 ### Commits
-- List of commit messages
+- Commit 1: Description
+- Commit 2: Description
+- Commit 3: Description
+- Commit 4: Description
 
 ## Test Plan
 - [x] Test item 1
@@ -358,12 +446,13 @@ Brief description of what this story implements.
 
 ### Before Creating PR
 
-1. Run full pre-PR validation: `npm run pre-pr:frontend`
-2. Ensure all tests pass
-3. Verify dev server runs without errors
-4. Check production build succeeds
-5. Review all commits
-6. Update story document status to "Ready for Review"
+1. **Verify you have MULTIPLE commits** (not one giant commit)
+2. Run full pre-PR validation: `npm run pre-pr:frontend` or `cd backend && pytest`
+3. Ensure all tests pass
+4. Verify dev server runs without errors (frontend)
+5. Check production build succeeds
+6. Review all commits
+7. Update story document status to "Ready for Review"
 
 ### Creating the PR
 
@@ -433,22 +522,23 @@ npm test -- --coverage # Generate coverage report
 5. Commit story document to main
 6. Create feature branch
 
-### 2. Implementation
+### 2. Implementation (FOLLOW THIS EXACTLY)
 
-1. Create todo list with all tasks
-2. For each task:
-   - Mark as in_progress
+1. **Create feature branch FIRST**: `git checkout -b story/X.Y-story-name`
+2. Create TodoWrite list with all tasks
+3. **For EACH task:**
+   - Mark as in_progress in TodoWrite
    - Implement the task
    - Write tests (if applicable)
    - Run tests
-   - **COMMIT** with task description
-   - Mark as completed
+   - **COMMIT** with task description ⭐ MANDATORY ⭐
+   - Mark as completed in TodoWrite
    - Move to next task
 
 ### 3. Validation
 
 1. Run all tests: `npm test -- --run`
-2. Run dev server health check
+2. Run dev server health check (frontend)
 3. Run full pre-PR validation
 4. Fix any issues
 5. Update story status to "Ready for Review"
@@ -457,7 +547,7 @@ npm test -- --coverage # Generate coverage report
 ### 4. PR & Review
 
 1. Push branch to origin
-2. Create PR with detailed description
+2. Create PR with detailed description (including commit list)
 3. Address review feedback
 4. Get approval
 5. Merge to main (squash)
@@ -485,6 +575,15 @@ npm test -- --coverage # Generate coverage report
 - Event handlers prefixed with `handle`
 - Use hooks appropriately
 
+### Python (Backend)
+
+- Type hints on all functions
+- Use Pydantic for data validation
+- Follow PEP 8 style guide
+- Docstrings for all classes and functions
+- Use Black for formatting
+- Use Ruff for linting
+
 ### Styling
 
 - TailwindCSS utility classes
@@ -496,7 +595,7 @@ npm test -- --coverage # Generate coverage report
 ### File Organization
 
 ```
-src/
+frontend/src/
 ├── components/
 │   ├── layout/       # Layout components (Container, Navigation, etc.)
 │   └── ui/           # shadcn UI components
@@ -505,6 +604,15 @@ src/
 ├── types/            # TypeScript type definitions
 ├── data/             # Mock data and data access functions
 └── hooks/            # Custom React hooks
+
+backend/
+├── app/
+│   ├── models/       # SQLAlchemy models
+│   ├── schemas/      # Pydantic schemas
+│   ├── routers/      # FastAPI routers
+│   ├── repositories/ # Data access layer
+│   └── main.py       # FastAPI app
+└── tests/            # Pytest tests
 ```
 
 ---
@@ -515,6 +623,7 @@ src/
 
 - Node.js 18+ (LTS recommended)
 - npm 9+
+- Python 3.11+
 - Git
 - GitHub CLI (`gh`)
 
@@ -528,6 +637,7 @@ cd portfolio-bmad
 # Install dependencies
 npm install
 cd frontend && npm install
+cd ../backend && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 
 # Setup Husky hooks
 cd ..
@@ -599,3 +709,5 @@ import type { ComponentProps } from 'react';
 | 2025-10-08 | Added branch protection rules | Dev Agent (Claude) |
 | 2025-10-08 | Added dev server health check | Dev Agent (Claude) |
 | 2025-10-08 | Added task completion protocol | Dev Agent (Claude) |
+| 2025-10-10 | **Enhanced task completion protocol with MANDATORY commit-per-task rule** | Dev Agent (Claude) |
+| 2025-10-10 | Added visual emphasis and examples to prevent bundled commits | Dev Agent (Claude) |
