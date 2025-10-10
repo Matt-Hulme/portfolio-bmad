@@ -50,7 +50,7 @@ const mockProjectNoLinksNoImages: Project = {
   title: 'Minimal Project',
   summary: 'A minimal project',
   description: 'Simple description',
-  roles: ['Developer'],
+  roles: ['Full-Stack Developer'],
   technologies: ['JavaScript'],
   industry: 'SaaS',
 };

@@ -1414,6 +1414,26 @@ python scripts/seed_db.py                  # Seed database
 
 ### 12.4 Git Workflow
 
+**Branch Strategy:**
+- **ALWAYS** work in feature branches, never directly in `main`
+- **ALWAYS** fetch latest `main` before creating a new branch
+- Branch naming: `story/{story-number}-{brief-description}` (e.g., `story/1.7-project-detail-modal`)
+- Create feature branches from latest `main` to avoid merge conflicts
+
+**Creating a New Feature Branch:**
+```bash
+# 1. Fetch latest changes from origin
+git fetch origin
+
+# 2. Create and checkout new branch from origin/main
+git checkout -b story/1.X-feature-name origin/main
+
+# OR if already on main:
+git checkout main
+git pull origin main
+git checkout -b story/1.X-feature-name
+```
+
 **Commit Message Convention:**
 ```
 <type>(<scope>): <subject>
@@ -1428,6 +1448,20 @@ fix(api): correct 404 response format for invalid slug
 docs(architecture): update testing strategy section
 test(projects): add integration tests for ProjectsPage
 chore(deps): update React to 19.1.1
+```
+
+**Pull Request Workflow:**
+```bash
+# 1. Push feature branch to remote
+git push -u origin story/1.X-feature-name
+
+# 2. Create PR via gh CLI or GitHub UI
+gh pr create --title "Story 1.X: Feature Name" --body "PR description"
+
+# 3. After PR approval, merge via GitHub UI
+# 4. Delete feature branch after merge
+git branch -d story/1.X-feature-name
+git push origin --delete story/1.X-feature-name
 ```
 
 ---

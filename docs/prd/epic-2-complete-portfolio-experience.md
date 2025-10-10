@@ -121,4 +121,101 @@
 9. Page is responsive and accessible
 10. Optional: Display brief "preferred contact method" guidance if applicable
 
+## Story 2.7: Media Assets & Static File Serving
+
+**As a** developer,
+**I want** a proper media storage strategy for project images and video,
+**so that** portfolio projects display rich visual content efficiently.
+
+### Acceptance Criteria
+
+#### Media Organization
+1. Project media assets organized in `backend/static/images/projects/{project-slug}/` directory structure
+2. Each project has dedicated subdirectory for its media files
+3. File naming convention documented (e.g., `{project-slug}-{descriptor}.{ext}`)
+4. Images optimized for web delivery (compressed, appropriate formats)
+5. Video files converted to web-friendly formats (MP4/WebM with H.264/VP9 codecs)
+
+#### Image Optimization
+1. Large PNG images (>1MB) compressed or converted to WebP format
+2. Images resized to appropriate dimensions (max 1920px width for full-screen)
+3. Multiple sizes generated for responsive images where needed (optional for MVP)
+4. Image file sizes reasonable (<500KB for most images, <1MB for hero images)
+5. Optimization script or documentation provided for future image additions
+
+#### Video Handling
+1. MOV files converted to MP4 format with H.264 codec for broad compatibility
+2. Video file sizes optimized (target <5MB for short demos)
+3. Video poster images (thumbnails) extracted and saved
+4. Optional: WebM format generated as fallback for modern browsers
+5. Video playback tested across browsers (Chrome, Firefox, Safari)
+
+#### Backend Static File Serving
+1. FastAPI configured to serve static files from `backend/static/` directory
+2. Static file endpoint configured (e.g., `/images/projects/{path}`)
+3. Nginx configuration documented for production static file serving (direct serving, bypassing FastAPI)
+4. CORS headers configured for static assets if needed
+5. Cache headers set appropriately for static assets (long-term caching)
+
+#### Database Image References
+1. ProjectImage model URLs reference static file paths (e.g., `/images/projects/star-wars-v2/home.png`)
+2. Seed data script updated with correct image URLs for all real projects
+3. Image alt text and captions populated for accessibility
+4. Images ordered correctly (order_num field) for gallery display
+5. Database includes poster image references for video content
+
+#### Frontend Integration
+1. ProjectDetailModal updated to handle video content (HTML5 `<video>` element)
+2. Video player includes controls, poster image, and fallback message
+3. Gallery component supports mixed media (images + video)
+4. Lazy loading implemented for images in modal gallery
+5. Responsive image handling (srcset/picture element for key images - optional)
+
+#### Testing & Validation
+1. All project images load correctly in modal galleries
+2. Video playback works in modal (autoplay muted, or user-initiated)
+3. Static file serving performance tested (response times <100ms)
+4. Broken image handling implemented (fallback placeholder or message)
+5. Media assets work correctly in both development (Vite proxy) and production (Nginx)
+
+#### Documentation
+1. Media asset organization documented in architecture.md
+2. Image optimization workflow documented (tools, settings)
+3. Video conversion instructions documented (ffmpeg commands or tools)
+4. Deployment checklist includes media asset deployment steps
+5. Future media addition process documented
+
+### Technical Notes
+
+**Backend Static Serving (Development):**
+```python
+# app/main.py
+from fastapi.staticfiles import StaticFiles
+
+app.mount("/images", StaticFiles(directory="static/images"), name="images")
+```
+
+**Nginx Production Config:**
+```nginx
+location /images/ {
+    alias /var/www/portfolio/backend/static/images/;
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+}
+```
+
+**Video Optimization (ffmpeg example):**
+```bash
+# Convert MOV to MP4 with H.264
+ffmpeg -i input.mov -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k output.mp4
+
+# Extract poster frame
+ffmpeg -i input.mov -ss 00:00:01 -vframes 1 output-poster.jpg
+```
+
+**Image Optimization (example tools):**
+- ImageOptim, TinyPNG, Squoosh for compression
+- Sharp (Node.js), Pillow (Python) for automated optimization
+- WebP conversion for modern browsers
+
 ---
