@@ -49,15 +49,6 @@ export function ProjectDetailModal({
           <DialogDescription className="sr-only">
             {project.summary}
           </DialogDescription>
-          {project.createdAt && (
-            <p className="text-muted-foreground text-sm">
-              Created:{' '}
-              {new Date(project.createdAt).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-              })}
-            </p>
-          )}
         </DialogHeader>
 
         {/* Description with markdown */}
