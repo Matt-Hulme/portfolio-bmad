@@ -1,7 +1,8 @@
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Code2, Palette, Boxes } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import type { ProjectResponse } from '@/lib/api';
+import { generateGradient } from '@/lib/gradientGenerator';
 
 interface ProjectCardProps {
   project: ProjectResponse;
@@ -10,6 +11,8 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onClick }: ProjectCardProps) {
   const hasLiveLink = !!project.liveUrl;
+  const hasImages = project.images && project.images.length > 0;
+  const firstImage = hasImages ? project.images[0] : null;
 
   // Format technologies as comma-separated string with ellipsis if too long
   const techDisplay = project.technologies.map((t) => t.name).join(', ');
@@ -18,6 +21,9 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
     techDisplay.length > maxTechLength
       ? techDisplay.slice(0, maxTechLength) + '...'
       : techDisplay;
+
+  // Get gradient for cards without images
+  const gradient = !hasImages ? generateGradient(project.slug) : '';
 
   return (
     <Card
@@ -32,6 +38,29 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         }
       }}
     >
+      {/* Visual area - thumbnail or gradient */}
+      <div className="relative aspect-video w-full overflow-hidden">
+        {firstImage ? (
+          <img
+            src={firstImage.url}
+            alt={firstImage.altText}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className="flex h-full w-full items-center justify-center"
+            style={{ background: gradient }}
+          >
+            <div className="flex gap-4 opacity-60">
+              <Code2 size={32} className="text-white" />
+              <Palette size={32} className="text-white" />
+              <Boxes size={32} className="text-white" />
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className="space-y-4 p-6">
         {/* Header with title and live indicator */}
         <div className="flex items-start justify-between gap-3">
