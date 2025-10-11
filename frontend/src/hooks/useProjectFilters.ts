@@ -1,28 +1,27 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import type { Technology, Role } from '@/types/project';
 
 export function useProjectFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Initialize state from URL params ONCE on mount
-  const initialTechnologies = useMemo((): Technology[] => {
+  const initialTechnologies = useMemo((): string[] => {
     const techParam = searchParams.get('tech');
     if (!techParam) return [];
-    return techParam.split(',').filter(Boolean) as Technology[];
+    return techParam.split(',').filter(Boolean);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty deps = only run once on mount
 
-  const initialRoles = useMemo((): Role[] => {
+  const initialRoles = useMemo((): string[] => {
     const roleParam = searchParams.get('role');
     if (!roleParam) return [];
-    return roleParam.split(',').filter(Boolean) as Role[];
+    return roleParam.split(',').filter(Boolean);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty deps = only run once on mount
 
   const [selectedTechnologies, setSelectedTechnologies] =
-    useState<Technology[]>(initialTechnologies);
-  const [selectedRoles, setSelectedRoles] = useState<Role[]>(initialRoles);
+    useState<string[]>(initialTechnologies);
+  const [selectedRoles, setSelectedRoles] = useState<string[]>(initialRoles);
 
   // Sync state with URL params
   useEffect(() => {
@@ -44,13 +43,13 @@ export function useProjectFilters() {
     }
   }, [selectedTechnologies, selectedRoles, setSearchParams, searchParams]);
 
-  const toggleTechnology = useCallback((tech: Technology) => {
+  const toggleTechnology = useCallback((tech: string) => {
     setSelectedTechnologies((prev) =>
       prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech],
     );
   }, []);
 
-  const toggleRole = useCallback((role: Role) => {
+  const toggleRole = useCallback((role: string) => {
     setSelectedRoles((prev) =>
       prev.includes(role) ? prev.filter((r) => r !== role) : [...prev, role],
     );

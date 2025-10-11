@@ -1,12 +1,24 @@
-import type { Project } from '@/types/project';
+import type { ProjectResponse } from '@/lib/api';
 import { ProjectCard } from './ProjectCard';
+import { LoadingState } from '@/components/common/LoadingState';
 
 interface ProjectGridProps {
-  projects: Project[];
-  onProjectClick?: (project: Project) => void;
+  projects: ProjectResponse[];
+  onProjectClick?: (project: ProjectResponse) => void;
+  isLoading?: boolean;
 }
 
-export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
+export function ProjectGrid({
+  projects,
+  onProjectClick,
+  isLoading = false,
+}: ProjectGridProps) {
+  // Show skeleton loading state
+  if (isLoading) {
+    return <LoadingState type="skeleton" count={6} />;
+  }
+
+  // Show empty state when no projects match filters
   if (projects.length === 0) {
     return (
       <div className="py-12 text-center">

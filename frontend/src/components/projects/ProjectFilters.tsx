@@ -2,15 +2,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { X } from 'lucide-react';
-import type { Technology, Role } from '@/types/project';
 
 export interface ProjectFiltersProps {
-  selectedTechnologies: Technology[];
-  selectedRoles: Role[];
-  availableTechnologies: Technology[];
-  availableRoles: Role[];
-  onTechnologyToggle: (tech: Technology) => void;
-  onRoleToggle: (role: Role) => void;
+  selectedTechnologies: string[];
+  selectedRoles: string[];
+  availableTechnologies: string[];
+  availableRoles: string[];
+  onTechnologyToggle: (tech: string) => void;
+  onRoleToggle: (role: string) => void;
   onClearFilters: () => void;
 }
 

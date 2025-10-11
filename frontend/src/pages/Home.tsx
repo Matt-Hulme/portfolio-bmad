@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Container } from '@/components/layout/Container';
 import { ProjectGrid } from '@/components/projects/ProjectGrid';
 import { ProjectFilters } from '@/components/projects/ProjectFilters';
 import { ProjectDetailModal } from '@/components/projects/ProjectDetailModal';
+import { ErrorMessage } from '@/components/common/ErrorMessage';
+import { useProjects } from '@/hooks/useProjects';
 import {
   filterProjects,
   getUniqueTechnologies,
   getUniqueRoles,
-} from '@/data/projects';
+} from '@/lib/projectUtils';
 import { useProjectFilters } from '@/hooks/useProjectFilters';
-import type { Project } from '@/types/project';
+import type { ProjectResponse } from '@/lib/api';
 
 export function Home() {
+  // Fetch projects from API
+  const { data: projects, isLoading, error, refetch } = useProjects();
+
   const {
     selectedTechnologies,
     selectedRoles,
@@ -20,18 +25,34 @@ export function Home() {
     clearFilters,
   } = useProjectFilters();
 
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectResponse | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const availableTechnologies = getUniqueTechnologies();
-  const availableRoles = getUniqueRoles();
+  // Compute available technologies and roles from fetched projects
+  const availableTechnologies = useMemo(
+    () => (projects ? getUniqueTechnologies(projects) : []),
+    [projects],
+  );
 
-  const filteredProjects = filterProjects({
-    technologies: selectedTechnologies,
-    roles: selectedRoles,
-  });
+  const availableRoles = useMemo(
+    () => (projects ? getUniqueRoles(projects) : []),
+    [projects],
+  );
 
-  const handleProjectClick = (project: Project) => {
+  // Filter projects client-side
+  const filteredProjects = useMemo(
+    () =>
+      projects
+        ? filterProjects(projects, {
+            technologies: selectedTechnologies,
+            roles: selectedRoles,
+          })
+        : [],
+    [projects, selectedTechnologies, selectedRoles],
+  );
+
+  const handleProjectClick = (project: ProjectResponse) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -56,26 +77,34 @@ export function Home() {
             </p>
           </div>
 
-          {/* Filters Section */}
-          <aside className="p-y-4 md:p-y-6 bg-gray-900/30">
-            <ProjectFilters
-              selectedTechnologies={selectedTechnologies}
-              selectedRoles={selectedRoles}
-              availableTechnologies={availableTechnologies}
-              availableRoles={availableRoles}
-              onTechnologyToggle={toggleTechnology}
-              onRoleToggle={toggleRole}
-              onClearFilters={clearFilters}
-            />
-          </aside>
+          {/* Error State */}
+          {error && <ErrorMessage error={error} onRetry={refetch} />}
 
-          {/* Projects Grid */}
-          <section>
-            <ProjectGrid
-              projects={filteredProjects}
-              onProjectClick={handleProjectClick}
-            />
-          </section>
+          {/* Filters Section - only show if not in error state */}
+          {!error && (
+            <aside className="p-y-4 md:p-y-6 bg-gray-900/30">
+              <ProjectFilters
+                selectedTechnologies={selectedTechnologies}
+                selectedRoles={selectedRoles}
+                availableTechnologies={availableTechnologies}
+                availableRoles={availableRoles}
+                onTechnologyToggle={toggleTechnology}
+                onRoleToggle={toggleRole}
+                onClearFilters={clearFilters}
+              />
+            </aside>
+          )}
+
+          {/* Projects Grid - passes loading and error states */}
+          {!error && (
+            <section>
+              <ProjectGrid
+                projects={filteredProjects}
+                onProjectClick={handleProjectClick}
+                isLoading={isLoading}
+              />
+            </section>
+          )}
         </div>
       </Container>
 
