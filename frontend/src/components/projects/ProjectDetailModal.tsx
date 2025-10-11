@@ -32,6 +32,12 @@ export function ProjectDetailModal({
       ? 'Matt-Hulme.com'
       : project.slug.replace(/-/g, ' ');
 
+  // Remove Tech Stack section from description since we display it as badges
+  const descriptionWithoutTechStack = project.description
+    .replace(/### Tech Stack[\s\S]*?(?=\n###|$)/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
   // Convert API response to link objects for display
   const links = [];
   if (project.liveUrl) {
@@ -68,7 +74,7 @@ export function ProjectDetailModal({
         {/* Description with markdown */}
         <div className="project-markdown">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {project.description}
+            {descriptionWithoutTechStack}
           </ReactMarkdown>
         </div>
 
