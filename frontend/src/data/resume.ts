@@ -45,8 +45,8 @@ export const resumeData: ResumeData = {
       responsibilities: [
         'Conceptualized and built Asset Frequency Report analyzing millions of Google Ads assets to derive efficiency metrics, driving data-driven copy optimization across all campaigns',
         'Developed AI-powered ad copy generation and fully automated address/name shortening tools',
-        'Led product development and team management for AI automation initiatives',
-        'Tech: Python, LangChain, LangSmith, OpenAI API, Google Ads API, Bing Ads API, AWS Lambda/S3, Snowflake, Tableau',
+        'Lead product development and team management for AI automation initiatives',
+        'Tech: Python, LangGraph, OpenAI API, Google Ads API, Microsoft Ads API, AWS Lambda/S3, Snowflake, Tableau',
       ],
     },
     {
@@ -58,7 +58,7 @@ export const resumeData: ResumeData = {
         'Developed personalized Dashboard Feed showing follower activity and List updates',
         'Implemented redesigned Profiles page, improving load times and overall UX',
         'Contributed to and maintained reusable UI component design system',
-        'Tech: TypeScript, React, GraphQL, HTML/CSS, TailwindCSS, shadcn/ui, AWS, Git/GitHub',
+        'Tech: TypeScript, React, GraphQL, HTML/CSS, TailwindCSS, AWS',
       ],
     },
     {
@@ -66,7 +66,7 @@ export const resumeData: ResumeData = {
       company: 'Travelpass Group',
       period: 'Jul 2022-Feb 2024',
       responsibilities: [
-        'Built custom Python scripts for Google Ads API automation (ngrams analysis, RSA reporting)',
+        'Built custom Python scripts for Google Ads API automation',
         'Created GPT-enabled Google Sheets automating daily SEM tasks',
         'Improved profitability of key international account by 195% YoY',
         'Managed search engine marketing campaigns and keyword optimization',
@@ -77,7 +77,9 @@ export const resumeData: ResumeData = {
       company: 'Self-employed',
       period: '2017-2022',
       responsibilities: [
-        'Achieved 800% ROI through systematic data analysis, statistical modeling, and risk management',
+        'Developed systematic data analysis and research processes',
+        'Achieved 800% ROI through statistical modeling and risk management',
+        'Managed large-scale data filtering and optimization strategies',
       ],
     },
     {
@@ -85,9 +87,9 @@ export const resumeData: ResumeData = {
       company: 'Self-employed',
       period: '2014-2017',
       responsibilities: [
-        'Invented and patented heated desk accessory; launched via Kickstarter campaign raising $113K in 33 days',
-        'Built end-to-end product business managing supply chain, manufacturing, and global distribution to 3,000+ customers',
-        'Generated additional $80K revenue through digital marketing campaigns',
+        'Invented and patented The Foot Hammock, a heated hammock for your desk',
+        'Raised $113,000 in 33 days on Kickstarter and an additional $80,000 through digital marketing',
+        'Built end-to-end product supply chain, manufacturing, and global distribution to 3,000+ customers',
       ],
     },
   ],
