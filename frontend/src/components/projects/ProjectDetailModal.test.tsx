@@ -2,9 +2,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { ProjectDetailModal } from './ProjectDetailModal';
-import type { Project } from '@/types/project';
+import type { ProjectResponse } from '@/lib/api';
 
-const mockProject: Project = {
+const mockProject: ProjectResponse = {
   id: '1',
   slug: 'test-project',
   title: 'Test Project',
@@ -21,38 +21,46 @@ This is a **test** project with markdown support.
 const test = true;
 \`\`\`
 `,
-  roles: ['Frontend Developer', 'Backend Developer'],
-  technologies: ['React', 'TypeScript', 'Node.js'],
-  industry: 'Technology',
-  links: [
-    { label: 'Live Site', url: 'https://example.com', type: 'live' },
-    { label: 'GitHub', url: 'https://github.com/test', type: 'github' },
+  roles: [
+    { id: '1', name: 'Frontend Developer' },
+    { id: '2', name: 'Backend Developer' },
   ],
+  technologies: [
+    { id: '1', name: 'React' },
+    { id: '2', name: 'TypeScript' },
+    { id: '3', name: 'Node.js' },
+  ],
+  liveUrl: 'https://example.com',
+  githubUrl: 'https://github.com/test',
   images: [
     {
+      id: '1',
+      projectId: '1',
       url: '/test-image-1.jpg',
-      alt: 'Test image 1',
-      caption: 'First test image',
+      altText: 'Test image 1',
+      order: 1,
     },
     {
+      id: '2',
+      projectId: '1',
       url: '/test-image-2.jpg',
-      alt: 'Test image 2',
-      caption: 'Second test image',
+      altText: 'Test image 2',
+      order: 2,
     },
   ],
-  featured: true,
-  dateCompleted: '2025-01-15',
 };
 
-const mockProjectNoLinksNoImages: Project = {
+const mockProjectNoLinksNoImages: ProjectResponse = {
   id: '2',
   slug: 'minimal-project',
   title: 'Minimal Project',
   summary: 'A minimal project',
   description: 'Simple description',
-  roles: ['Full-Stack Developer'],
-  technologies: ['JavaScript'],
-  industry: 'SaaS',
+  roles: [{ id: '3', name: 'Full-Stack Developer' }],
+  technologies: [{ id: '4', name: 'JavaScript' }],
+  liveUrl: null,
+  githubUrl: null,
+  images: [],
 };
 
 describe('ProjectDetailModal', () => {
@@ -99,17 +107,6 @@ describe('ProjectDetailModal', () => {
     expect(headings.length).toBeGreaterThan(0);
   });
 
-  it('displays completion date', () => {
-    render(
-      <ProjectDetailModal
-        project={mockProject}
-        isOpen={true}
-        onClose={vi.fn()}
-      />,
-    );
-    expect(screen.getByText(/Completed: January 2025/i)).toBeInTheDocument();
-  });
-
   it('renders markdown description', () => {
     render(
       <ProjectDetailModal
@@ -152,17 +149,6 @@ describe('ProjectDetailModal', () => {
     expect(screen.getByText('React')).toBeInTheDocument();
     expect(screen.getByText('TypeScript')).toBeInTheDocument();
     expect(screen.getByText('Node.js')).toBeInTheDocument();
-  });
-
-  it('displays industry', () => {
-    render(
-      <ProjectDetailModal
-        project={mockProject}
-        isOpen={true}
-        onClose={vi.fn()}
-      />,
-    );
-    expect(screen.getByText('Technology')).toBeInTheDocument();
   });
 
   it('displays project links section when links exist', () => {
@@ -226,21 +212,9 @@ describe('ProjectDetailModal', () => {
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(2);
     expect(images[0]).toHaveAttribute('src', '/test-image-1.jpg');
-    expect(images[0]).toHaveAttribute('alt', 'Test image 1');
+    expect(images[0]).toHaveAttribute('alt', 'Test image 1'); // altText in API
     expect(images[1]).toHaveAttribute('src', '/test-image-2.jpg');
-    expect(images[1]).toHaveAttribute('alt', 'Test image 2');
-  });
-
-  it('displays image captions', () => {
-    render(
-      <ProjectDetailModal
-        project={mockProject}
-        isOpen={true}
-        onClose={vi.fn()}
-      />,
-    );
-    expect(screen.getByText('First test image')).toBeInTheDocument();
-    expect(screen.getByText('Second test image')).toBeInTheDocument();
+    expect(images[1]).toHaveAttribute('alt', 'Test image 2'); // altText in API
   });
 
   it('images have lazy loading attribute', () => {
