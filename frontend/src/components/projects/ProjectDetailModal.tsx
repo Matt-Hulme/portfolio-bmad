@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ExternalLink, Github } from 'lucide-react';
+import './markdown.css';
 
 interface ProjectDetailModalProps {
   project: ProjectResponse | null;
@@ -52,7 +53,7 @@ export function ProjectDetailModal({
         </DialogHeader>
 
         {/* Description with markdown */}
-        <div className="prose prose-sm prose-neutral dark:prose-invert [&_h1]:text-foreground [&_h2]:text-foreground [&_h3]:text-foreground [&_h4]:text-foreground [&_p]:text-muted-foreground [&_strong]:text-foreground [&_ul]:text-muted-foreground [&_li]:text-muted-foreground [&_ol]:text-muted-foreground [&_code]:text-primary [&_code]:bg-muted [&_pre]:bg-muted [&_a]:text-primary max-w-none [&_code]:rounded [&_code]:px-1 [&_code]:py-0.5">
+        <div className="project-markdown">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {project.description}
           </ReactMarkdown>
