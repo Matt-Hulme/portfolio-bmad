@@ -63,27 +63,22 @@ Users can:
 ### Notes
 - This project served as a foundational learning exercise while teaching myself React.",Frontend Dev,https://sw-archive.vercel.app/,https://github.com/Matt-Hulme/sw-archive
 SW 2,Star Wars Archive 2,"A rebuilt Star Wars archive that demonstrates growth in React, TypeScript, and modern frontend practices one year after the original version.","### Overview
-Star Wars Archive V2 is a complete rebuild of my first React project, created one year later to measure technical growth. The project functions as a Star Wars reference tool, letting users browse films, characters, planets, starships, and more through an improved interface and architecture.
+Star Wars Archive is a Star Wars reference tool that lets users browse films, characters, planets, starships, and more through an interactive interface. I built this to practice TypeScript, modern React patterns, and GraphQL integration.
 
-### Improvements from V1 → V2
-- **TypeScript vs JavaScript**: V2 fully typed for better maintainability
-- **Responsive Design**: V2 optimized for mobile; V1 was desktop-only
-- **Data Layer**: V2 used GraphQL (all data at once); V1 used Fetch + pagination
-- **Styling**: V2 used TailwindCSS; V1 relied on a single monolithic CSS file
-- **Component Libraries**: V2 integrated Material UI; V1 was fully custom-built
-- **Reusable Components**: V2 introduced shared components (e.g. `DetailsHeaderPanel`) to reduce duplication
-- **Routing & Params**: V2 improved URL handling and navbar highlighting
-- **Error Handling**: V2 added styled 404 and "not found" pages instead of Vercel defaults
-- **Design Choices**: V2 adopted a cleaner design (less border-radius overuse)
+### Features
+Users can:
+- Browse categories like **Films, Characters, Planets, Species, Vehicles, Starships**
+- Click into entries to view metadata, descriptions, and related connections
+- Explore relationships (e.g. which characters appear in which films)
+- Share direct links to specific entries
 
 ### Tech Stack
-- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Frontend:** TypeScript, React, TailwindCSS, Vite, Material UI
 - **Data Layer:** GraphQL
-- **UI Library:** Material UI
 - **Deployment:** Vercel
 
 ### Notes
-- The GraphQL endpoint used by V2 has lost support, so some detail queries return null fields.",Frontend Dev,https://starwars-archive.vercel.app/,https://github.com/Matt-Hulme/starwars-archive
+- The GraphQL endpoint has lost support, so some detail queries return null fields.",Frontend Dev,https://starwars-archive.vercel.app/,https://github.com/Matt-Hulme/starwars-archive
 React Scratch Map,Where Have You Traveled,"An interactive travel tracker that enables users to visualize visited countries, view stats, and save progress with Firebase.","### Overview
 Scratch Map is an interactive travel tracker that helps users visualize where they've been around the world. The tool combines data visualization with persistence through account-based saving. I built this project to practice API integration, authentication, and state management with Firebase.
 
