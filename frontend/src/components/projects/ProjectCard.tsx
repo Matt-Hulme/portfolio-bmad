@@ -12,6 +12,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
   const hasLiveLink = !!project.liveUrl;
   const hasImages = project.images && project.images.length > 0;
   const firstImage = hasImages ? project.images[0] : null;
+  const isVideo = firstImage && /\.(mp4|webm|mov)$/i.test(firstImage.url);
 
   // Format technologies as comma-separated string with ellipsis if too long
   const techDisplay = project.technologies.map((t) => t.name).join(', ');
@@ -37,12 +38,22 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
       {/* Visual area - thumbnail (only for cards with images) */}
       {firstImage && (
         <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
-          <img
-            src={firstImage.url}
-            alt={firstImage.altText}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-          />
+          {isVideo ? (
+            <video
+              src={firstImage.url}
+              className="h-full w-full object-cover"
+              muted
+              playsInline
+              preload="metadata"
+            />
+          ) : (
+            <img
+              src={firstImage.url}
+              alt={firstImage.altText}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          )}
         </div>
       )}
 
