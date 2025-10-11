@@ -67,7 +67,10 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   return (
     <div className="relative">
       {/* Carousel viewport */}
-      <div className="overflow-hidden" ref={emblaRef}>
+      <div
+        className="overflow-hidden rounded-lg border border-gray-800"
+        ref={emblaRef}
+      >
         <div className="flex">
           {images.map((image) => (
             <div

@@ -85,20 +85,28 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         </p>
 
         {/* Role badges */}
-        <div className="flex flex-wrap gap-2">
-          {project.roles.map((role) => (
-            <Badge
-              key={role.id}
-              variant="default"
-              className="text-xs text-gray-900"
-            >
-              {role.name}
-            </Badge>
-          ))}
+        <div className="space-y-2">
+          <h4 className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+            Roles
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {project.roles.map((role) => (
+              <Badge
+                key={role.id}
+                variant="default"
+                className="text-xs text-gray-900"
+              >
+                {role.name}
+              </Badge>
+            ))}
+          </div>
         </div>
 
         {/* Technology badges */}
-        <div className="border-t border-gray-800 pt-3">
+        <div className="space-y-2 border-t border-gray-800 pt-3">
+          <h4 className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+            Technologies
+          </h4>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
               <Badge

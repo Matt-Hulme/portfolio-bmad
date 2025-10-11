@@ -30,13 +30,13 @@ export function ProjectFilters({
       {/* Filter Dropdowns */}
       <div className="flex flex-col gap-4 md:flex-row md:gap-6">
         <MultiSelect
-          label="Role"
+          label="Roles"
           options={availableRoles}
           selectedValues={selectedRoles}
           onValueToggle={onRoleToggle}
         />
         <MultiSelect
-          label="Technology"
+          label="Technologies"
           options={availableTechnologies}
           selectedValues={selectedTechnologies}
           onValueToggle={onTechnologyToggle}
