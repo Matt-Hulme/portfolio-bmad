@@ -34,14 +34,12 @@ export function ProjectFilters({
           options={availableRoles}
           selectedValues={selectedRoles}
           onValueToggle={onRoleToggle}
-          placeholder="Select roles..."
         />
         <MultiSelect
           label="Technology"
           options={availableTechnologies}
           selectedValues={selectedTechnologies}
           onValueToggle={onTechnologyToggle}
-          placeholder="Select technologies..."
         />
         <div className="flex flex-row md:items-end">
           {hasActiveFilters && (

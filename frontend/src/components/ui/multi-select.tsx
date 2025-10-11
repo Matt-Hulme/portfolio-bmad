@@ -12,7 +12,6 @@ export interface MultiSelectProps<T extends string = string> {
   options: T[];
   selectedValues: T[];
   onValueToggle: (value: T) => void;
-  placeholder?: string;
 }
 
 export function MultiSelect<T extends string = string>({
@@ -20,12 +19,11 @@ export function MultiSelect<T extends string = string>({
   options,
   selectedValues,
   onValueToggle,
-  placeholder = 'Select...',
 }: MultiSelectProps<T>) {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="w-full md:w-64 md:flex-shrink-0">
+    <div className="w-full md:w-40 md:flex-shrink-0">
       <label className="mb-2 block text-sm font-medium text-gray-300">
         {label}
       </label>
@@ -37,9 +35,11 @@ export function MultiSelect<T extends string = string>({
             aria-expanded={open}
             className="focus:ring-primary flex h-9 w-full items-center justify-between rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 shadow-sm hover:bg-gray-700 hover:text-gray-100 focus:ring-1 focus:outline-none"
           >
-            {selectedValues.length > 0
-              ? `${selectedValues.length} selected`
-              : placeholder}
+            {selectedValues.length > 0 ? (
+              <span className="truncate">{`${selectedValues.length} selected`}</span>
+            ) : (
+              <span className="text-gray-500">-</span>
+            )}
             <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </button>
         </PopoverTrigger>
@@ -47,7 +47,7 @@ export function MultiSelect<T extends string = string>({
           className="w-[--radix-popover-trigger-width] border-gray-700 bg-gray-900 p-0"
           align="start"
         >
-          <div className="max-h-[300px] overflow-y-auto p-1">
+          <div className="max-h-[300px] overflow-y-auto p-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-600 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500 [&::-webkit-scrollbar-track]:bg-gray-800">
             {options.map((option) => {
               const isSelected = selectedValues.includes(option);
               return (
