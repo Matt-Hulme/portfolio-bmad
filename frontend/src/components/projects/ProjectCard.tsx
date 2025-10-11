@@ -36,7 +36,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
     >
       {/* Visual area - thumbnail (only for cards with images) */}
       {firstImage && (
-        <div className="relative aspect-video w-full overflow-hidden">
+        <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
           <img
             src={firstImage.url}
             alt={firstImage.altText}
