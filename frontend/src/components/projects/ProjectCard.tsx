@@ -14,6 +14,12 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
   const firstImage = hasImages ? project.images[0] : null;
   const isVideo = firstImage && /\.(mp4|webm|mov)$/i.test(firstImage.url);
 
+  // Format title: preserve dash for Matt-Hulme.com, replace hyphens with spaces for others
+  const displayTitle =
+    project.slug === 'Matt-Hulme.com'
+      ? 'matt-hulme.com'
+      : project.slug.replace(/-/g, ' ');
+
   // Format technologies as comma-separated string with ellipsis if too long
   const techDisplay = project.technologies.map((t) => t.name).join(', ');
   const maxTechLength = 60;
@@ -61,7 +67,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         {/* Header with title and live indicator */}
         <div className="flex items-start justify-between gap-3">
           <h3 className="group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 capitalize transition-colors">
-            {project.slug.replace(/-/g, ' ')}
+            {displayTitle}
           </h3>
           {hasLiveLink && (
             <div

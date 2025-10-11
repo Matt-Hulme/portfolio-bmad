@@ -248,7 +248,7 @@ def seed_database():
 
         # Second pass: Create projects with relationships
         print("Creating projects...")
-        for row in valid_projects:
+        for order_num, row in enumerate(valid_projects):
             project_slug = row["Project Slug"]
             print(f"  - {row['Project Title']} ({project_slug})")
 
@@ -261,6 +261,7 @@ def seed_database():
                 description=row.get("Full Description", ""),
                 live_url=row.get("Live Site URL") if row.get("Live Site URL") != "None" else None,
                 github_url=row.get("GH Repo") if row.get("GH Repo") != "None" else None,
+                order_num=order_num,
             )
 
             # Add technology relationships

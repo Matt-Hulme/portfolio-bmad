@@ -138,6 +138,11 @@ function generateGradient(slug: string): string {
 **Commits:**
 1. `581e318` - feat: Implement modal gallery carousel with fixed height container
 2. `9c1c07e` - feat: Add visual thumbnails to project cards
+3. `c2083c1` - refactor: Remove Brainstormer poster image from seed data
+4. `ddc9624` - refactor: Remove visual area from cards without images
+5. `c0222b1` - fix: Add rounded corners to card images
+6. `063aaa2` - feat: Display project slugs as titles in Title Case
+7. `0067ecd` - fix: Preserve case in image filenames for correct URLs
 
 **Files Created:**
 - `frontend/src/components/projects/ImageCarousel.tsx` - Carousel component
