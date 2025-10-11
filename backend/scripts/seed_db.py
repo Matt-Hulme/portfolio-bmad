@@ -45,6 +45,8 @@ def extract_technologies(description: str | None) -> list[str]:
                 # Split by comma and clean up
                 for tech in tech_list.split(","):
                     tech = tech.strip()
+                    # Remove ** prefix/suffix from markdown bold formatting
+                    tech = tech.strip("*").strip()
                     if tech and tech != "None":
                         technologies.add(tech)
 

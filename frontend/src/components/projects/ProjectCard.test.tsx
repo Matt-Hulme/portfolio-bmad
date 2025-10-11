@@ -65,14 +65,11 @@ describe('ProjectCard', () => {
     expect(screen.getByText('Backend Developer')).toBeInTheDocument();
   });
 
-  it('renders technology line with $ prefix', () => {
+  it('renders all technology badges', () => {
     render(<ProjectCard project={mockProject} />);
-    const techLine = screen.getByText('React, TypeScript, Node.js');
-    expect(techLine).toBeInTheDocument();
-
-    // Check that $ prefix exists in the parent
-    const techContainer = techLine.parentElement;
-    expect(techContainer?.textContent).toContain('$');
+    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByText('TypeScript')).toBeInTheDocument();
+    expect(screen.getByText('Node.js')).toBeInTheDocument();
   });
 
   it('shows LIVE indicator when project has live link', () => {
@@ -86,10 +83,12 @@ describe('ProjectCard', () => {
     expect(screen.queryByText('LIVE')).not.toBeInTheDocument();
   });
 
-  it('truncates long technology list with ellipsis', () => {
+  it('renders all technology badges for projects with many techs', () => {
     render(<ProjectCard project={mockProjectWithManyTechs} />);
-    const techText = screen.getByText(/React, TypeScript/);
-    expect(techText.textContent).toContain('...');
+    // All technologies should be rendered as individual badges (no truncation)
+    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByText('TypeScript')).toBeInTheDocument();
+    expect(screen.getByText('TailwindCSS')).toBeInTheDocument();
   });
 
   it('calls onClick handler when card is clicked', async () => {

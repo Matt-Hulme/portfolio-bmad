@@ -26,6 +26,12 @@ export function ProjectDetailModal({
 }: ProjectDetailModalProps) {
   if (!project) return null;
 
+  // Format title: preserve dash for Matt-Hulme.com, replace hyphens with spaces for others
+  const displayTitle =
+    project.slug === 'Matt-Hulme.com'
+      ? 'matt-hulme.com'
+      : project.slug.replace(/-/g, ' ');
+
   // Convert API response to link objects for display
   const links = [];
   if (project.liveUrl) {
@@ -47,7 +53,9 @@ export function ProjectDetailModal({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
         <DialogHeader className="space-y-3">
-          <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+          <DialogTitle className="text-2xl capitalize">
+            {displayTitle}
+          </DialogTitle>
           <DialogDescription className="sr-only">
             {project.summary}
           </DialogDescription>

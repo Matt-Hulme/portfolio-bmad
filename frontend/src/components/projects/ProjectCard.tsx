@@ -20,17 +20,9 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
       ? 'matt-hulme.com'
       : project.slug.replace(/-/g, ' ');
 
-  // Format technologies as comma-separated string with ellipsis if too long
-  const techDisplay = project.technologies.map((t) => t.name).join(', ');
-  const maxTechLength = 60;
-  const truncatedTech =
-    techDisplay.length > maxTechLength
-      ? techDisplay.slice(0, maxTechLength) + '...'
-      : techDisplay;
-
   return (
     <Card
-      className="group border-l-primary/40 hover:border-l-primary hover:shadow-primary/5 h-full min-w-0 cursor-pointer border-l-4 bg-gray-900/50 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
+      className="group border-l-primary/40 hover:border-l-primary hover:shadow-primary/5 relative h-full min-w-0 cursor-pointer overflow-hidden border-0 border-l-4 bg-gray-900/50 ring-1 ring-gray-800 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -43,7 +35,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
     >
       {/* Visual area - thumbnail (only for cards with images) */}
       {firstImage && (
-        <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
+        <div className="aspect-video w-full">
           {isVideo ? (
             <video
               src={firstImage.url}
@@ -98,11 +90,18 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           ))}
         </div>
 
-        {/* Technology line with $ prefix */}
-        <div className="border-t border-gray-800 pt-2">
-          <div className="font-mono text-sm text-gray-500">
-            <span className="text-primary font-bold">$ </span>
-            <span title={techDisplay}>{truncatedTech}</span>
+        {/* Technology badges */}
+        <div className="border-t border-gray-800 pt-3">
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <Badge
+                key={tech.id}
+                variant="outline"
+                className="border-primary/20 bg-primary/5 text-primary font-mono text-xs"
+              >
+                {tech.name}
+              </Badge>
+            ))}
           </div>
         </div>
       </div>
