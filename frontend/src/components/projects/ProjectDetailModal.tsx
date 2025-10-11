@@ -1,4 +1,4 @@
-import type { Project, ProjectLink } from '@/types/project';
+import type { ProjectResponse } from '@/lib/api';
 import {
   Dialog,
   DialogContent,
@@ -10,9 +10,10 @@ import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ExternalLink, Github } from 'lucide-react';
+import './markdown.css';
 
 interface ProjectDetailModalProps {
-  project: Project | null;
+  project: ProjectResponse | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -24,6 +25,23 @@ export function ProjectDetailModal({
 }: ProjectDetailModalProps) {
   if (!project) return null;
 
+  // Convert API response to link objects for display
+  const links = [];
+  if (project.liveUrl) {
+    links.push({
+      label: 'Live Site',
+      url: project.liveUrl,
+      type: 'live' as const,
+    });
+  }
+  if (project.githubUrl) {
+    links.push({
+      label: 'GitHub',
+      url: project.githubUrl,
+      type: 'github' as const,
+    });
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
@@ -32,19 +50,10 @@ export function ProjectDetailModal({
           <DialogDescription className="sr-only">
             {project.summary}
           </DialogDescription>
-          {project.dateCompleted && (
-            <p className="text-muted-foreground text-sm">
-              Completed:{' '}
-              {new Date(project.dateCompleted).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-              })}
-            </p>
-          )}
         </DialogHeader>
 
         {/* Description with markdown */}
-        <div className="prose prose-sm prose-neutral dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-a:text-primary max-w-none">
+        <div className="project-markdown">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {project.description}
           </ReactMarkdown>
@@ -58,8 +67,8 @@ export function ProjectDetailModal({
               <h3 className="text-foreground text-sm font-semibold">Roles</h3>
               <div className="flex flex-wrap gap-2">
                 {project.roles.map((role) => (
-                  <Badge key={role} variant="default">
-                    {role}
+                  <Badge key={role.id} variant="default">
+                    {role.name}
                   </Badge>
                 ))}
               </div>
@@ -74,35 +83,23 @@ export function ProjectDetailModal({
               </h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
-                  <Badge key={tech} variant="outline">
-                    {tech}
+                  <Badge key={tech.id} variant="outline">
+                    {tech.name}
                   </Badge>
                 ))}
               </div>
             </div>
           )}
-
-          {/* Industry */}
-          {project.industry && (
-            <div className="space-y-2">
-              <h3 className="text-foreground text-sm font-semibold">
-                Industry
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                {project.industry}
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Links Section */}
-        {project.links && project.links.length > 0 && (
+        {links.length > 0 && (
           <div className="border-border bg-muted/30 space-y-3 rounded-lg border p-4">
             <h3 className="text-foreground text-sm font-semibold">
               Project Links
             </h3>
             <div className="flex flex-col gap-3">
-              {project.links.map((link, index) => (
+              {links.map((link, index) => (
                 <ProjectLinkItem key={index} link={link} />
               ))}
             </div>
@@ -114,24 +111,19 @@ export function ProjectDetailModal({
           <div className="space-y-3">
             <h3 className="text-foreground text-sm font-semibold">Gallery</h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.images.map((image, index) => (
+              {project.images.map((image) => (
                 <div
-                  key={index}
+                  key={image.id}
                   className="group border-border bg-muted/20 hover:border-primary/50 space-y-2 overflow-hidden rounded-lg border transition-all"
                 >
                   <div className="overflow-hidden">
                     <img
                       src={image.url}
-                      alt={image.alt}
+                      alt={image.altText}
                       className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
                   </div>
-                  {image.caption && (
-                    <p className="text-muted-foreground px-3 pb-3 text-xs">
-                      {image.caption}
-                    </p>
-                  )}
                 </div>
               ))}
             </div>
@@ -143,18 +135,17 @@ export function ProjectDetailModal({
 }
 
 // Helper component for rendering project links with icons
-function ProjectLinkItem({ link }: { link: ProjectLink }) {
+function ProjectLinkItem({
+  link,
+}: {
+  link: { label: string; url: string; type: 'live' | 'github' };
+}) {
   const getIcon = () => {
-    switch (link.type) {
-      case 'github':
-        return <Github className="h-4 w-4" />;
-      case 'live':
-      case 'demo':
-      case 'case-study':
-      case 'other':
-      default:
-        return <ExternalLink className="h-4 w-4" />;
-    }
+    return link.type === 'github' ? (
+      <Github className="h-4 w-4" />
+    ) : (
+      <ExternalLink className="h-4 w-4" />
+    );
   };
 
   return (

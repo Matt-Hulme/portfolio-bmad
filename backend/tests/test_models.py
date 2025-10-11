@@ -47,8 +47,6 @@ def test_create_project(test_session):
     assert project.id is not None
     assert project.title == "My Project"
     assert project.slug == "my-project"
-    assert project.created_at is not None
-    assert project.updated_at is not None
 
 
 def test_project_technology_relationship(test_session, sample_technology):

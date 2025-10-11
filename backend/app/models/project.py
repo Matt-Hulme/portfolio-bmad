@@ -1,8 +1,6 @@
 """SQLAlchemy models for projects and related entities."""
 
-from datetime import UTC, datetime
-
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table, Text
+from sqlalchemy import Column, ForeignKey, Integer, String, Table, Text
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -38,13 +36,6 @@ class Project(Base):
     description = Column(Text, nullable=False)
     live_url = Column(String, nullable=True)
     github_url = Column(String, nullable=True)
-    created_at = Column(DateTime, default=lambda: datetime.now(UTC), nullable=False)
-    updated_at = Column(
-        DateTime,
-        default=lambda: datetime.now(UTC),
-        onupdate=lambda: datetime.now(UTC),
-        nullable=False,
-    )
 
     # Relationships
     technologies = relationship(

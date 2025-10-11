@@ -1,18 +1,18 @@
 import { ExternalLink } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
-import type { Project } from '@/types/project';
+import type { ProjectResponse } from '@/lib/api';
 
 interface ProjectCardProps {
-  project: Project;
+  project: ProjectResponse;
   onClick?: () => void;
 }
 
 export function ProjectCard({ project, onClick }: ProjectCardProps) {
-  const hasLiveLink = project.links?.some((link) => link.type === 'live');
+  const hasLiveLink = !!project.liveUrl;
 
   // Format technologies as comma-separated string with ellipsis if too long
-  const techDisplay = project.technologies.join(', ');
+  const techDisplay = project.technologies.map((t) => t.name).join(', ');
   const maxTechLength = 60;
   const truncatedTech =
     techDisplay.length > maxTechLength
@@ -58,11 +58,11 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         <div className="flex flex-wrap gap-2">
           {project.roles.map((role) => (
             <Badge
-              key={role}
+              key={role.id}
               variant="outline"
               className="border-gray-700 bg-gray-800/50 text-xs text-gray-300"
             >
-              {role}
+              {role.name}
             </Badge>
           ))}
         </div>

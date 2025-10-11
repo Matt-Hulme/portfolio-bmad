@@ -26,7 +26,7 @@ class ProjectRepository:
         Retrieve all projects with eager loading of related data.
 
         Returns:
-            List of Project models ordered by created_at descending
+            List of Project models ordered by title
         """
         return (
             self.db.query(Project)
@@ -35,7 +35,7 @@ class ProjectRepository:
                 joinedload(Project.roles),
                 joinedload(Project.images),
             )
-            .order_by(Project.created_at.desc())
+            .order_by(Project.title)
             .all()
         )
 
