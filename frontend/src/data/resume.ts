@@ -43,10 +43,10 @@ export const resumeData: ResumeData = {
       company: 'Travelpass Group',
       period: 'Apr 2025-Present',
       responsibilities: [
-        'Conceptualized, designed, and built Asset Frequency Report, which analyzes millions of Google Ads assets and derives their relative efficiency, driving data-driven copy optimization decisions across all campaigns',
+        'Designed and built Asset Frequency Report analyzing millions of Google Ads assets to derive efficiency metrics, driving data-driven copy optimization across all campaigns',
         'Developed AI-powered ad copy generation and fully automated address/name shortening tools',
-        'Lead product development and team management for AI automation initiatives',
-        'Stack: Python, LangChain, LangSmith, OpenAI API, Google Ads API, AWS Lambda/S3, Snowflake, Tableau',
+        'Led product development and team management for AI automation initiatives',
+        'Tech: Python, LangChain, LangSmith, OpenAI API, Google Ads API, AWS Lambda/S3, Snowflake, Tableau',
       ],
     },
     {
@@ -54,29 +54,22 @@ export const resumeData: ResumeData = {
       company: 'Travelpass Group',
       period: 'Feb 2024-Mar 2025',
       responsibilities: [
-        'Shipped Lists, a collaborative travel recommendation tool',
-        'Developed personalized Dashboard Feed, showing follower activity and List updates',
+        'Built and shipped Lists feature, a collaborative travel recommendation tool',
+        'Developed personalized Dashboard Feed showing follower activity and List updates',
         'Implemented redesigned Profiles page, improving load times and overall UX',
-        'Maintained reusable UI component design system',
-        'Stack: TypeScript, React, GraphQL, HTML/CSS, Tailwind, AWS, Git/GitHub',
+        'Contributed to and maintained reusable UI component design system',
+        'Tech: TypeScript, React, GraphQL, HTML/CSS, TailwindCSS, shadcn/ui, AWS, Git/GitHub',
       ],
     },
     {
-      title: 'Paid Search Specialist',
+      title: 'Junior SEM Specialist → Paid Search Specialist',
       company: 'Travelpass Group',
-      period: 'Jul 2023-Feb 2024',
+      period: 'Jul 2022-Feb 2024',
       responsibilities: [
         'Built custom Python scripts for Google Ads API automation (ngrams analysis, RSA reporting)',
         'Created GPT-enabled Google Sheets automating daily SEM tasks',
         'Improved profitability of key international account by 195% YoY',
-      ],
-    },
-    {
-      title: 'Junior SEM Specialist',
-      company: 'Travelpass Group',
-      period: 'Jul 2022-Jul 2023',
-      responsibilities: [
-        'Entry role managing search engine marketing campaigns and keyword optimization',
+        'Managed search engine marketing campaigns and keyword optimization',
       ],
     },
     {
@@ -84,9 +77,7 @@ export const resumeData: ResumeData = {
       company: 'Self-employed',
       period: '2017-2022',
       responsibilities: [
-        'Developed systematic data analysis and research processes',
-        'Achieved 800% ROI through statistical modeling and risk management',
-        'Managed large-scale data filtering and optimization strategies',
+        'Achieved 800% ROI through systematic data analysis, statistical modeling, and risk management',
       ],
     },
     {
@@ -94,30 +85,32 @@ export const resumeData: ResumeData = {
       company: 'Self-employed',
       period: '2014-2017',
       responsibilities: [
-        'Invented and patented The Foot Hammock, a heated hammock for your desk',
-        'Raised $113,000 in 33 days on Kickstarter',
-        'Shipped product to 3,000+ customers worldwide',
-        'Generated additional $80,000+ revenue through digital marketing',
+        'Invented and patented heated desk accessory; launched via Kickstarter campaign raising $113K in 33 days',
+        'Built end-to-end product business managing supply chain, manufacturing, and global distribution to 3,000+ customers',
+        'Generated additional $80K revenue through digital marketing campaigns',
       ],
     },
   ],
   technicalSkills: [
     {
-      category: 'AI & Data',
-      skills: [
-        'Python',
-        'LangChain',
-        'LangSmith',
-        'OpenAI API',
-        'N8N',
-        'SQL',
-        'AWS Lambda/S3',
-        'Snowflake',
-      ],
+      category: 'Languages & Frameworks',
+      skills: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
     },
     {
-      category: 'Frontend & Full-Stack',
-      skills: ['React', 'TypeScript', 'GraphQL', 'HTML/CSS', 'Tailwind'],
+      category: 'Frontend Development',
+      skills: ['React', 'HTML/CSS', 'TailwindCSS', 'shadcn/ui', 'Vite'],
+    },
+    {
+      category: 'Backend & APIs',
+      skills: ['FastAPI', 'GraphQL', 'REST APIs', 'Pydantic', 'Uvicorn'],
+    },
+    {
+      category: 'AI & Automation',
+      skills: ['LangChain', 'LangSmith', 'OpenAI API', 'n8n'],
+    },
+    {
+      category: 'Cloud & Infrastructure',
+      skills: ['AWS (Lambda, S3)', 'Snowflake', 'Firebase', 'Vercel'],
     },
     {
       category: 'Marketing & Analytics',
