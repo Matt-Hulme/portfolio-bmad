@@ -7,9 +7,6 @@ const Home = lazy(() =>
   import('@/pages/Home').then((module) => ({ default: module.Home })),
 );
 const Resume = lazy(() => import('@/pages/Resume'));
-const Contact = lazy(() =>
-  import('@/pages/Contact').then((module) => ({ default: module.Contact })),
-);
 const NotFound = lazy(() =>
   import('@/pages/NotFound').then((module) => ({ default: module.NotFound })),
 );
@@ -35,10 +32,6 @@ export const routes: RouteObject[] = [
     element: withSuspense(Resume),
   },
   {
-    path: '/contact',
-    element: withSuspense(Contact),
-  },
-  {
     path: '*',
     element: withSuspense(NotFound),
   },
@@ -47,5 +40,4 @@ export const routes: RouteObject[] = [
 export const navLinks = [
   { path: '/', label: 'Projects' },
   { path: '/resume', label: 'Resume' },
-  { path: '/contact', label: 'Contact' },
 ];
