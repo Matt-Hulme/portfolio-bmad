@@ -115,7 +115,7 @@ def get_image_mappings() -> dict[str, list[dict]]:
             "sw-v2-Films-M.png",
         ],
         "scratch-map": ["scratch-map-1.png", "scratch-map-2.png", "scratch-map-3-M.png"],
-        "brainstormer": [
+        "Brainstormer": [
             "brainstormer-demo-poster.jpg",
             "brainstormer-demo.mp4",
         ],
