@@ -115,7 +115,10 @@ def get_image_mappings() -> dict[str, list[dict]]:
             "sw-v2-Films-M.png",
         ],
         "scratch-map": ["scratch-map-1.png", "scratch-map-2.png", "scratch-map-3-M.png"],
-        "brainstormer": ["Brainstormer Demo.mov"],
+        "brainstormer": [
+            "brainstormer-demo-poster.jpg",
+            "brainstormer-demo.mp4",
+        ],
     }
 
     # Convert to the format expected by the seeder
@@ -126,7 +129,7 @@ def get_image_mappings() -> dict[str, list[dict]]:
             file_path = static_dir / slug / filename
             if file_path.exists():
                 # Determine URL path based on file type
-                is_video = filename.lower().endswith(".mov")
+                is_video = filename.lower().endswith((".mov", ".mp4", ".webm"))
                 url_prefix = "/videos/projects" if is_video else "/images/projects"
 
                 # Clean up filename for URL (lowercase, replace spaces with hyphens)

@@ -23,6 +23,7 @@ app.add_middleware(
 
 # Mount static files
 app.mount("/images", StaticFiles(directory="static/images"), name="images")
+app.mount("/videos", StaticFiles(directory="static/images"), name="videos")
 
 # Register routers
 app.include_router(projects_router, prefix="/api", tags=["projects"])
