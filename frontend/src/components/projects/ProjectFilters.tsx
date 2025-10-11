@@ -30,18 +30,18 @@ export function ProjectFilters({
       {/* Filter Dropdowns */}
       <div className="flex flex-col gap-4 md:flex-row md:gap-6">
         <MultiSelect
-          label="Technology"
-          options={availableTechnologies}
-          selectedValues={selectedTechnologies}
-          onValueToggle={onTechnologyToggle}
-          placeholder="Select technologies..."
-        />
-        <MultiSelect
           label="Role"
           options={availableRoles}
           selectedValues={selectedRoles}
           onValueToggle={onRoleToggle}
           placeholder="Select roles..."
+        />
+        <MultiSelect
+          label="Technology"
+          options={availableTechnologies}
+          selectedValues={selectedTechnologies}
+          onValueToggle={onTechnologyToggle}
+          placeholder="Select technologies..."
         />
         <div className="flex flex-row md:items-end">
           {hasActiveFilters && (
@@ -68,25 +68,25 @@ export function ProjectFilters({
           </Badge>
         ) : (
           <>
-            {selectedTechnologies.map((tech) => (
-              <Badge
-                key={tech}
-                variant="default"
-                className="bg-primary/20 text-primary hover:bg-primary/30 cursor-pointer"
-                onClick={() => onTechnologyToggle(tech)}
-              >
-                {tech}
-                <X size={14} className="ml-1" />
-              </Badge>
-            ))}
             {selectedRoles.map((role) => (
               <Badge
                 key={role}
                 variant="default"
-                className="bg-primary/20 text-primary hover:bg-primary/30 cursor-pointer"
+                className="hover:bg-primary/90 cursor-pointer text-gray-900"
                 onClick={() => onRoleToggle(role)}
               >
                 {role}
+                <X size={14} className="ml-1" />
+              </Badge>
+            ))}
+            {selectedTechnologies.map((tech) => (
+              <Badge
+                key={tech}
+                variant="outline"
+                className="border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 cursor-pointer font-mono"
+                onClick={() => onTechnologyToggle(tech)}
+              >
+                {tech}
                 <X size={14} className="ml-1" />
               </Badge>
             ))}

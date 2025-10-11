@@ -29,7 +29,7 @@ export function ProjectDetailModal({
   // Format title: preserve dash for Matt-Hulme.com, replace hyphens with spaces for others
   const displayTitle =
     project.slug === 'Matt-Hulme.com'
-      ? 'matt-hulme.com'
+      ? 'Matt-Hulme.com'
       : project.slug.replace(/-/g, ' ');
 
   // Convert API response to link objects for display
@@ -53,7 +53,11 @@ export function ProjectDetailModal({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
         <DialogHeader className="space-y-3">
-          <DialogTitle className="text-2xl capitalize">
+          <DialogTitle
+            className={`text-2xl ${
+              project.slug === 'Matt-Hulme.com' ? '' : 'capitalize'
+            }`}
+          >
             {displayTitle}
           </DialogTitle>
           <DialogDescription className="sr-only">
@@ -76,7 +80,11 @@ export function ProjectDetailModal({
               <h3 className="text-foreground text-sm font-semibold">Roles</h3>
               <div className="flex flex-wrap gap-2">
                 {project.roles.map((role) => (
-                  <Badge key={role.id} variant="default">
+                  <Badge
+                    key={role.id}
+                    variant="default"
+                    className="text-sm text-gray-900"
+                  >
                     {role.name}
                   </Badge>
                 ))}
@@ -92,7 +100,11 @@ export function ProjectDetailModal({
               </h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
-                  <Badge key={tech.id} variant="outline">
+                  <Badge
+                    key={tech.id}
+                    variant="outline"
+                    className="border-primary/20 bg-primary/5 text-primary font-mono text-sm"
+                  >
                     {tech.name}
                   </Badge>
                 ))}

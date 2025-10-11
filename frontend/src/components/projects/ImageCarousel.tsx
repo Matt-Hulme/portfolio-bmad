@@ -104,18 +104,18 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
           <button
             onClick={scrollPrev}
             disabled={!canScrollPrev}
-            className="bg-background/80 hover:bg-background absolute top-1/2 left-4 -translate-y-1/2 rounded-full p-2 backdrop-blur-sm transition-all disabled:opacity-30"
+            className="hover:ring-primary/50 absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-gray-900/90 p-3 ring-1 ring-gray-700 backdrop-blur-sm transition-all hover:bg-gray-800 disabled:opacity-40 disabled:hover:bg-gray-900/90 disabled:hover:ring-gray-700"
             aria-label="Previous image"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="text-primary h-6 w-6" />
           </button>
           <button
             onClick={scrollNext}
             disabled={!canScrollNext}
-            className="bg-background/80 hover:bg-background absolute top-1/2 right-4 -translate-y-1/2 rounded-full p-2 backdrop-blur-sm transition-all disabled:opacity-30"
+            className="hover:ring-primary/50 absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-gray-900/90 p-3 ring-1 ring-gray-700 backdrop-blur-sm transition-all hover:bg-gray-800 disabled:opacity-40 disabled:hover:bg-gray-900/90 disabled:hover:ring-gray-700"
             aria-label="Next image"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="text-primary h-6 w-6" />
           </button>
         </>
       )}

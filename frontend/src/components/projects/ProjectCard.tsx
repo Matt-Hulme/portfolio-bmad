@@ -17,12 +17,12 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
   // Format title: preserve dash for Matt-Hulme.com, replace hyphens with spaces for others
   const displayTitle =
     project.slug === 'Matt-Hulme.com'
-      ? 'matt-hulme.com'
+      ? 'Matt-Hulme.com'
       : project.slug.replace(/-/g, ' ');
 
   return (
     <Card
-      className="group border-l-primary/40 hover:border-l-primary hover:shadow-primary/5 relative h-full min-w-0 cursor-pointer overflow-hidden border-0 border-l-4 bg-gray-900/50 ring-1 ring-gray-800 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
+      className="group hover:shadow-primary/5 relative h-full min-w-0 cursor-pointer overflow-hidden rounded-lg border border-gray-800 bg-gray-900/50 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -33,6 +33,9 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         }
       }}
     >
+      {/* Left accent border - straight vertical line */}
+      <div className="bg-primary/40 group-hover:bg-primary absolute top-0 bottom-0 left-0 z-10 w-1 transition-colors" />
+
       {/* Visual area - thumbnail (only for cards with images) */}
       {firstImage && (
         <div className="aspect-video w-full">
@@ -58,7 +61,11 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
       <div className="space-y-4 p-6">
         {/* Header with title and live indicator */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 capitalize transition-colors">
+          <h3
+            className={`group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 transition-colors ${
+              project.slug === 'Matt-Hulme.com' ? '' : 'capitalize'
+            }`}
+          >
             {displayTitle}
           </h3>
           {hasLiveLink && (
@@ -82,8 +89,8 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           {project.roles.map((role) => (
             <Badge
               key={role.id}
-              variant="outline"
-              className="border-gray-700 bg-gray-800/50 text-xs text-gray-300"
+              variant="default"
+              className="text-xs text-gray-900"
             >
               {role.name}
             </Badge>
