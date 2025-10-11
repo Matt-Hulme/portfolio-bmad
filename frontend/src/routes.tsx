@@ -6,9 +6,7 @@ import { RouteLoading } from '@/components/layout/RouteLoading';
 const Home = lazy(() =>
   import('@/pages/Home').then((module) => ({ default: module.Home })),
 );
-const Resume = lazy(() =>
-  import('@/pages/Resume').then((module) => ({ default: module.Resume })),
-);
+const Resume = lazy(() => import('@/pages/Resume'));
 const Contact = lazy(() =>
   import('@/pages/Contact').then((module) => ({ default: module.Contact })),
 );
