@@ -75,13 +75,13 @@ def parse_roles(roles_str: str | None) -> list[str]:
 
 def get_image_mappings() -> dict[str, list[dict]]:
     """
-    Map image files from projects-data directory to project slugs.
+    Map image files from backend static directory to project slugs.
 
     Returns:
         Dictionary mapping project slugs to lists of image info dicts
     """
-    # Get the frontend projects-data directory
-    frontend_dir = backend_dir.parent / "frontend" / "src" / "data" / "projects-data"
+    # Get the backend static images directory
+    static_dir = backend_dir / "static" / "images" / "projects"
 
     # Mapping of file prefixes/patterns to project slugs
     image_mappings = {
@@ -123,7 +123,7 @@ def get_image_mappings() -> dict[str, list[dict]]:
     for slug, files in image_mappings.items():
         images = []
         for i, filename in enumerate(files):
-            file_path = frontend_dir / filename
+            file_path = static_dir / slug / filename
             if file_path.exists():
                 # Determine URL path based on file type
                 is_video = filename.lower().endswith(".mov")
