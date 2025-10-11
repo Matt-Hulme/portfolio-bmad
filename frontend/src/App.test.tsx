@@ -67,8 +67,8 @@ describe('App', () => {
 
     renderWithProviders(<App />);
     await waitFor(() => {
-      // Check for first project card
-      expect(screen.getByText('Modern Portfolio Website')).toBeInTheDocument();
+      // Check for first project card (slug "test-project" displays as "test project")
+      expect(screen.getByText('test project')).toBeInTheDocument();
     });
   });
 

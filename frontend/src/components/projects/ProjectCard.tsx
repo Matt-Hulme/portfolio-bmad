@@ -49,8 +49,8 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
       <div className="space-y-4 p-6">
         {/* Header with title and live indicator */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 transition-colors">
-            {project.title}
+          <h3 className="group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 capitalize transition-colors">
+            {project.slug.replace(/-/g, ' ')}
           </h3>
           {hasLiveLink && (
             <div

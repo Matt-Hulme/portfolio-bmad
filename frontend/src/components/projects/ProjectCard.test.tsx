@@ -48,9 +48,10 @@ const mockProjectWithManyTechs: ProjectResponse = {
 };
 
 describe('ProjectCard', () => {
-  it('renders project title', () => {
+  it('renders project slug as title', () => {
     render(<ProjectCard project={mockProject} />);
-    expect(screen.getByText('Test Project')).toBeInTheDocument();
+    // Slug "test-project" is displayed as "test project" (with spaces, capitalized via CSS)
+    expect(screen.getByText('test project')).toBeInTheDocument();
   });
 
   it('renders project summary', () => {

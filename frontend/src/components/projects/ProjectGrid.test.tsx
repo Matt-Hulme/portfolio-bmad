@@ -41,9 +41,10 @@ describe('ProjectGrid', () => {
   it('renders all projects', () => {
     render(<ProjectGrid projects={mockProjects} />);
 
-    expect(screen.getByText('Project One')).toBeInTheDocument();
-    expect(screen.getByText('Project Two')).toBeInTheDocument();
-    expect(screen.getByText('Project Three')).toBeInTheDocument();
+    // Slugs are displayed with hyphens replaced by spaces
+    expect(screen.getByText('project one')).toBeInTheDocument();
+    expect(screen.getByText('project two')).toBeInTheDocument();
+    expect(screen.getByText('project three')).toBeInTheDocument();
   });
 
   it('renders correct number of project cards', () => {
@@ -76,7 +77,7 @@ describe('ProjectGrid', () => {
     );
 
     const firstCard = screen
-      .getByText('Project One')
+      .getByText('project one')
       .closest('[role="button"]');
     if (firstCard) {
       await user.click(firstCard);
@@ -100,9 +101,10 @@ describe('ProjectGrid', () => {
     const cards = container.querySelectorAll('[role="button"]');
     expect(cards).toHaveLength(3);
 
-    // Each card should have unique content
+    // Each card should have unique content (slugs displayed with spaces)
     mockProjects.forEach((project) => {
-      expect(screen.getByText(project.title)).toBeInTheDocument();
+      const slugAsText = project.slug.replace(/-/g, ' ');
+      expect(screen.getByText(slugAsText)).toBeInTheDocument();
     });
   });
 });
