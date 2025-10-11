@@ -2,40 +2,48 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ProjectCard } from './ProjectCard';
-import type { Project } from '@/types/project';
+import type { ProjectResponse } from '@/lib/api';
 
-const mockProject: Project = {
-  id: '1',
+const mockProject: ProjectResponse = {
+  id: 1,
   slug: 'test-project',
   title: 'Test Project',
   summary: 'A test project summary',
   description: 'Full description',
-  roles: ['Frontend Developer', 'Backend Developer'],
-  technologies: ['React', 'TypeScript', 'Node.js'],
-  industry: 'Technology',
-};
-
-const mockProjectWithLiveLink: Project = {
-  ...mockProject,
-  links: [
-    { label: 'Live Site', url: 'https://example.com', type: 'live' },
-    { label: 'GitHub', url: 'https://github.com/test', type: 'github' },
+  roles: [
+    { id: 1, name: 'Frontend Developer' },
+    { id: 2, name: 'Backend Developer' },
   ],
+  technologies: [
+    { id: 1, name: 'React' },
+    { id: 2, name: 'TypeScript' },
+    { id: 3, name: 'Node.js' },
+  ],
+  industry: 'Technology',
+  liveUrl: null,
+  githubUrl: null,
+  images: [],
 };
 
-const mockProjectWithManyTechs: Project = {
+const mockProjectWithLiveLink: ProjectResponse = {
+  ...mockProject,
+  liveUrl: 'https://example.com',
+  githubUrl: 'https://github.com/test',
+};
+
+const mockProjectWithManyTechs: ProjectResponse = {
   ...mockProject,
   technologies: [
-    'React',
-    'TypeScript',
-    'Node.js',
-    'PostgreSQL',
-    'Redis',
-    'Docker',
-    'Kubernetes',
-    'AWS',
-    'GraphQL',
-    'TailwindCSS',
+    { id: 1, name: 'React' },
+    { id: 2, name: 'TypeScript' },
+    { id: 3, name: 'Node.js' },
+    { id: 4, name: 'PostgreSQL' },
+    { id: 5, name: 'Redis' },
+    { id: 6, name: 'Docker' },
+    { id: 7, name: 'Kubernetes' },
+    { id: 8, name: 'AWS' },
+    { id: 9, name: 'GraphQL' },
+    { id: 10, name: 'TailwindCSS' },
   ],
 };
 
