@@ -134,7 +134,6 @@ def get_image_mappings() -> dict[str, list[dict]]:
         "Brainstormer": (
             "Brainstormer",
             [
-                "brainstormer-demo-poster.jpg",
                 "brainstormer-demo.mp4",
             ],
         ),
