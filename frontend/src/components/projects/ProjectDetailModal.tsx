@@ -111,21 +111,36 @@ export function ProjectDetailModal({
           <div className="space-y-3">
             <h3 className="text-foreground text-sm font-semibold">Gallery</h3>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.images.map((image) => (
-                <div
-                  key={image.id}
-                  className="group border-border bg-muted/20 hover:border-primary/50 space-y-2 overflow-hidden rounded-lg border transition-all"
-                >
-                  <div className="overflow-hidden">
-                    <img
-                      src={image.url}
-                      alt={image.altText}
-                      className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
+              {project.images.map((image) => {
+                const isVideo = /\.(mp4|webm|mov)$/i.test(image.url);
+
+                return (
+                  <div
+                    key={image.id}
+                    className="group border-border bg-muted/20 hover:border-primary/50 space-y-2 overflow-hidden rounded-lg border transition-all"
+                  >
+                    <div className="overflow-hidden">
+                      {isVideo ? (
+                        <video
+                          src={image.url}
+                          controls
+                          className="h-auto w-full object-cover"
+                          preload="metadata"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : (
+                        <img
+                          src={image.url}
+                          alt={image.altText}
+                          className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

@@ -17,9 +17,6 @@ describe('Navigation', () => {
         screen.getByRole('link', { name: /projects/i }),
       ).toBeInTheDocument();
       expect(screen.getByRole('link', { name: /resume/i })).toBeInTheDocument();
-      expect(
-        screen.getByRole('link', { name: /contact/i }),
-      ).toBeInTheDocument();
     });
 
     it('has correct navigation role and aria-label', () => {
@@ -49,10 +46,6 @@ describe('Navigation', () => {
         'href',
         '/resume',
       );
-      expect(screen.getByRole('link', { name: /contact/i })).toHaveAttribute(
-        'href',
-        '/contact',
-      );
     });
 
     it('highlights active route', () => {
@@ -74,10 +67,8 @@ describe('Navigation', () => {
       );
 
       const projectsLink = screen.getByRole('link', { name: /projects/i });
-      const contactLink = screen.getByRole('link', { name: /contact/i });
 
       expect(projectsLink.className).toContain('text-foreground');
-      expect(contactLink.className).toContain('text-foreground');
     });
 
     it('applies custom className prop', () => {
@@ -151,10 +142,9 @@ describe('Navigation', () => {
 
       const mobileNav = screen.getByLabelText('Mobile navigation');
       const buttons = mobileNav.querySelectorAll('button');
-      expect(buttons).toHaveLength(3);
+      expect(buttons).toHaveLength(2);
       expect(buttons[0]).toHaveTextContent('Projects');
       expect(buttons[1]).toHaveTextContent('Resume');
-      expect(buttons[2]).toHaveTextContent('Contact');
     });
 
     it('closes mobile menu when a navigation item is clicked', async () => {

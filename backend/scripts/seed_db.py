@@ -75,58 +75,80 @@ def parse_roles(roles_str: str | None) -> list[str]:
 
 def get_image_mappings() -> dict[str, list[dict]]:
     """
-    Map image files from projects-data directory to project slugs.
+    Map image files from backend static directory to project slugs.
 
     Returns:
         Dictionary mapping project slugs to lists of image info dicts
     """
-    # Get the frontend projects-data directory
-    frontend_dir = backend_dir.parent / "frontend" / "src" / "data" / "projects-data"
+    # Get the backend static images directory
+    static_dir = backend_dir / "static" / "images" / "projects"
 
-    # Mapping of file prefixes/patterns to project slugs
+    # Mapping of CSV project slugs to (directory_name, [files])
+    # CSV slugs have spaces/caps, directories use lowercase-with-dashes
     image_mappings = {
-        "travelpass-lists": [
-            "Lists-1.png",
-            "Lists-2.png",
-            "Lists-3.png",
-            "Lists-4.png",
-            "Lists-5-M.png",
-        ],
-        "travelpass-dashboard": [
-            "Dashboard-1.png",
-            "Dashboard-2.png",
-            "Dashboard-3.png",
-            "Dashboard-4.png",
-            "Dashboard-5.png",
-            "Dashboard-6-M.png",
-        ],
-        "travelpass-profiles": [
-            "Profile-1.png",
-            "Profile-2.png",
-            "Profile-3.png",
-            "Profile-4-M.png",
-        ],
-        "star-wars-archive-1": ["sw-v1-home.png", "sw-v1-characters.png"],
-        "star-wars-archive-2": [
-            "sw-v2-Home.png",
-            "sw-v2-Characters.png",
-            "sw-v2-CharactersList.png",
-            "sw-v2-characterdetails.png",
-            "sw-v2-Films-M.png",
-        ],
-        "scratch-map": ["scratch-map-1.png", "scratch-map-2.png", "scratch-map-3-M.png"],
-        "brainstormer": ["Brainstormer Demo.mov"],
+        "Travelpass Lists": (
+            "travelpass-lists",
+            [
+                "Lists-1.png",
+                "Lists-2.png",
+                "Lists-3.png",
+                "Lists-4.png",
+                "Lists-5-M.png",
+            ],
+        ),
+        "Travelpass Dashboard": (
+            "travelpass-dashboard",
+            [
+                "Dashboard-1.png",
+                "Dashboard-2.png",
+                "Dashboard-3.png",
+                "Dashboard-4.png",
+                "Dashboard-5.png",
+                "Dashboard-6-M.png",
+            ],
+        ),
+        "Travelpass Profiles": (
+            "travelpass-profiles",
+            [
+                "Profile-1.png",
+                "Profile-2.png",
+                "Profile-3.png",
+                "Profile-4-M.png",
+            ],
+        ),
+        "Star Wars Archive 1": ("star-wars-archive-1", ["sw-v1-home.png", "sw-v1-characters.png"]),
+        "Star Wars Archive 2": (
+            "star-wars-archive-2",
+            [
+                "sw-v2-Home.png",
+                "sw-v2-Characters.png",
+                "sw-v2-CharactersList.png",
+                "sw-v2-characterdetails.png",
+                "sw-v2-Films-M.png",
+            ],
+        ),
+        "Where Have You Traveled": (
+            "scratch-map",
+            ["scratch-map-1.png", "scratch-map-2.png", "scratch-map-3-M.png"],
+        ),
+        "Brainstormer": (
+            "Brainstormer",
+            [
+                "brainstormer-demo-poster.jpg",
+                "brainstormer-demo.mp4",
+            ],
+        ),
     }
 
     # Convert to the format expected by the seeder
     result = {}
-    for slug, files in image_mappings.items():
+    for slug, (directory_name, files) in image_mappings.items():
         images = []
         for i, filename in enumerate(files):
-            file_path = frontend_dir / filename
+            file_path = static_dir / directory_name / filename
             if file_path.exists():
                 # Determine URL path based on file type
-                is_video = filename.lower().endswith(".mov")
+                is_video = filename.lower().endswith((".mov", ".mp4", ".webm"))
                 url_prefix = "/videos/projects" if is_video else "/images/projects"
 
                 # Clean up filename for URL (lowercase, replace spaces with hyphens)
@@ -134,7 +156,7 @@ def get_image_mappings() -> dict[str, list[dict]]:
 
                 images.append(
                     {
-                        "url": f"{url_prefix}/{slug}/{clean_name}",
+                        "url": f"{url_prefix}/{directory_name}/{clean_name}",
                         "alt_text": f"{slug.replace('-', ' ').title()} - Image {i + 1}",
                         "order_num": i,
                     }

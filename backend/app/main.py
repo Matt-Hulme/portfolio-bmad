@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.routers import projects_router
 
@@ -19,6 +20,10 @@ app.add_middleware(
     allow_methods=["GET", "HEAD", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# Mount static files
+app.mount("/images", StaticFiles(directory="static/images"), name="images")
+app.mount("/videos", StaticFiles(directory="static/images"), name="videos")
 
 # Register routers
 app.include_router(projects_router, prefix="/api", tags=["projects"])

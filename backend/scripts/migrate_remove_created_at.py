@@ -29,7 +29,9 @@ def migrate():
         # 4. Rename new table to original name
 
         # Create temporary table with new schema (without timestamps)
-        conn.execute(text("""
+        conn.execute(
+            text(
+                """
             CREATE TABLE projects_new (
                 id TEXT PRIMARY KEY,
                 title TEXT NOT NULL,
@@ -39,15 +41,21 @@ def migrate():
                 live_url TEXT,
                 github_url TEXT
             )
-        """))
+        """
+            )
+        )
         print("✓ Created new table structure")
 
         # Copy data from old table to new table
-        conn.execute(text("""
+        conn.execute(
+            text(
+                """
             INSERT INTO projects_new (id, title, slug, summary, description, live_url, github_url)
             SELECT id, title, slug, summary, description, live_url, github_url
             FROM projects
-        """))
+        """
+            )
+        )
         print("✓ Copied project data to new table")
 
         # Drop old table
@@ -63,6 +71,7 @@ def migrate():
         print("✓ Recreated index on slug")
 
         print("✓ Migration completed successfully!")
+
 
 if __name__ == "__main__":
     try:
