@@ -41,9 +41,9 @@ export const resumeData: ResumeData = {
     {
       title: 'Applied AI Engineer',
       company: 'Travelpass Group',
-      period: 'Apr 2025-Present',
+      period: 'Apr 2025-Sept 2025',
       responsibilities: [
-        'Conceptualized and built Asset Frequency Report analyzing millions of Google Ads assets to derive efficiency metrics, driving data-driven copy optimization across all campaigns',
+        'Conceptualized and built Asset Frequency Report analyzing tens of millions of Google Ads assets to derive efficiency metrics, driving data-driven copy optimization across all campaigns',
         'Developed AI-powered ad copy generation and fully automated address/name shortening tools',
         'Lead product development and team management for AI automation initiatives',
         'Tech: Python, LangGraph, OpenAI API, Google Ads API, Microsoft Ads API, AWS Lambda/S3, Snowflake, Tableau',
