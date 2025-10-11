@@ -1,10 +1,10 @@
-# Epic 3: Production Deployment & Quality Assurance
+# Epic 4: Production Deployment & Quality Assurance
 
 **Epic Goal:** Deploy the portfolio to production VPS with proper infrastructure configuration, implement comprehensive E2E test coverage using Playwright, and apply final accessibility and visual polish to deliver a production-ready, professional portfolio site.
 
 **Value Delivered:** At the end of this epic, the portfolio is live on the internet with proper infrastructure, thoroughly tested with E2E coverage, accessible to all users, and polished to professional standards. The site is ready to share with hiring managers and recruiters.
 
-## Story 3.1: Production Build Configuration
+## Story 4.1: Production Build Configuration
 
 **As a** developer,
 **I want** optimized production builds for both frontend and backend,
@@ -22,7 +22,7 @@
 8. Production build runs successfully locally for testing
 9. Build documentation added to deployment guide
 
-## Story 3.2: VPS Deployment & Nginx Configuration
+## Story 4.2: VPS Deployment & Nginx Configuration
 
 **As a** developer,
 **I want** the portfolio deployed to VPS with Nginx reverse proxy,
@@ -43,7 +43,7 @@
 11. Site is accessible via public domain/IP with HTTPS
 12. Health check endpoint (`/api/health`) returns 200 OK from production
 
-## Story 3.3: Playwright E2E Test Suite - Core Flows
+## Story 4.3: Playwright E2E Test Suite - Core Flows
 
 **As a** developer,
 **I want** comprehensive E2E tests covering critical user journeys,
@@ -59,12 +59,12 @@
 6. Test: Modal closes on Escape key press
 7. Test: Modal closes on backdrop click
 8. Test: Focus returns to correct card after modal close
-9. Test: Navigation between routes (/, /resume, /contact) works correctly
+9. Test: Navigation between routes (/, /resume) works correctly
 10. Test: Active route is visually indicated in navigation
 11. Playwright MCP integration available for enhanced debugging and snapshot capabilities
 12. All E2E tests pass consistently on local development environment
 
-## Story 3.4: Playwright E2E Test Suite - Filtering & Interactions
+## Story 4.4: Playwright E2E Test Suite - Filtering & Interactions
 
 **As a** developer,
 **I want** E2E tests for filtering and interactive features,
@@ -82,10 +82,9 @@
 8. Test: Filter state persists in URL parameters
 9. Test: Keyboard navigation works through filter controls
 10. Test: Resume page displays and "Download PDF" button triggers download
-11. Test: Contact page displays all contact links with correct hrefs
-12. All filtering E2E tests pass consistently
+11. All filtering E2E tests pass consistently
 
-## Story 3.5: Accessibility Audit & Improvements
+## Story 4.5: Accessibility Audit & Improvements
 
 **As a** portfolio visitor with accessibility needs,
 **I want** the site to meet WCAG 2.1 AA standards,
@@ -106,7 +105,7 @@
 11. Screen reader testing performed on critical flows (at least manual testing with VoiceOver/NVDA)
 12. Accessibility documentation added noting compliance level achieved
 
-## Story 3.6: Visual Polish & Performance Optimization
+## Story 4.6: Visual Polish & Performance Optimization
 
 **As a** portfolio visitor,
 **I want** a polished, fast-loading site with smooth interactions,
