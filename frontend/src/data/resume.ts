@@ -126,7 +126,8 @@ export const resumeData: ResumeData = {
   ],
   education: [
     {
-      degree: 'Bachelor of Science, Business Management',
+      degree:
+        'Bachelor of Science, Business Management - Entrepreneurship Emphasis',
       institution: 'Brigham Young University',
       year: '2016',
     },
