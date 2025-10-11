@@ -2,7 +2,6 @@
 Pydantic schemas for project API responses.
 """
 
-from datetime import datetime
 from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -51,8 +50,6 @@ class ProjectResponse(BaseModel):
     roles: list[RoleSchema] = Field(default_factory=list)
     technologies: list[TechnologySchema] = Field(default_factory=list)
     images: list[ProjectImageSchema] = Field(default_factory=list)
-    created_at: datetime = Field(alias="createdAt")
-    updated_at: datetime = Field(alias="updatedAt")
 
     model_config = ConfigDict(from_attributes=True, populate_by_name=True)
 

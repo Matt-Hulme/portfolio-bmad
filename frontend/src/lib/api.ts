@@ -79,8 +79,6 @@ export interface ProjectResponse {
   roles: Role[];
   technologies: Technology[];
   images: ProjectImage[];
-  createdAt: string;
-  updatedAt: string;
 }
 
 /**

@@ -52,7 +52,7 @@ export function ProjectDetailModal({
         </DialogHeader>
 
         {/* Description with markdown */}
-        <div className="prose prose-sm prose-neutral dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-muted prose-a:text-primary max-w-none">
+        <div className="prose prose-sm prose-neutral dark:prose-invert [&_h1]:text-foreground [&_h2]:text-foreground [&_h3]:text-foreground [&_h4]:text-foreground [&_p]:text-muted-foreground [&_strong]:text-foreground [&_ul]:text-muted-foreground [&_li]:text-muted-foreground [&_ol]:text-muted-foreground [&_code]:text-primary [&_code]:bg-muted [&_pre]:bg-muted [&_a]:text-primary max-w-none [&_code]:rounded [&_code]:px-1 [&_code]:py-0.5">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {project.description}
           </ReactMarkdown>

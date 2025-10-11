@@ -139,10 +139,6 @@ class TestGetAllProjects:
         assert second_project["liveUrl"] is None
         assert second_project["githubUrl"] is None
 
-        # Verify timestamps exist
-        assert "createdAt" in first_project
-        assert "updatedAt" in first_project
-
 
 class TestGetProjectBySlug:
     """Tests for GET /api/projects/{slug} endpoint."""
@@ -203,10 +199,6 @@ class TestGetProjectBySlug:
         assert len(data["images"]) == 1
         assert data["images"][0]["url"] == "/images/projects/test-project/screenshot.png"
         assert data["images"][0]["altText"] == "Screenshot"
-
-        # Verify timestamps
-        assert "createdAt" in data
-        assert "updatedAt" in data
 
     def test_get_project_by_slug_not_found(self, client):
         """Test getting a project with non-existent slug."""
