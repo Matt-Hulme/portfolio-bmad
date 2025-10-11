@@ -43,10 +43,10 @@ export const resumeData: ResumeData = {
       company: 'Travelpass Group',
       period: 'Apr 2025-Present',
       responsibilities: [
-        'Designed and built Asset Frequency Report analyzing millions of Google Ads assets to derive efficiency metrics, driving data-driven copy optimization across all campaigns',
+        'Conceptualized and built Asset Frequency Report analyzing millions of Google Ads assets to derive efficiency metrics, driving data-driven copy optimization across all campaigns',
         'Developed AI-powered ad copy generation and fully automated address/name shortening tools',
         'Led product development and team management for AI automation initiatives',
-        'Tech: Python, LangChain, LangSmith, OpenAI API, Google Ads API, AWS Lambda/S3, Snowflake, Tableau',
+        'Tech: Python, LangChain, LangSmith, OpenAI API, Google Ads API, Bing Ads API, AWS Lambda/S3, Snowflake, Tableau',
       ],
     },
     {
@@ -102,7 +102,15 @@ export const resumeData: ResumeData = {
     },
     {
       category: 'Backend & APIs',
-      skills: ['FastAPI', 'GraphQL', 'REST APIs', 'Pydantic', 'Uvicorn'],
+      skills: [
+        'FastAPI',
+        'GraphQL',
+        'REST APIs',
+        'Google Ads API',
+        'Bing Ads API',
+        'Pydantic',
+        'Uvicorn',
+      ],
     },
     {
       category: 'AI & Automation',
@@ -114,7 +122,7 @@ export const resumeData: ResumeData = {
     },
     {
       category: 'Marketing & Analytics',
-      skills: ['Google Ads API', 'Bing Ads', 'Google Analytics', 'Tableau'],
+      skills: ['Google Analytics', 'Tableau'],
     },
   ],
   education: [
