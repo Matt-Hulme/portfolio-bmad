@@ -93,36 +93,35 @@ export const resumeData: ResumeData = {
   ],
   technicalSkills: [
     {
-      category: 'Languages & Frameworks',
-      skills: ['Python', 'TypeScript', 'JavaScript', 'SQL'],
+      category: 'Languages',
+      skills: ['Python', 'TypeScript/JavaScript', 'HTML', 'CSS'],
     },
     {
-      category: 'Frontend Development',
-      skills: ['React', 'HTML/CSS', 'TailwindCSS', 'shadcn/ui', 'Vite'],
+      category: 'Frontend',
+      skills: ['React', 'TailwindCSS', 'shadcn/ui', 'Vite'],
     },
     {
-      category: 'Backend & APIs',
-      skills: [
-        'FastAPI',
-        'GraphQL',
-        'REST APIs',
-        'Google Ads API',
-        'Bing Ads API',
-        'Pydantic',
-        'Uvicorn',
-      ],
+      category: 'Backend',
+      skills: ['FastAPI', 'Express.js', 'GraphQL', 'Rest APIs', 'Firebase'],
     },
     {
       category: 'AI & Automation',
-      skills: ['LangChain', 'LangSmith', 'OpenAI API', 'n8n'],
+      skills: ['LangGraph', 'LangSmith', 'OpenAI API', 'n8n/make.com'],
+    },
+    {
+      category: 'Data & Analytics',
+      skills: [
+        'SQL',
+        'Snowflake',
+        'Google Analytics',
+        'Tableau',
+        'Google Ads API',
+        'Microsoft Ads API',
+      ],
     },
     {
       category: 'Cloud & Infrastructure',
-      skills: ['AWS (Lambda, S3)', 'Snowflake', 'Firebase', 'Vercel'],
-    },
-    {
-      category: 'Marketing & Analytics',
-      skills: ['Google Analytics', 'Tableau'],
+      skills: ['AWS (Lambda, S3)'],
     },
   ],
   education: [
