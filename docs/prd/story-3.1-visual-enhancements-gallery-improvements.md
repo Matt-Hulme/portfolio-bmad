@@ -9,14 +9,6 @@
 
 ## Acceptance Criteria
 
-### Hero Carousel
-- [ ] Hero carousel component created for top of Projects page
-- [ ] Carousel displays 3-5 featured projects that have images
-- [ ] Carousel shows project title, summary, and first image
-- [ ] Auto-rotation implemented with manual navigation controls
-- [ ] Carousel is responsive and works on mobile/tablet/desktop
-- [ ] Carousel has proper accessibility (keyboard navigation, ARIA labels)
-
 ### Project Card Visuals
 - [ ] Project cards WITH images display first image as thumbnail
 - [ ] Thumbnail uses consistent aspect ratio (16:9 or similar)
@@ -92,14 +84,6 @@ function generateGradient(slug: string): string {
 5. Ensure consistent card heights
 6. Test responsive behavior
 
-### Phase 3: Hero Carousel
-1. Create HeroCarousel component
-2. Filter projects to those with images
-3. Take first 5 for featured display
-4. Implement auto-rotation (5-7 second intervals)
-5. Add pause-on-hover behavior
-6. Make fully responsive
-7. Add to Home component above project grid
 
 ## Testing Requirements
 - [ ] All carousel controls work with mouse/touch/keyboard
@@ -107,7 +91,6 @@ function generateGradient(slug: string): string {
 - [ ] Videos play correctly in modal carousel
 - [ ] Cards without images show gradients + icons
 - [ ] Same project always shows same gradient (deterministic)
-- [ ] Hero carousel auto-rotates and pauses on hover
 - [ ] Responsive behavior tested on mobile/tablet/desktop
 - [ ] Accessibility: Screen readers can navigate carousels
 - [ ] Performance: No jank, smooth animations

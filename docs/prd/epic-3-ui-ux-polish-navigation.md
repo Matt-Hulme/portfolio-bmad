@@ -12,44 +12,34 @@
 
 ### Acceptance Criteria
 
-#### Hero Carousel
-1. Hero carousel component created for top of Projects page
-2. Carousel displays 3-5 featured projects that have images
-3. Carousel shows project title, summary, and first image
-4. Auto-rotation implemented with manual navigation controls
-5. Carousel is responsive and works on mobile/tablet/desktop
-6. Carousel has proper accessibility (keyboard navigation, ARIA labels)
-
 #### Project Card Visuals
-7. Project cards WITH images display first image as thumbnail
-8. Thumbnail uses consistent aspect ratio (16:9 or similar)
-9. Project cards WITHOUT images show gradient background + tech icons
-10. Gradient colors are deterministic based on project slug (same project = same colors)
-11. Tech icons are pulled from project's technology stack (2-3 prominent ones)
-12. Card visual area has consistent height across all cards
-13. Images use `object-cover` to fill space without distortion
+1. Project cards WITH images display first image as thumbnail
+2. Thumbnail uses consistent aspect ratio (16:9 or similar)
+3. Project cards WITHOUT images show gradient background + tech icons
+4. Gradient colors are deterministic based on project slug (same project = same colors)
+5. Tech icons are pulled from project's technology stack (2-3 prominent ones)
+6. Card visual area has consistent height across all cards
+7. Images use `object-cover` to fill space without distortion
 
 #### Modal Gallery Carousel
-14. Modal gallery implements carousel with navigation arrows
-15. Gallery has dot indicators showing total images and current position
-16. Images are displayed with fixed height (500-600px) container
-17. Images use `object-contain` to show full image without cropping
-18. Container has black background for letterboxing
-19. Portrait images (9:16) show with black bars on sides
-20. Landscape images (16:9) show with black bars on top/bottom
-21. Videos maintain same fixed height and layout consistency
-22. Carousel supports keyboard navigation (arrow keys)
-23. Carousel is touch-friendly on mobile devices
+8. Modal gallery implements carousel with navigation arrows
+9. Gallery has dot indicators showing total images and current position
+10. Images are displayed with fixed height (500-600px) container
+11. Images use `object-contain` to show full image without cropping
+12. Container has black background for letterboxing
+13. Portrait images (9:16) show with black bars on sides
+14. Landscape images (16:9) show with black bars on top/bottom
+15. Videos maintain same fixed height and layout consistency
+16. Carousel supports keyboard navigation (arrow keys)
+17. Carousel is touch-friendly on mobile devices
 
 ### Technical Notes
 - Use existing image data from backend API
 - Consider using a lightweight carousel library (e.g., embla-carousel, swiper) or build custom
 - Ensure all interactions are performant (no layout shifts, smooth transitions)
 - Maintain accessibility standards for all carousel controls
-- Featured projects for hero carousel could be determined by:
-  - Projects with images only
-  - First 5 projects in order, or
-  - Add `featured` flag to backend (future enhancement)
+- Gradient generation should be deterministic (same slug = same colors every time)
+- Tech icons should be mapped from project technologies to visual icons
 
 ## Story 3.2: Home Page & Persistent Navigation
 
