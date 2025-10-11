@@ -150,8 +150,8 @@ def get_image_mappings() -> dict[str, list[dict]]:
                 is_video = filename.lower().endswith((".mov", ".mp4", ".webm"))
                 url_prefix = "/videos/projects" if is_video else "/images/projects"
 
-                # Clean up filename for URL (lowercase, replace spaces with hyphens)
-                clean_name = filename.lower().replace(" ", "-")
+                # Clean up filename for URL (replace spaces with hyphens, preserve case)
+                clean_name = filename.replace(" ", "-")
 
                 images.append(
                     {
