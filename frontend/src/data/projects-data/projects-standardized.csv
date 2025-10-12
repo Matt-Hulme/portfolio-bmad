@@ -57,33 +57,27 @@ Users can:
 
 ### Tech Stack
 - **Frontend:** TypeScript, React, TailwindCSS, Vite
-- **Data Layer:** REST API (SWAPI)
 - **Deployment:** Vercel
 
 ### Notes
 - This project served as a foundational learning exercise while teaching myself React.",Frontend Dev,https://sw-archive.vercel.app/,https://github.com/Matt-Hulme/sw-archive
 SW 2,Star Wars Archive 2,"A rebuilt Star Wars archive that demonstrates growth in React, TypeScript, and modern frontend practices one year after the original version.","### Overview
-Star Wars Archive V2 is a complete rebuild of my first React project, created one year later to measure technical growth. The project functions as a Star Wars reference tool, letting users browse films, characters, planets, starships, and more through an improved interface and architecture.
+Star Wars Archive is a Star Wars reference tool that lets users browse films, characters, planets, starships, and more through an interactive interface. I built this to practice TypeScript, modern React patterns, and GraphQL integration.
 
-### Improvements from V1 → V2
-- **TypeScript vs JavaScript**: V2 fully typed for better maintainability
-- **Responsive Design**: V2 optimized for mobile; V1 was desktop-only
-- **Data Layer**: V2 used GraphQL (all data at once); V1 used Fetch + pagination
-- **Styling**: V2 used TailwindCSS; V1 relied on a single monolithic CSS file
-- **Component Libraries**: V2 integrated Material UI; V1 was fully custom-built
-- **Reusable Components**: V2 introduced shared components (e.g. `DetailsHeaderPanel`) to reduce duplication
-- **Routing & Params**: V2 improved URL handling and navbar highlighting
-- **Error Handling**: V2 added styled 404 and "not found" pages instead of Vercel defaults
-- **Design Choices**: V2 adopted a cleaner design (less border-radius overuse)
+### Features
+Users can:
+- Browse categories like **Films, Characters, Planets, Species, Vehicles, Starships**
+- Click into entries to view metadata, descriptions, and related connections
+- Explore relationships (e.g. which characters appear in which films)
+- Share direct links to specific entries
 
 ### Tech Stack
-- **Frontend:** TypeScript, React, TailwindCSS, Vite
+- **Frontend:** TypeScript, React, TailwindCSS, Vite, Material UI
 - **Data Layer:** GraphQL
-- **UI Library:** Material UI
 - **Deployment:** Vercel
 
 ### Notes
-- The GraphQL endpoint used by V2 has lost support, so some detail queries return null fields.",Frontend Dev,https://starwars-archive.vercel.app/,https://github.com/Matt-Hulme/starwars-archive
+- The GraphQL endpoint has lost support, so some detail queries return null fields.",Frontend Dev,https://starwars-archive.vercel.app/,https://github.com/Matt-Hulme/starwars-archive
 React Scratch Map,Where Have You Traveled,"An interactive travel tracker that enables users to visualize visited countries, view stats, and save progress with Firebase.","### Overview
 Scratch Map is an interactive travel tracker that helps users visualize where they've been around the world. The tool combines data visualization with persistence through account-based saving. I built this project to practice API integration, authentication, and state management with Firebase.
 
@@ -97,8 +91,7 @@ Users can:
 
 ### Tech Stack
 - **Frontend:** TypeScript, React, TailwindCSS, Vite
-- **Auth & Database:** Firebase Auth, Firebase Realtime Database
-- **APIs:** Google Maps API
+- **Backend:** Firebase
 - **Deployment:** Vercel
 
 ### Notes
@@ -115,9 +108,9 @@ Users can:
 
 ### Tech Stack
 - **Frontend:** TypeScript, React, TailwindCSS, Vite
-- **Backend:** FastAPI, Pydantic, Python-Multipart, Uvicorn
-- **AI Integration:** OpenAI API
-- **Deployment:** Dockerized and hosted on a private VPS
+- **Backend:** Python, FastAPI
+- **AI:** OpenAI API
+- **Deployment:** Docker, VPS
 
 ### Notes
 - Early user testing provided valuable lessons on product-market fit, prompting a pivot away from the concept.
@@ -134,7 +127,7 @@ The framework provides:
 - A repeatable methodology to improve trust, reproducibility, and maintainability
 
 ### Tech Stack
-- **Format:** Markdown Agentic Instructions files
+- **Format:** Markdown
 
 ### Notes
 - This project is not a traditional codebase, but a set of instructions and best practices.
@@ -211,11 +204,10 @@ What this enables:
 - Optimize **device-specific ad copy**, tailoring for mobile vs. desktop
 
 ### Tech Stack
-- **Language/Framework:** Python 3.11, LangChain, LangSmith, OpenAI API
-- **Infrastructure:** AWS Lambda, AWS S3
-- **Integrations:** Google Ads API
+- **Backend:** Python, LangChain, OpenAI API
+- **Infrastructure:** AWS Lambda, S3
 - **Database:** Snowflake
-- **Analytics & Visualization:** Tableau
+- **Analytics:** Tableau
 
 ### Notes
 - Identified hundreds of thousands (if not millions) of assets for replacement.
@@ -232,9 +224,9 @@ The tool:
 - Runs fully automated through **n8n**
 
 ### Tech Stack
-- **Workflow Automation:** n8n
+- **Automation:** n8n
 - **Integrations:** Slack, Linear, Google Sheets
-- **AI Integration:** OpenAI API
+- **AI:** OpenAI API
 
 ### Notes
 - Eliminates manual copy/paste of Slack requests into Linear.
@@ -253,10 +245,10 @@ The site includes:
 - **Accessibility compliance** with keyboard navigation and WCAG AA standards
 
 ### Tech Stack
-- **Frontend:** TypeScript, React, Vite, TailwindCSS, shadcn/ui, React Router
-- **Backend:** FastAPI, Python, SQLAlchemy, SQLite
-- **Testing:** Vitest, React Testing Library, Playwright
-- **Infrastructure:** VPS deployment, Nginx reverse proxy, systemd
+- **Frontend:** TypeScript, React, Vite, TailwindCSS
+- **Backend:** Python, FastAPI, SQLAlchemy, SQLite
+- **Testing:** Vitest, Playwright
+- **Infrastructure:** Nginx, VPS
 
 ### Notes
 - Designed for clarity and speed: fast-loading, responsive, and accessible.",Fullstack Dev; AI Engineer,Matt-Hulme.com,https://github.com/Matt-Hulme/portfolio-bmad

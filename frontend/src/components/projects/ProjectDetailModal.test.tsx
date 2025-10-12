@@ -159,9 +159,6 @@ describe('ProjectDetailModal', () => {
         onClose={vi.fn()}
       />,
     );
-    expect(
-      screen.getByRole('heading', { name: 'Project Links' }),
-    ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Live Site/i })).toHaveAttribute(
       'href',
       'https://example.com',
@@ -194,7 +191,10 @@ describe('ProjectDetailModal', () => {
       />,
     );
     expect(
-      screen.queryByRole('heading', { name: 'Project Links' }),
+      screen.queryByRole('link', { name: /Live Site/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /GitHub/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -206,9 +206,6 @@ describe('ProjectDetailModal', () => {
         onClose={vi.fn()}
       />,
     );
-    expect(
-      screen.getByRole('heading', { name: 'Gallery' }),
-    ).toBeInTheDocument();
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(2);
     expect(images[0]).toHaveAttribute('src', '/test-image-1.jpg');
@@ -239,9 +236,7 @@ describe('ProjectDetailModal', () => {
         onClose={vi.fn()}
       />,
     );
-    expect(
-      screen.queryByRole('heading', { name: 'Gallery' }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('calls onClose when dialog close event triggered', async () => {

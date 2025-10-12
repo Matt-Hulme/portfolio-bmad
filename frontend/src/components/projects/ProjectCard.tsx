@@ -10,18 +10,19 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onClick }: ProjectCardProps) {
   const hasLiveLink = !!project.liveUrl;
+  const hasImages = project.images && project.images.length > 0;
+  const firstImage = hasImages ? project.images[0] : null;
+  const isVideo = firstImage && /\.(mp4|webm|mov)$/i.test(firstImage.url);
 
-  // Format technologies as comma-separated string with ellipsis if too long
-  const techDisplay = project.technologies.map((t) => t.name).join(', ');
-  const maxTechLength = 60;
-  const truncatedTech =
-    techDisplay.length > maxTechLength
-      ? techDisplay.slice(0, maxTechLength) + '...'
-      : techDisplay;
+  // Format title: preserve dash for Matt-Hulme.com, replace hyphens with spaces for others
+  const displayTitle =
+    project.slug === 'Matt-Hulme.com'
+      ? 'Matt-Hulme.com'
+      : project.slug.replace(/-/g, ' ');
 
   return (
     <Card
-      className="group border-l-primary/40 hover:border-l-primary hover:shadow-primary/5 h-full min-w-0 cursor-pointer border-l-4 bg-gray-900/50 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
+      className="group hover:shadow-primary/5 relative h-full min-w-0 cursor-pointer overflow-hidden rounded-lg border border-gray-800 bg-gray-900/50 backdrop-blur-sm transition-all hover:bg-gray-900/70 hover:shadow-lg"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -32,11 +33,40 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         }
       }}
     >
+      {/* Left accent border - straight vertical line */}
+      <div className="bg-primary/40 group-hover:bg-primary absolute top-0 bottom-0 left-0 z-10 w-1 transition-colors" />
+
+      {/* Visual area - thumbnail (only for cards with images) */}
+      {firstImage && (
+        <div className="aspect-video w-full">
+          {isVideo ? (
+            <video
+              src={firstImage.url}
+              className="h-full w-full object-cover"
+              muted
+              playsInline
+              preload="metadata"
+            />
+          ) : (
+            <img
+              src={firstImage.url}
+              alt={firstImage.altText}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          )}
+        </div>
+      )}
+
       <div className="space-y-4 p-6">
         {/* Header with title and live indicator */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 transition-colors">
-            {project.title}
+          <h3
+            className={`group-hover:text-primary text-xl leading-tight font-semibold text-gray-100 transition-colors ${
+              project.slug === 'Matt-Hulme.com' ? '' : 'capitalize'
+            }`}
+          >
+            {displayTitle}
           </h3>
           {hasLiveLink && (
             <div
@@ -55,23 +85,38 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
         </p>
 
         {/* Role badges */}
-        <div className="flex flex-wrap gap-2">
-          {project.roles.map((role) => (
-            <Badge
-              key={role.id}
-              variant="outline"
-              className="border-gray-700 bg-gray-800/50 text-xs text-gray-300"
-            >
-              {role.name}
-            </Badge>
-          ))}
+        <div className="space-y-2">
+          <h4 className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+            Roles
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {project.roles.map((role) => (
+              <Badge
+                key={role.id}
+                variant="default"
+                className="text-xs text-gray-900"
+              >
+                {role.name}
+              </Badge>
+            ))}
+          </div>
         </div>
 
-        {/* Technology line with $ prefix */}
-        <div className="border-t border-gray-800 pt-2">
-          <div className="font-mono text-sm text-gray-500">
-            <span className="text-primary font-bold">$ </span>
-            <span title={techDisplay}>{truncatedTech}</span>
+        {/* Technology badges */}
+        <div className="space-y-2 border-t border-gray-800 pt-3">
+          <h4 className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+            Technologies
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <Badge
+                key={tech.id}
+                variant="outline"
+                className="border-primary/20 bg-primary/5 text-primary font-mono text-xs"
+              >
+                {tech.name}
+              </Badge>
+            ))}
           </div>
         </div>
       </div>

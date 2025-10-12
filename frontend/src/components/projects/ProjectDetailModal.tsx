@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ExternalLink, Github } from 'lucide-react';
+import { ImageCarousel } from './ImageCarousel';
 import './markdown.css';
 
 interface ProjectDetailModalProps {
@@ -24,6 +25,27 @@ export function ProjectDetailModal({
   onClose,
 }: ProjectDetailModalProps) {
   if (!project) return null;
+
+  // Format title: preserve dash for Matt-Hulme.com, replace hyphens with spaces for others
+  const displayTitle =
+    project.slug === 'Matt-Hulme.com'
+      ? 'Matt-Hulme.com'
+      : project.slug.replace(/-/g, ' ');
+
+  // Remove Tech Stack section from description since we display it as badges
+  const descriptionWithoutTechStack = project.description
+    .replace(/### Tech Stack[\s\S]*?(?=\n###|$)/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  // Split description: Overview paragraph vs rest (Features, Notes, etc.)
+  const overviewMatch = descriptionWithoutTechStack.match(
+    /### Overview\s*\n(.*?)(?=\n###|$)/s,
+  );
+  const overviewText = overviewMatch ? overviewMatch[0] : '';
+  const restOfDescription = overviewMatch
+    ? descriptionWithoutTechStack.replace(overviewMatch[0], '').trim()
+    : descriptionWithoutTechStack;
 
   // Convert API response to link objects for display
   const links = [];
@@ -45,111 +67,103 @@ export function ProjectDetailModal({
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
-        <DialogHeader className="space-y-3">
-          <DialogTitle className="text-2xl">{project.title}</DialogTitle>
+        <DialogHeader className="space-y-2">
+          <DialogTitle
+            className={`text-2xl ${
+              project.slug === 'Matt-Hulme.com' ? '' : 'capitalize'
+            }`}
+          >
+            {displayTitle}
+          </DialogTitle>
           <DialogDescription className="sr-only">
             {project.summary}
           </DialogDescription>
         </DialogHeader>
 
-        {/* Description with markdown */}
-        <div className="project-markdown">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {project.description}
-          </ReactMarkdown>
-        </div>
+        <div className="space-y-6">
+          {/* Overview - context first */}
+          {overviewText && (
+            <div className="project-markdown">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {overviewText}
+              </ReactMarkdown>
+            </div>
+          )}
 
-        {/* Metadata Section */}
-        <div className="border-border bg-muted/30 space-y-4 rounded-lg border p-4">
-          {/* Roles */}
-          {project.roles && project.roles.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-foreground text-sm font-semibold">Roles</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.roles.map((role) => (
-                  <Badge key={role.id} variant="default">
-                    {role.name}
-                  </Badge>
+          {/* Gallery - after overview context */}
+          {project.images && project.images.length > 0 && (
+            <div className="space-y-3">
+              <ImageCarousel images={project.images} />
+            </div>
+          )}
+
+          {/* Rest of description (Features, Notes, etc.) */}
+          {restOfDescription && (
+            <div className="project-markdown">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {restOfDescription}
+              </ReactMarkdown>
+            </div>
+          )}
+
+          {/* Project Links - prominent call-to-action */}
+          {links.length > 0 && (
+            <div className="space-y-3">
+              <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
+                {links.map((link, index) => (
+                  <ProjectLinkItem key={index} link={link} />
                 ))}
               </div>
             </div>
           )}
 
-          {/* Technologies */}
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-foreground text-sm font-semibold">
-                Technologies
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <Badge key={tech.id} variant="outline">
-                    {tech.name}
-                  </Badge>
-                ))}
+          {/* Metadata Section - tags last */}
+          <div className="border-border bg-muted/30 space-y-4 rounded-lg border p-4">
+            {/* Roles */}
+            {project.roles && project.roles.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-foreground text-sm font-semibold">Roles</h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.roles.map((role) => (
+                    <Badge
+                      key={role.id}
+                      variant="default"
+                      className="text-sm text-gray-900"
+                    >
+                      {role.name}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Technologies */}
+            {project.technologies && project.technologies.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-foreground text-sm font-semibold">
+                  Technologies
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <Badge
+                      key={tech.id}
+                      variant="outline"
+                      className="border-primary/20 bg-primary/5 text-primary font-mono text-sm"
+                    >
+                      {tech.name}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-
-        {/* Links Section */}
-        {links.length > 0 && (
-          <div className="border-border bg-muted/30 space-y-3 rounded-lg border p-4">
-            <h3 className="text-foreground text-sm font-semibold">
-              Project Links
-            </h3>
-            <div className="flex flex-col gap-3">
-              {links.map((link, index) => (
-                <ProjectLinkItem key={index} link={link} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Media Section */}
-        {project.images && project.images.length > 0 && (
-          <div className="space-y-3">
-            <h3 className="text-foreground text-sm font-semibold">Gallery</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {project.images.map((image) => {
-                const isVideo = /\.(mp4|webm|mov)$/i.test(image.url);
-
-                return (
-                  <div
-                    key={image.id}
-                    className="group border-border bg-muted/20 hover:border-primary/50 space-y-2 overflow-hidden rounded-lg border transition-all"
-                  >
-                    <div className="overflow-hidden">
-                      {isVideo ? (
-                        <video
-                          src={image.url}
-                          controls
-                          className="h-auto w-full object-cover"
-                          preload="metadata"
-                        >
-                          Your browser does not support the video tag.
-                        </video>
-                      ) : (
-                        <img
-                          src={image.url}
-                          alt={image.altText}
-                          className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </DialogContent>
     </Dialog>
   );
 }
 
-// Helper component for rendering project links with icons
+// Helper component for rendering project links as prominent CTAs
 function ProjectLinkItem({
   link,
 }: {
@@ -157,26 +171,27 @@ function ProjectLinkItem({
 }) {
   const getIcon = () => {
     return link.type === 'github' ? (
-      <Github className="h-4 w-4" />
+      <Github className="h-5 w-5" />
     ) : (
-      <ExternalLink className="h-4 w-4" />
+      <ExternalLink className="h-5 w-5" />
     );
   };
+
+  const isLive = link.type === 'live';
 
   return (
     <a
       href={link.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group hover:border-primary/30 hover:bg-primary/5 flex items-center gap-3 rounded-md border border-transparent px-3 py-2 text-sm transition-all"
+      className={`group flex flex-1 items-center justify-center gap-2 rounded-lg px-6 py-3 font-medium transition-all ${
+        isLive
+          ? 'bg-primary hover:bg-primary/90 text-gray-900'
+          : 'border-primary/30 bg-primary/10 text-primary hover:border-primary/50 hover:bg-primary/20 border'
+      }`}
     >
-      <span className="text-primary flex-shrink-0">{getIcon()}</span>
-      <span className="text-foreground group-hover:text-primary flex-1">
-        {link.label}
-      </span>
-      <span className="text-muted-foreground text-xs capitalize">
-        {link.type === 'live' ? '🟢 Live' : link.type}
-      </span>
+      <span className="flex-shrink-0">{getIcon()}</span>
+      <span>{link.label}</span>
     </a>
   );
 }

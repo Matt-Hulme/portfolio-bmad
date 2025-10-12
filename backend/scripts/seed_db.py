@@ -45,6 +45,8 @@ def extract_technologies(description: str | None) -> list[str]:
                 # Split by comma and clean up
                 for tech in tech_list.split(","):
                     tech = tech.strip()
+                    # Remove ** prefix/suffix from markdown bold formatting
+                    tech = tech.strip("*").strip()
                     if tech and tech != "None":
                         technologies.add(tech)
 
@@ -134,7 +136,6 @@ def get_image_mappings() -> dict[str, list[dict]]:
         "Brainstormer": (
             "Brainstormer",
             [
-                "brainstormer-demo-poster.jpg",
                 "brainstormer-demo.mp4",
             ],
         ),
@@ -151,8 +152,8 @@ def get_image_mappings() -> dict[str, list[dict]]:
                 is_video = filename.lower().endswith((".mov", ".mp4", ".webm"))
                 url_prefix = "/videos/projects" if is_video else "/images/projects"
 
-                # Clean up filename for URL (lowercase, replace spaces with hyphens)
-                clean_name = filename.lower().replace(" ", "-")
+                # Clean up filename for URL (replace spaces with hyphens, preserve case)
+                clean_name = filename.replace(" ", "-")
 
                 images.append(
                     {
@@ -249,7 +250,7 @@ def seed_database():
 
         # Second pass: Create projects with relationships
         print("Creating projects...")
-        for row in valid_projects:
+        for order_num, row in enumerate(valid_projects):
             project_slug = row["Project Slug"]
             print(f"  - {row['Project Title']} ({project_slug})")
 
@@ -262,6 +263,7 @@ def seed_database():
                 description=row.get("Full Description", ""),
                 live_url=row.get("Live Site URL") if row.get("Live Site URL") != "None" else None,
                 github_url=row.get("GH Repo") if row.get("GH Repo") != "None" else None,
+                order_num=order_num,
             )
 
             # Add technology relationships

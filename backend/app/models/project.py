@@ -36,6 +36,7 @@ class Project(Base):
     description = Column(Text, nullable=False)
     live_url = Column(String, nullable=True)
     github_url = Column(String, nullable=True)
+    order_num = Column(Integer, default=0, nullable=False)
 
     # Relationships
     technologies = relationship(

@@ -72,8 +72,8 @@ export function Home() {
               Portfolio
             </h1>
             <p className="text-lg text-gray-400">
-              A showcase of diverse projects spanning frontend development, AI
-              engineering, data analysis, product work, and marketing.
+              A showcase of diverse projects spanning AI engineering, fullstack
+              development, data analysis, product work, and marketing.
             </p>
           </div>
 
