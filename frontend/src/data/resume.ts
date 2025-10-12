@@ -104,7 +104,14 @@ export const resumeData: ResumeData = {
     },
     {
       category: 'Backend',
-      skills: ['FastAPI', 'Express.js', 'GraphQL', 'Rest APIs', 'Firebase'],
+      skills: [
+        'FastAPI',
+        'Express.js',
+        'GraphQL',
+        'Rest APIs',
+        'Firebase',
+        'Supabase',
+      ],
     },
     {
       category: 'AI & Automation',

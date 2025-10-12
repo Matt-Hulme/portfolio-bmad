@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 import * as api from '@/lib/api';
 
@@ -34,26 +35,53 @@ describe('App', () => {
 
   it('renders home page by default', async () => {
     renderWithProviders(<App />);
-    await waitFor(() => {
-      expect(screen.getByText('Matt Hulme')).toBeInTheDocument();
+    // Find all main elements and click the innermost one (Home page's main)
+    await waitFor(async () => {
+      const mains = screen.getAllByRole('main');
+      await userEvent.click(mains[mains.length - 1]);
     });
+    // Wait for content to appear after skip
+    await waitFor(
+      () => {
+        expect(screen.getByText('Matt Hulme')).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
   });
 
   it('displays tagline on home page', async () => {
     renderWithProviders(<App />);
-    await waitFor(() => {
-      expect(
-        screen.getByText('Applied AI Engineer & Full-Stack Developer'),
-      ).toBeInTheDocument();
+    // Find all main elements and click the innermost one (Home page's main)
+    await waitFor(async () => {
+      const mains = screen.getAllByRole('main');
+      await userEvent.click(mains[mains.length - 1]);
     });
+    // Wait for content to appear after skip
+    await waitFor(
+      () => {
+        expect(
+          screen.getByText('Applied AI Engineer & Full-Stack Developer'),
+        ).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
   });
 
   it('displays navigation buttons on home page', async () => {
     renderWithProviders(<App />);
-    await waitFor(() => {
-      expect(screen.getByText('View Projects')).toBeInTheDocument();
-      expect(screen.getByText('View Resume')).toBeInTheDocument();
+    // Find all main elements and click the innermost one (Home page's main)
+    await waitFor(async () => {
+      const mains = screen.getAllByRole('main');
+      await userEvent.click(mains[mains.length - 1]);
     });
+    // Wait for content to appear after skip
+    await waitFor(
+      () => {
+        expect(screen.getByText('View Projects')).toBeInTheDocument();
+        expect(screen.getByText('View Resume')).toBeInTheDocument();
+      },
+      { timeout: 3000 },
+    );
   });
 
   it('has navigation to all sections', async () => {
