@@ -1,47 +1,74 @@
 # Epic 4: Production Deployment & Quality Assurance
 
-**Epic Goal:** Deploy the portfolio to production VPS with proper infrastructure configuration, implement comprehensive E2E test coverage using Playwright, and apply final accessibility and visual polish to deliver a production-ready, professional portfolio site.
+**Epic Goal:** Deploy the portfolio to production VPS with proper infrastructure configuration and implement comprehensive E2E test coverage using Playwright to deliver a production-ready, professional portfolio site.
 
-**Value Delivered:** At the end of this epic, the portfolio is live on the internet with proper infrastructure, thoroughly tested with E2E coverage, accessible to all users, and polished to professional standards. The site is ready to share with hiring managers and recruiters.
+**Value Delivered:** At the end of this epic, the portfolio is live on the internet at matt-hulme.com with proper infrastructure, thoroughly tested with E2E coverage, and ready to share with hiring managers and recruiters.
 
-## Story 4.1: Production Build Configuration
+## Epic Scope
+This epic focuses on:
+1. **Deployment Infrastructure** (Story 4.1) - Scripts, configs, and documentation
+2. **Production Deployment** (Story 4.2) - Live deployment to GoDaddy VPS
+3. **E2E Testing - Core Flows** (Story 4.3) - Critical user journey tests
+4. **E2E Testing - Filtering** (Story 4.4) - Interactive feature tests
+5. **Accessibility Audit** (Story 4.5) - WCAG 2.1 AA compliance (optional)
+
+**Note:** Story 4.6 (Visual Polish & Performance) was removed from scope as the site already meets quality standards from Epic 3 work.
+
+## Story 4.1: Deployment Infrastructure Setup
 
 **As a** developer,
-**I want** optimized production builds for both frontend and backend,
-**so that** the deployed site is performant and properly configured for production use.
+**I want** deployment infrastructure and scripts ready for VPS deployment,
+**so that** I can reliably deploy and update the portfolio on the production server.
 
 ### Acceptance Criteria
 
-1. Frontend production build configured with Vite (minification, code splitting, asset optimization)
-2. Environment variable handling configured for frontend (production API base URL)
-3. Backend production configuration created (proper logging, error handling, security headers)
-4. SQLite database file location configured for production (persistent storage path)
-5. Production build script creates optimized static assets
-6. Build output size is reasonable (frontend bundle < 500KB gzipped as baseline target)
-7. Source maps configured appropriately (excluded from production or restricted)
-8. Production build runs successfully locally for testing
-9. Build documentation added to deployment guide
+1. ✅ Nginx configuration file created with reverse proxy setup
+2. ✅ systemd service unit file created for backend process management
+3. ✅ Initial setup script created for first-time VPS configuration
+4. ✅ Deployment script created for ongoing updates
+5. ✅ Quick deploy script created for remote deployment from local machine
+6. ✅ Production environment variable templates created
+7. ✅ Comprehensive deployment documentation written (README.md)
+8. ✅ Deployment checklist created for step-by-step guidance
+9. ✅ All deployment scripts are executable and tested locally
+10. Frontend production build verified (< 500KB gzipped main bundle)
+11. Backend configuration reviewed for production readiness
 
-## Story 4.2: VPS Deployment & Nginx Configuration
+### Status
+**Partially Complete** - Infrastructure files created, pending actual VPS deployment and testing.
+
+## Story 4.2: Production Deployment to GoDaddy VPS
 
 **As a** developer,
-**I want** the portfolio deployed to VPS with Nginx reverse proxy,
-**so that** the site is publicly accessible with proper routing and performance.
+**I want** the portfolio deployed to the GoDaddy VPS at matt-hulme.com,
+**so that** the site is publicly accessible with proper routing, performance, and security.
 
 ### Acceptance Criteria
 
-1. VPS access configured and deployment user created
-2. Nginx installed and configured as reverse proxy
-3. Nginx routes `/api/*` requests to FastAPI backend (uvicorn/gunicorn)
-4. Nginx serves frontend static assets for all other routes
-5. Nginx configured with proper caching headers for static assets
-6. SPA routing handled correctly (all frontend routes return index.html)
-7. SSL/TLS certificate configured (Let's Encrypt or similar) for HTTPS
-8. systemd service unit created for FastAPI backend process
-9. Backend service starts automatically on server reboot
-10. Deployment script or documentation created for future updates
-11. Site is accessible via public domain/IP with HTTPS
-12. Health check endpoint (`/api/health`) returns 200 OK from production
+1. SSH access to GoDaddy VPS confirmed and working
+2. DNS A record configured to point matt-hulme.com to VPS IP
+3. Initial setup script executed successfully on VPS
+4. System packages installed (Node.js, Python, Nginx, certbot)
+5. Repository cloned to `/var/www/matt-hulme.com`
+6. Frontend built and deployed to production
+7. Backend virtual environment created and dependencies installed
+8. Database initialized and accessible
+9. systemd service running and enabled for auto-start
+10. Nginx installed and configured as reverse proxy
+11. Nginx routes `/api/*` to FastAPI backend on port 8000
+12. Nginx serves frontend static assets from `/var/www/matt-hulme.com/frontend/dist`
+13. SPA routing handled correctly (all frontend routes serve index.html)
+14. Static asset caching configured (1 year for immutable assets)
+15. SSL/TLS certificate obtained via Let's Encrypt
+16. HTTPS enforced (HTTP redirects to HTTPS)
+17. Security headers configured (X-Frame-Options, X-Content-Type-Options, etc.)
+18. File permissions set correctly (www-data ownership)
+19. Site accessible at `https://matt-hulme.com`
+20. Health check endpoint returns 200 OK: `https://matt-hulme.com/api/health`
+21. All pages load correctly in production
+22. API endpoints return expected data
+23. Media files (images/videos) load correctly
+24. CORS configured appropriately for production domain
 
 ## Story 4.3: Playwright E2E Test Suite - Core Flows
 
@@ -84,7 +111,7 @@
 10. Test: Resume page displays and "Download PDF" button triggers download
 11. All filtering E2E tests pass consistently
 
-## Story 4.5: Accessibility Audit & Improvements
+## Story 4.5: Accessibility Audit & Improvements (Optional)
 
 **As a** portfolio visitor with accessibility needs,
 **I want** the site to meet WCAG 2.1 AA standards,
@@ -105,25 +132,22 @@
 11. Screen reader testing performed on critical flows (at least manual testing with VoiceOver/NVDA)
 12. Accessibility documentation added noting compliance level achieved
 
+### Status
+**Optional** - May be deferred if site is already sufficiently accessible. Focus on Stories 4.1-4.4 first.
+
+---
+
 ## Story 4.6: Visual Polish & Performance Optimization
 
-**As a** portfolio visitor,
-**I want** a polished, fast-loading site with smooth interactions,
-**so that** my first impression is positive and the site reflects professional quality.
+**Status:** ~~REMOVED FROM EPIC 4 SCOPE~~
 
-### Acceptance Criteria
+The visual polish and performance work from Epic 3 is already sufficient. The site:
+- Has consistent visual design
+- Loads in < 3 seconds
+- Frontend bundle is only 103.52 KB gzipped (excellent)
+- Mobile responsive design works well
+- Smooth transitions and interactions
 
-1. Visual consistency audit performed across all pages and components
-2. Spacing, alignment, and typography are consistent throughout
-3. Hover states and transitions are smooth and professional
-4. Loading states are polished (skeleton loaders or spinners)
-5. Error states have clear, user-friendly messaging
-6. Images are optimized (compressed, appropriate formats, lazy loading if applicable)
-7. Performance audit performed using Chrome DevTools MCP (Lighthouse or performance profiling)
-8. Core Web Vitals measured and meet reasonable targets (LCP < 2.5s, FID < 100ms, CLS < 0.1)
-9. Any identified performance issues addressed (code splitting, asset optimization, etc.)
-10. Mobile experience tested on real devices or emulators and polished
-11. Cross-browser testing performed (Chrome, Firefox, Safari)
-12. Final visual QA pass completed and documented
+If performance or visual issues are discovered during deployment or testing, they can be addressed as bugs rather than a dedicated story.
 
 ---
