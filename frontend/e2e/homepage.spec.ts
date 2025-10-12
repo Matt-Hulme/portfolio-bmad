@@ -15,7 +15,7 @@ test.describe('Homepage', () => {
 
     // Verify tagline is present
     await expect(
-      page.getByText(/Applied AI Engineer.*Full-Stack Developer/i)
+      page.getByText(/AI Engineer, Full Stack Developer, Data Engineer, and Marketer/i)
     ).toBeVisible();
 
     // Verify navigation buttons
@@ -33,7 +33,7 @@ test.describe('Homepage', () => {
     await page.click('body');
 
     // All content should appear quickly
-    await expect(page.getByText(/Applied AI Engineer/i)).toBeVisible({ timeout: 2000 });
+    await expect(page.getByText(/AI Engineer, Full Stack Developer/i)).toBeVisible({ timeout: 2000 });
     await expect(page.getByRole('link', { name: /view projects/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /view resume/i })).toBeVisible();
   });
