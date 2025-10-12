@@ -21,7 +21,7 @@
   --color-gray-900: #171717;
 
   /* Font families */
-  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
 
   /* shadcn theme variables */
   --radius-sm: calc(var(--radius) - 4px);
@@ -137,7 +137,7 @@
   body {
     background-color: #0f0f0f;
     color: var(--foreground);
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
+    font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Courier New', monospace;
   }
 
   /* Headings */

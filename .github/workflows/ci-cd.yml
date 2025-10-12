@@ -121,12 +121,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Initialize database for E2E tests
+        working-directory: ./backend
+        run: |
+          python scripts/init_db.py
+          python scripts/seed_db.py
+
       - name: Start backend
         working-directory: ./backend
         run: |
           uvicorn app.main:app --host 127.0.0.1 --port 8000 &
           sleep 3
           curl http://localhost:8000/api/health
+          curl http://localhost:8000/api/projects | head -20
 
       - name: Build and start frontend
         working-directory: ./frontend
