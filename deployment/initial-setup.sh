@@ -12,7 +12,7 @@ set -e  # Exit on error
 DOMAIN="matt-hulme.com"
 DEPLOY_PATH="/var/www/${DOMAIN}"
 DEPLOY_USER="www-data"
-REPO_URL="YOUR_GIT_REPO_URL"  # Update this with your git repository URL
+REPO_URL="https://github.com/Matt-Hulme/portfolio-bmad.git"
 
 echo "🔧 Starting initial VPS setup for ${DOMAIN}..."
 
@@ -73,10 +73,7 @@ if [ -d ".git" ]; then
     git pull origin main
 else
     print_status "Cloning repository..."
-    print_warning "Please update REPO_URL in this script before running!"
-    # Uncomment and update the line below with your repo URL
-    # git clone "${REPO_URL}" .
-    echo "Manual step: Clone your repository to ${DEPLOY_PATH}"
+    git clone "${REPO_URL}" .
 fi
 
 # 6. Set up frontend
@@ -145,7 +142,7 @@ print_status "Setting up SSL certificate..."
 print_warning "About to run certbot. Make sure your domain DNS points to this server!"
 read -p "Press Enter to continue or Ctrl+C to cancel..."
 
-certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email YOUR_EMAIL@example.com || print_warning "Certbot failed. Run manually: sudo certbot --nginx -d ${DOMAIN}"
+certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} --non-interactive --agree-tos --email matt@matt-hulme.com || print_warning "Certbot failed. Run manually: sudo certbot --nginx -d ${DOMAIN}"
 
 # 11. Set proper permissions
 print_status "Setting file permissions..."

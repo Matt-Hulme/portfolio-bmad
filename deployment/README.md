@@ -29,17 +29,19 @@ This guide walks through deploying the portfolio application to your GoDaddy VPS
 
 ## Initial Deployment (First Time Setup)
 
-### 1. Prepare Your Repository
+### 1. Prerequisites Check
 
-Before deploying, update the following files with your repository information:
+Before deploying, ensure:
+- [ ] All code is merged to `main` branch
+- [ ] GitHub Actions CI/CD pipeline is passing
+- [ ] You have SSH access to your GoDaddy VPS
+- [ ] DNS A record for `matt-hulme.com` points to your VPS IP
+- [ ] You have `sudo` privileges on the VPS
 
-```bash
-# Edit deployment/initial-setup.sh
-REPO_URL="https://github.com/yourusername/portfolio-bmad.git"
-
-# Edit deployment/deploy.sh
-REPO_URL="https://github.com/yourusername/portfolio-bmad.git"
-```
+Repository is pre-configured with:
+- Repository URL: `https://github.com/Matt-Hulme/portfolio-bmad.git`
+- Domain: `matt-hulme.com`
+- SSL email: `matt@matt-hulme.com`
 
 ### 2. SSH into Your VPS
 
@@ -136,6 +138,33 @@ sudo tail -f /var/log/nginx/portfolio-access.log
 # Nginx error logs
 sudo tail -f /var/log/nginx/portfolio-error.log
 ```
+
+## CI/CD Pipeline
+
+The repository includes a GitHub Actions workflow (`.github/workflows/ci-cd.yml`) that automatically:
+
+**On Pull Requests:**
+- Runs frontend linting, TypeScript checking, and unit tests
+- Runs backend import validation
+- Executes E2E test suite with Playwright
+- Runs Lighthouse performance audit
+- Must pass before merging to main
+
+**On Main Branch Push:**
+- Runs all CI checks
+- Creates deployable build artifacts
+- Displays deployment instructions
+
+**Manual Deployment:**
+Currently configured for manual deployment via SSH. The workflow provides deployment instructions after successful builds.
+
+**Future: Automated Deployment**
+To enable automated deployment, add GitHub Secrets:
+- `VPS_HOST`: Your VPS IP address
+- `VPS_USER`: SSH username (e.g., `root` or your user)
+- `VPS_SSH_KEY`: Private SSH key for authentication
+
+Then uncomment the automated deployment section in `.github/workflows/ci-cd.yml`.
 
 ## Deploying Updates
 
