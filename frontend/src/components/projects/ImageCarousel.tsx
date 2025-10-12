@@ -65,7 +65,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   const isVideo = (url: string) => /\.(mp4|webm|mov)$/i.test(url);
 
   return (
-    <div className="relative">
+    <div className="relative" data-testid="image-carousel">
       {/* Carousel viewport */}
       <div
         className="overflow-hidden rounded-lg border border-gray-800"

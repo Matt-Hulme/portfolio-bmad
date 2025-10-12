@@ -26,6 +26,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
       onClick={onClick}
       role="button"
       tabIndex={0}
+      data-testid="project-card"
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -113,6 +114,7 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
                 key={tech.id}
                 variant="outline"
                 className="border-primary/20 bg-primary/5 text-primary font-mono text-xs"
+                data-testid="technology-badge"
               >
                 {tech.name}
               </Badge>
