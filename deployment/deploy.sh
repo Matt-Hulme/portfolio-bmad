@@ -13,7 +13,7 @@ DEPLOY_USER="www-data"
 DEPLOY_PATH="/var/www/${DOMAIN}"
 BACKEND_PATH="${DEPLOY_PATH}/backend"
 FRONTEND_PATH="${DEPLOY_PATH}/frontend"
-REPO_URL="YOUR_GIT_REPO_URL"  # Update this with your git repository URL
+REPO_URL="https://github.com/Matt-Hulme/portfolio-bmad.git"
 
 echo "🚀 Starting deployment to ${DOMAIN}..."
 
