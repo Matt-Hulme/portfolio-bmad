@@ -5,12 +5,14 @@
 **Value Delivered:** At the end of this epic, the portfolio is live on the internet at matt-hulme.com with proper infrastructure, thoroughly tested with E2E coverage, and ready to share with hiring managers and recruiters.
 
 ## Epic Scope
-This epic focuses on:
-1. **Deployment Infrastructure** (Story 4.1) - Scripts, configs, and documentation
-2. **Production Deployment** (Story 4.2) - Live deployment to GoDaddy VPS
-3. **E2E Testing - Core Flows** (Story 4.3) - Critical user journey tests
-4. **E2E Testing - Filtering** (Story 4.4) - Interactive feature tests
-5. **Accessibility Audit** (Story 4.5) - WCAG 2.1 AA compliance (optional)
+This epic focuses on testing and deployment in the correct order:
+1. **Deployment Infrastructure** (Story 4.1) ✅ - Scripts, configs, and documentation
+2. **E2E Testing - Core Flows** (Story 4.2) - Critical user journey tests
+3. **E2E Testing - Filtering** (Story 4.3) - Interactive feature tests
+4. **Accessibility Audit** (Story 4.4) - WCAG 2.1 AA compliance (optional)
+5. **Production Deployment** (Story 4.5) - Live deployment to GoDaddy VPS (LAST)
+
+**Deployment is intentionally last** - we test thoroughly before deploying to production.
 
 **Note:** Story 4.6 (Visual Polish & Performance) was removed from scope as the site already meets quality standards from Epic 3 work.
 
@@ -37,40 +39,7 @@ This epic focuses on:
 ### Status
 **Partially Complete** - Infrastructure files created, pending actual VPS deployment and testing.
 
-## Story 4.2: Production Deployment to GoDaddy VPS
-
-**As a** developer,
-**I want** the portfolio deployed to the GoDaddy VPS at matt-hulme.com,
-**so that** the site is publicly accessible with proper routing, performance, and security.
-
-### Acceptance Criteria
-
-1. SSH access to GoDaddy VPS confirmed and working
-2. DNS A record configured to point matt-hulme.com to VPS IP
-3. Initial setup script executed successfully on VPS
-4. System packages installed (Node.js, Python, Nginx, certbot)
-5. Repository cloned to `/var/www/matt-hulme.com`
-6. Frontend built and deployed to production
-7. Backend virtual environment created and dependencies installed
-8. Database initialized and accessible
-9. systemd service running and enabled for auto-start
-10. Nginx installed and configured as reverse proxy
-11. Nginx routes `/api/*` to FastAPI backend on port 8000
-12. Nginx serves frontend static assets from `/var/www/matt-hulme.com/frontend/dist`
-13. SPA routing handled correctly (all frontend routes serve index.html)
-14. Static asset caching configured (1 year for immutable assets)
-15. SSL/TLS certificate obtained via Let's Encrypt
-16. HTTPS enforced (HTTP redirects to HTTPS)
-17. Security headers configured (X-Frame-Options, X-Content-Type-Options, etc.)
-18. File permissions set correctly (www-data ownership)
-19. Site accessible at `https://matt-hulme.com`
-20. Health check endpoint returns 200 OK: `https://matt-hulme.com/api/health`
-21. All pages load correctly in production
-22. API endpoints return expected data
-23. Media files (images/videos) load correctly
-24. CORS configured appropriately for production domain
-
-## Story 4.3: Playwright E2E Test Suite - Core Flows
+## Story 4.2: Playwright E2E Test Suite - Core Flows
 
 **As a** developer,
 **I want** comprehensive E2E tests covering critical user journeys,
@@ -91,7 +60,7 @@ This epic focuses on:
 11. Playwright MCP integration available for enhanced debugging and snapshot capabilities
 12. All E2E tests pass consistently on local development environment
 
-## Story 4.4: Playwright E2E Test Suite - Filtering & Interactions
+## Story 4.3: Playwright E2E Test Suite - Filtering & Interactions
 
 **As a** developer,
 **I want** E2E tests for filtering and interactive features,
@@ -111,7 +80,7 @@ This epic focuses on:
 10. Test: Resume page displays and "Download PDF" button triggers download
 11. All filtering E2E tests pass consistently
 
-## Story 4.5: Accessibility Audit & Improvements (Optional)
+## Story 4.4: Accessibility Audit & Improvements (Optional)
 
 **As a** portfolio visitor with accessibility needs,
 **I want** the site to meet WCAG 2.1 AA standards,
@@ -134,6 +103,46 @@ This epic focuses on:
 
 ### Status
 **Optional** - May be deferred if site is already sufficiently accessible. Focus on Stories 4.1-4.4 first.
+
+---
+
+## Story 4.5: Production Deployment to GoDaddy VPS
+
+**As a** developer,
+**I want** the portfolio deployed to the GoDaddy VPS at matt-hulme.com,
+**so that** the site is publicly accessible with proper routing, performance, and security.
+
+### Acceptance Criteria
+
+1. SSH access to GoDaddy VPS confirmed and working
+2. DNS A record configured to point matt-hulme.com to VPS IP
+3. Initial setup script executed successfully on VPS
+4. All E2E tests passing (Stories 4.2-4.3 complete)
+5. Accessibility audit complete or deferred (Story 4.4)
+6. System packages installed (Node.js, Python, Nginx, certbot)
+7. Repository cloned to `/var/www/matt-hulme.com`
+8. Frontend built and deployed to production
+9. Backend virtual environment created and dependencies installed
+10. Database initialized and accessible
+11. systemd service running and enabled for auto-start
+12. Nginx installed and configured as reverse proxy
+13. Nginx routes `/api/*` to FastAPI backend on port 8000
+14. Nginx serves frontend static assets
+15. SPA routing handled correctly
+16. Static asset caching configured
+17. SSL/TLS certificate obtained via Let's Encrypt
+18. HTTPS enforced (HTTP redirects to HTTPS)
+19. Security headers configured
+20. File permissions set correctly (www-data ownership)
+21. Site accessible at `https://matt-hulme.com`
+22. Health check endpoint returns 200 OK
+23. All pages load correctly in production
+24. API endpoints return expected data
+25. Media files load correctly
+26. CORS configured appropriately for production domain
+
+### Notes
+**This story is intentionally LAST** - we test thoroughly (4.2-4.4) before deploying to production.
 
 ---
 
