@@ -27,7 +27,9 @@ describe('Home', () => {
     await userEvent.click(container.firstChild as Element);
     await waitFor(() => {
       expect(
-        screen.getByText('Applied AI Engineer & Full-Stack Developer'),
+        screen.getByText(
+          'AI Engineer, Full Stack Developer, Data Engineer, and Marketer',
+        ),
       ).toBeInTheDocument();
     });
   });

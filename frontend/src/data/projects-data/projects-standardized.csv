@@ -232,15 +232,14 @@ The tool:
 - Eliminates manual copy/paste of Slack requests into Linear.
 - Ensures that projects are consistently formatted and categorized before review.
 - Demonstrates the power of combining AI with workflow automation to reduce friction in everyday processes.",AI Engineer; Product Manager,None,None
-This website!,Matt-Hulme.com,"A professional portfolio website with filterable projects, modal details, resume page, and contact page to showcase frontend, AI, and SEM automation work.","### Overview
-Portfolio Site v2 is a professional showcase that highlights work across frontend development, AI engineering, product management, and SEM automation. I built this site to help hiring managers, industry colleagues, and others quickly understand skills, experience, and impact through a curated set of projects. The experience is polished, responsive, and optimized for clarity: a project grid for browsing, filter-driven exploration, and modal-based detail views that let users dive deeper without losing context.
+This website!,Matt-Hulme.com,"A professional portfolio website with filterable projects, modal details, and resume page to showcase frontend, AI, and SEM automation work.","### Overview
+Matt-Hulme.com is a professional showcase that highlights work across frontend development, AI engineering, product management, and SEM automation. I built this site to help hiring managers, industry colleagues, and others quickly understand skills, experience, and impact through a curated set of projects. The experience is polished, responsive, and optimized for clarity: a project grid for browsing, filter-driven exploration, and modal-based detail views that let users dive deeper without losing context.
 
 ### Features
 The site includes:
 - **Filterable project grid** with technology and role tags
 - **Project detail modals** with summaries, full descriptions, and media
 - **Resume page** (`/resume`) with styled HTML and PDF download
-- **Contact page** (`/contact`) linking to LinkedIn, X, and email
 - **Responsive design** across desktop, tablet, and mobile
 - **Accessibility compliance** with keyboard navigation and WCAG AA standards
 

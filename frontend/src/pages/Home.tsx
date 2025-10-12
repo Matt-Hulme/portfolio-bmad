@@ -15,7 +15,8 @@ export function Home() {
   const [isSkipped, setIsSkipped] = useState(false);
 
   const name = 'Matt Hulme';
-  const tagline = 'Applied AI Engineer & Full-Stack Developer';
+  const tagline =
+    'AI Engineer, Full Stack Developer, Data Engineer, and Marketer';
   const projectsBtn = 'View Projects';
   const resumeBtn = 'View Resume';
 
