@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { navLinks, homeLink } from '@/routes';
 import { cn } from '@/lib/utils';
@@ -20,6 +20,7 @@ interface NavigationProps {
 export function Navigation({ className }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleMobileNavClick = (path: string) => {
     setMobileMenuOpen(false);
@@ -61,7 +62,7 @@ export function Navigation({ className }: NavigationProps) {
             variant="ghost"
             size="icon"
             aria-label="Open navigation menu"
-            className="text-primary hover:text-primary/80 md:hidden"
+            className="text-primary hover:text-primary/80 ml-auto md:hidden"
           >
             <Menu className="h-6 w-6" />
           </Button>
@@ -83,7 +84,9 @@ export function Navigation({ className }: NavigationProps) {
               className={cn(
                 'hover:text-primary/80 text-left font-mono text-sm transition-colors',
                 'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
-                'text-gray-300',
+                location.pathname === homeLink.path
+                  ? 'text-primary'
+                  : 'text-gray-300',
               )}
             >
               {homeLink.label}
@@ -95,7 +98,9 @@ export function Navigation({ className }: NavigationProps) {
                 className={cn(
                   'hover:text-primary/80 text-left font-mono text-sm transition-colors',
                   'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
-                  'text-gray-300',
+                  location.pathname === link.path
+                    ? 'text-primary'
+                    : 'text-gray-300',
                 )}
               >
                 {link.label}
