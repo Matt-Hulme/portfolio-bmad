@@ -33,6 +33,7 @@ export function MultiSelect<T extends string = string>({
           <button
             role="combobox"
             aria-expanded={open}
+            data-testid={`filter-${label.toLowerCase()}`}
             className="focus:ring-primary flex h-9 w-full items-center justify-between rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 shadow-sm hover:bg-gray-700 hover:text-gray-100 focus:ring-1 focus:outline-none"
           >
             {selectedValues.length > 0 ? (
@@ -53,6 +54,8 @@ export function MultiSelect<T extends string = string>({
               return (
                 <div
                   key={option}
+                  role="option"
+                  aria-selected={isSelected}
                   className={cn(
                     'text-primary flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-gray-800',
                     isSelected && 'bg-gray-800/70',
