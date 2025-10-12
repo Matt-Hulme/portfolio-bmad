@@ -18,19 +18,17 @@ git reset --hard origin/main
 echo -e "${GREEN}✅ Code updated${NC}"
 echo ""
 
-# Step 2: Update database
-echo -e "${BLUE}🗄️  Step 2: Updating database...${NC}"
-sqlite3 backend/portfolio.db "UPDATE project_images SET url = '/videos/projects/brainstormer/brainstormer-demo.mp4' WHERE url LIKE '%Brainstormer%';"
-echo "  ✓ Fixed Brainstormer video path"
-
-sqlite3 backend/portfolio.db "UPDATE projects SET live_url = 'https://matt-hulme.com' WHERE title = 'This website!';"
-echo "  ✓ Fixed Matt-Hulme.com URL"
-echo -e "${GREEN}✅ Database updated${NC}"
+# Step 2: Re-seed database
+echo -e "${BLUE}🗄️  Step 2: Re-seeding database with latest project data...${NC}"
+cd /var/www/matt-hulme.com/backend
+source .venv/bin/activate
+python scripts/seed_db.py
+echo -e "${GREEN}✅ Database re-seeded with cleaned descriptions${NC}"
 echo ""
 
 # Step 3: Rebuild frontend
 echo -e "${BLUE}🎨 Step 3: Rebuilding frontend...${NC}"
-cd frontend
+cd /var/www/matt-hulme.com/frontend
 npm ci --ignore-scripts
 npm run build
 echo -e "${GREEN}✅ Frontend rebuilt${NC}"
@@ -67,15 +65,11 @@ echo ""
 
 echo -e "${GREEN}🎉 Deployment complete!${NC}"
 echo ""
-echo "📊 Optimized images summary:"
-echo "  • Total image size reduced from 29MB → 9.3MB (68% reduction)"
-echo "  • Most images now under 200KB"
-echo ""
-echo "🔧 Fixes applied:"
-echo "  ✓ JetBrains Mono web font for consistency"
-echo "  ✓ Green modal X button"
-echo "  ✓ Brainstormer video path fixed"
-echo "  ✓ Matt-Hulme.com URL fixed"
-echo "  ✓ E2E tests now passing in CI/CD"
+echo "🔧 Updates applied:"
+echo "  ✓ Cleaned project descriptions (removed Overview headers)"
+echo "  ✓ Card summaries now match modal descriptions"
+echo "  ✓ Fixed content accuracy (removed incorrect 'designed' claim)"
+echo "  ✓ Replaced em dashes with regular hyphens"
+echo "  ✓ Database re-seeded with corrected data"
 echo ""
 echo "🌐 Visit: https://matt-hulme.com"
