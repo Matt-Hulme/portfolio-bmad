@@ -31,7 +31,7 @@ echo ""
 # Step 3: Rebuild frontend
 echo -e "${BLUE}🎨 Step 3: Rebuilding frontend...${NC}"
 cd frontend
-npm ci --production
+npm ci --ignore-scripts
 npm run build
 echo -e "${GREEN}✅ Frontend rebuilt${NC}"
 echo ""
