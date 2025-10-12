@@ -1,8 +1,10 @@
-# Story 4.2: Production Deployment to GoDaddy VPS
+# Story 4.5: Production Deployment to GoDaddy VPS
 
 **Epic:** Epic 4 - Production Deployment & Quality Assurance
 **Status:** Not Started
-**Branch:** `story/4.2-production-deployment`
+**Branch:** `story/4.5-production-deployment`
+
+**⚠️ IMPORTANT:** This story is intentionally LAST in Epic 4. Complete Stories 4.2 (E2E Core), 4.3 (E2E Filtering), and optionally 4.4 (Accessibility) before deploying to production.
 
 ## User Story
 
