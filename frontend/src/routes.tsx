@@ -6,6 +6,9 @@ import { RouteLoading } from '@/components/layout/RouteLoading';
 const Home = lazy(() =>
   import('@/pages/Home').then((module) => ({ default: module.Home })),
 );
+const Projects = lazy(() =>
+  import('@/pages/Projects').then((module) => ({ default: module.Projects })),
+);
 const Resume = lazy(() => import('@/pages/Resume'));
 const NotFound = lazy(() =>
   import('@/pages/NotFound').then((module) => ({ default: module.NotFound })),
@@ -28,6 +31,10 @@ export const routes: RouteObject[] = [
     element: withSuspense(Home),
   },
   {
+    path: '/projects',
+    element: withSuspense(Projects),
+  },
+  {
     path: '/resume',
     element: withSuspense(Resume),
   },
@@ -38,6 +45,8 @@ export const routes: RouteObject[] = [
 ];
 
 export const navLinks = [
-  { path: '/', label: 'Projects' },
+  { path: '/projects', label: 'Projects' },
   { path: '/resume', label: 'Resume' },
 ];
+
+export const homeLink = { path: '/', label: 'Home' };

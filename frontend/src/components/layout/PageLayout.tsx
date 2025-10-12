@@ -17,12 +17,6 @@ export function PageLayout() {
       <header className="border-muted bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b backdrop-blur">
         <Container>
           <div className="flex h-16 items-center justify-between">
-            <a
-              href="/"
-              className="text-primary hover:text-primary/80 focus-visible:ring-primary font-mono text-lg font-bold transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-            >
-              bmad.dev
-            </a>
             <Navigation />
           </div>
         </Container>
@@ -36,22 +30,21 @@ export function PageLayout() {
       {/* Footer */}
       <footer className="border-muted bg-background border-t">
         <Container>
-          <div className="text-muted-foreground flex h-16 items-center justify-between text-sm">
-            <p className="font-mono">© 2025 bmad.dev</p>
+          <div className="flex h-16 items-center justify-end text-sm">
             <div className="flex gap-4">
               <a
-                href="https://github.com/bmad4ever"
+                href="https://github.com/Matt-Hulme"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary focus-visible:ring-primary font-mono transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-primary font-mono text-gray-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 GitHub
               </a>
               <a
-                href="https://www.linkedin.com/in/bruno-fonseca-bmad/"
+                href="https://www.linkedin.com/in/matt-hulme-1ba9a288/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary focus-visible:ring-primary font-mono transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                className="focus-visible:ring-primary font-mono text-gray-300 transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 LinkedIn
               </a>

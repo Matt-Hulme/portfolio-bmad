@@ -35,66 +35,38 @@ describe('App', () => {
   it('renders home page by default', async () => {
     renderWithProviders(<App />);
     await waitFor(() => {
-      expect(screen.getByText('Portfolio')).toBeInTheDocument();
+      expect(screen.getByText('Matt Hulme')).toBeInTheDocument();
     });
   });
 
-  it('displays portfolio description on home page', async () => {
+  it('displays tagline on home page', async () => {
     renderWithProviders(<App />);
     await waitFor(() => {
       expect(
-        screen.getByText(/A showcase of diverse projects/),
+        screen.getByText('Applied AI Engineer & Full-Stack Developer'),
       ).toBeInTheDocument();
     });
   });
 
-  it('displays project grid on home page', async () => {
-    const mockProjects: api.ProjectResponse[] = [
-      {
-        id: '1',
-        slug: 'test-project',
-        title: 'Modern Portfolio Website',
-        summary: 'Test summary',
-        description: 'Test description',
-        liveUrl: null,
-        githubUrl: null,
-        roles: [],
-        technologies: [],
-        images: [],
-      },
-    ];
-    vi.spyOn(api, 'getProjects').mockResolvedValue(mockProjects);
-
+  it('displays navigation buttons on home page', async () => {
     renderWithProviders(<App />);
     await waitFor(() => {
-      // Check for first project card (slug "test-project" displays as "test project")
-      expect(screen.getByText('test project')).toBeInTheDocument();
+      expect(screen.getByText('View Projects')).toBeInTheDocument();
+      expect(screen.getByText('View Resume')).toBeInTheDocument();
     });
   });
 
-  it('displays multiple project cards', async () => {
-    const mockProjects: api.ProjectResponse[] = Array.from(
-      { length: 7 },
-      (_, i) => ({
-        id: String(i + 1),
-        slug: `project-${i + 1}`,
-        title: `Project ${i + 1}`,
-        summary: `Summary ${i + 1}`,
-        description: `Description ${i + 1}`,
-        liveUrl: null,
-        githubUrl: null,
-        roles: [],
-        technologies: [],
-        images: [],
-      }),
-    );
-    vi.spyOn(api, 'getProjects').mockResolvedValue(mockProjects);
-
+  it('has navigation to all sections', async () => {
     renderWithProviders(<App />);
     await waitFor(() => {
-      const projectCards = screen.getAllByRole('button');
-      // Should have at least 7 project cards
-      expect(projectCards.length).toBeGreaterThanOrEqual(7);
+      // Check navigation links exist in the header navigation
+      const nav = screen.getByLabelText('Main navigation');
+      const homeLink = screen.getByRole('link', { name: 'Home' });
+      const resumeLink = screen.getByRole('link', { name: 'Resume' });
+
+      expect(homeLink).toBeInTheDocument();
+      expect(resumeLink).toBeInTheDocument();
+      expect(nav).toBeInTheDocument();
     });
   });
 });

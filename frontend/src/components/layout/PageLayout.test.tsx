@@ -18,11 +18,10 @@ describe('PageLayout', () => {
     );
   };
 
-  it('renders header with logo', () => {
+  it('renders header with navigation', () => {
     renderWithRouter();
-    const logo = screen.getByRole('link', { name: /bmad\.dev/i });
-    expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute('href', '/');
+    const header = document.querySelector('header');
+    expect(header).toBeInTheDocument();
   });
 
   it('renders navigation in header', () => {
@@ -46,11 +45,10 @@ describe('PageLayout', () => {
     expect(screen.getByText('Test Page Content')).toBeInTheDocument();
   });
 
-  it('renders footer with copyright', () => {
+  it('renders footer', () => {
     renderWithRouter();
     const footer = document.querySelector('footer');
     expect(footer).toBeInTheDocument();
-    expect(screen.getByText(/© 2025 bmad\.dev/i)).toBeInTheDocument();
   });
 
   it('renders footer links', () => {
@@ -59,14 +57,14 @@ describe('PageLayout', () => {
     const linkedinLink = screen.getByRole('link', { name: /linkedin/i });
 
     expect(githubLink).toBeInTheDocument();
-    expect(githubLink).toHaveAttribute('href', 'https://github.com/bmad4ever');
+    expect(githubLink).toHaveAttribute('href', 'https://github.com/Matt-Hulme');
     expect(githubLink).toHaveAttribute('target', '_blank');
     expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
 
     expect(linkedinLink).toBeInTheDocument();
     expect(linkedinLink).toHaveAttribute(
       'href',
-      'https://www.linkedin.com/in/bruno-fonseca-bmad/',
+      'https://www.linkedin.com/in/matt-hulme-1ba9a288/',
     );
     expect(linkedinLink).toHaveAttribute('target', '_blank');
     expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
