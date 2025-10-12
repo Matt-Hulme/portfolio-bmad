@@ -38,13 +38,12 @@ export function ProjectDetailModal({
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  // Split description: Overview paragraph vs rest (Features, Notes, etc.)
-  const overviewMatch = descriptionWithoutTechStack.match(
-    /### Overview\s*\n(.*?)(?=\n###|$)/s,
-  );
-  const overviewText = overviewMatch ? overviewMatch[0] : '';
-  const restOfDescription = overviewMatch
-    ? descriptionWithoutTechStack.replace(overviewMatch[0], '').trim()
+  // Split description: first paragraph (intro) vs rest (Features, Notes, etc.)
+  const firstSectionMatch =
+    descriptionWithoutTechStack.match(/^(.*?)(?=\n###|$)/s);
+  const introText = firstSectionMatch ? firstSectionMatch[1].trim() : '';
+  const restOfDescription = firstSectionMatch
+    ? descriptionWithoutTechStack.replace(firstSectionMatch[1], '').trim()
     : descriptionWithoutTechStack;
 
   // Convert API response to link objects for display
@@ -81,11 +80,11 @@ export function ProjectDetailModal({
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Overview - context first */}
-          {overviewText && (
+          {/* Introduction - context first */}
+          {introText && (
             <div className="project-markdown">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {overviewText}
+                {introText}
               </ReactMarkdown>
             </div>
           )}

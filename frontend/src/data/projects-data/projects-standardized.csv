@@ -1,6 +1,5 @@
 Project Title,Project Slug,Summary,Full Description,Role(s),Live Site URL,GH Repo
-TP Lists,Travelpass Lists,"An interactive travel guide builder that enables users to create, organize, and share curated destination lists with photos and notes.","### Overview
-The List Builder is an interactive feature that enables Travelpass users to transform travel ideas into shareable guides. I developed the frontend experience to consolidate photo uploads, event management, and social sharing into a cohesive workflow.
+TP Lists,Travelpass Lists,"An interactive feature that enables Travelpass users to transform travel ideas into shareable guides.","An interactive feature that enables Travelpass users to transform travel ideas into shareable guides. I developed the frontend experience to consolidate photo uploads, event management, and social sharing into a cohesive workflow.
 
 ### Features
 Users can:
@@ -15,8 +14,7 @@ Users can:
 ### Tech Stack
 - **Frontend:** TypeScript, React, TailwindCSS, Vite
 - **Data Layer:** GraphQL",Frontend Dev,https://travelpass.com/lists/01J8G9JTNFA2J0?name=Star-Wars-Filming-Locations,None
-TP Dashboard,Travelpass Dashboard,"A central hub that enables Travelpass users to manage their profile, lists, saved content, and bookings in one unified interface.","### Overview
-The Dashboard is a personalized home base that consolidates profile management, content discovery, and bookings into a single interface. I designed and built the frontend to provide seamless access to all core user actions.
+TP Dashboard,Travelpass Dashboard,"A personalized home base that consolidates profile management, content discovery, and bookings into a single interface.","A personalized home base that consolidates profile management, content discovery, and bookings into a single interface. I built the frontend to provide seamless access to all core user actions.
 
 ### Features
 Users can:
@@ -30,8 +28,7 @@ Users can:
 ### Tech Stack
 - **Frontend:** TypeScript, React, TailwindCSS, Vite
 - **Data Layer:** GraphQL",Frontend Dev,https://travelpass.com/dashboard,None
-TP Profiles Refactor,Travelpass Profiles,"A user profile system that enables travelers to manage their identity, connections, and shared content in one place.","### Overview
-The Profiles feature is a personal space where Travelpass users manage their information, showcase their travel style, and connect with other travelers. I refactored the frontend to improve profile editing, follower management, and list visibility.
+TP Profiles Refactor,Travelpass Profiles,"A personal space where Travelpass users manage their information, showcase their travel style, and connect with other travelers.","A personal space where Travelpass users manage their information, showcase their travel style, and connect with other travelers. I refactored the frontend to improve profile editing, follower management, and list visibility.
 
 ### Features
 Users can:
@@ -45,8 +42,7 @@ Users can:
 ### Tech Stack
 - **Frontend:** TypeScript, React, TailwindCSS, Vite
 - **Data Layer:** GraphQL",Frontend Dev,https://travelpass.com/profile/matt,None
-SW 1,Star Wars Archive 1,"A Star Wars reference archive that enables fans to explore films, characters, planets, species, vehicles, and starships through an interactive UI.","### Overview
-SW-Archive is a Star Wars reference tool that lets fans explore films, characters, planets, species, vehicles, and starships in a pokedex-style interface. I built this as my first solo React project to practice component-based architecture and REST API integration.
+SW 1,Star Wars Archive 1,"A Star Wars reference tool that lets fans explore films, characters, planets, species, vehicles, and starships in a pokedex-style interface.","A Star Wars reference tool that lets fans explore films, characters, planets, species, vehicles, and starships in a pokedex-style interface. I built this as my first solo React project to practice component-based architecture and REST API integration.
 
 ### Features
 Users can:
@@ -61,8 +57,7 @@ Users can:
 
 ### Notes
 - This project served as a foundational learning exercise while teaching myself React.",Frontend Dev,https://sw-archive.vercel.app/,https://github.com/Matt-Hulme/sw-archive
-SW 2,Star Wars Archive 2,"A rebuilt Star Wars archive that demonstrates growth in React, TypeScript, and modern frontend practices one year after the original version.","### Overview
-Star Wars Archive is a Star Wars reference tool that lets users browse films, characters, planets, starships, and more through an interactive interface. I built this to practice TypeScript, modern React patterns, and GraphQL integration.
+SW 2,Star Wars Archive 2,"A Star Wars reference tool that lets users browse films, characters, planets, starships, and more through an interactive interface.","A Star Wars reference tool that lets users browse films, characters, planets, starships, and more through an interactive interface. I built this to practice TypeScript, modern React patterns, and GraphQL integration.
 
 ### Features
 Users can:
@@ -78,8 +73,7 @@ Users can:
 
 ### Notes
 - The GraphQL endpoint has lost support, so some detail queries return null fields.",Frontend Dev,https://starwars-archive.vercel.app/,https://github.com/Matt-Hulme/starwars-archive
-React Scratch Map,Where Have You Traveled,"An interactive travel tracker that enables users to visualize visited countries, view stats, and save progress with Firebase.","### Overview
-Scratch Map is an interactive travel tracker that helps users visualize where they've been around the world. The tool combines data visualization with persistence through account-based saving. I built this project to practice API integration, authentication, and state management with Firebase.
+React Scratch Map,Where Have You Traveled,"An interactive travel tracker that helps users visualize where they've been around the world.","An interactive travel tracker that helps users visualize where they've been around the world. The tool combines data visualization with persistence through account-based saving. I built this project to practice API integration, authentication, and state management with Firebase.
 
 ### Features
 Users can:
@@ -96,8 +90,7 @@ Users can:
 
 ### Notes
 - This project prioritized functionality over aesthetics as a deliberate learning focus on technical integration rather than visual design.",Frontend Dev,https://scratch-map-react.vercel.app/,https://github.com/Matt-Hulme/scratch-map-react
-Brainstormer,Brainstormer,"An AI-powered creative assistant that generates related or overlapping concepts to help users explore new ideas through OR and AND mode brainstorming.","### Overview
-Brainstormer is an AI-powered ideation tool that helps users explore creative connections between concepts. The system uses a large language model to generate either related ideas (OR mode) or overlapping connections (AND mode), supporting writers, entrepreneurs, and creatives during early brainstorming. Though my brother and I closed the project after early user testing, it served as an important full-stack and AI integration learning experience.
+Brainstormer,Brainstormer,"An AI-powered ideation tool that helps users explore creative connections between concepts.","An AI-powered ideation tool that helps users explore creative connections between concepts. The system uses a large language model to generate either related ideas (OR mode) or overlapping connections (AND mode), supporting writers, entrepreneurs, and creatives during early brainstorming. Though my brother and I closed the project after early user testing, it served as an important full-stack and AI integration learning experience.
 
 ### Features
 Users can:
@@ -115,8 +108,7 @@ Users can:
 ### Notes
 - Early user testing provided valuable lessons on product-market fit, prompting a pivot away from the concept.
 - The project sharpened AI integration skills and full-stack deployment experience despite not reaching production scale.",Fullstack Dev,None,https://github.com/Matt-Hulme/brainstormer
-Deliberate Agentic Development,Deliberate Agentic Development,"An AI-assisted development framework that guides AI coding assistants through structured checkpoints with human oversight to improve reliability and quality.","### Overview
-Deliberate Agentic Development is an open-source framework that brings structure and accountability to AI-assisted software development. Instead of letting AI coding agents operate freely, it provides a deliberate methodology with checkpoints, reviews, and human-in-the-loop oversight. I built this framework to make AI pair programming more reliable, transparent, and maintainable while keeping developers in control.
+Deliberate Agentic Development,Deliberate Agentic Development,"An open-source framework that brings structure and accountability to AI-assisted software development.","An open-source framework that brings structure and accountability to AI-assisted software development. Instead of letting AI coding agents operate freely, it provides a deliberate methodology with checkpoints, reviews, and human-in-the-loop oversight. I built this framework to make AI pair programming more reliable, transparent, and maintainable while keeping developers in control.
 
 ### Features
 The framework provides:
@@ -132,8 +124,7 @@ The framework provides:
 ### Notes
 - This project is not a traditional codebase, but a set of instructions and best practices.
 - It reflects an ongoing focus on AI developer tooling and how to align emerging agentic workflows with real-world software engineering standards.",Fullstack Dev; AI Engineer,None,https://github.com/Matt-Hulme/deliberate-agentic-development
-Hotel Name Shortener,Hotel Name Shortener,"An AI-powered automation tool that abbreviates hotel names for Google and Bing Ads character limit compliance using LLM-powered text processing.","### Overview
-The Hotel Name Shortener is a Python + AWS Lambda service that automatically abbreviates hotel names to comply with Google and Bing Ads character limits. I designed the system architecture, established coding standards, and managed a developer while contributing to core implementation. The tool preserves marketing value while ensuring policy compliance at scale.
+Hotel Name Shortener,Hotel Name Shortener,"A Python + AWS Lambda service that automatically abbreviates hotel names to comply with Google and Bing Ads character limits.","A Python + AWS Lambda service that automatically abbreviates hotel names to comply with Google and Bing Ads character limits. I designed the system architecture, established coding standards, and managed a developer while contributing to core implementation. The tool preserves marketing value while ensuring policy compliance at scale.
 
 ### Features
 The tool:
@@ -153,8 +144,7 @@ The tool:
 ### Notes
 - Led the project while managing another developer and maintaining code quality standards.
 - Significantly reduced manual editing time for the SEM team while guaranteeing ad policy compliance.",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
-Hotel Address Shortener,Hotel Address Shortener,"An AI-powered automation tool that abbreviates hotel addresses for Google and Bing Ads character limit compliance using LLM-powered text processing.","### Overview
-The Hotel Address Shortener is a Python + AWS Lambda service that automatically abbreviates hotel addresses to comply with Google and Bing Ads character limits. I designed the system architecture, maintained coding standards, and contributed major portions of the implementation while managing another developer. The tool ensures concise, compliant addresses at scale while preserving key travel information.
+Hotel Address Shortener,Hotel Address Shortener,"A Python + AWS Lambda service that automatically abbreviates hotel addresses to comply with Google and Bing Ads character limits.","A Python + AWS Lambda service that automatically abbreviates hotel addresses to comply with Google and Bing Ads character limits. I designed the system architecture, maintained coding standards, and contributed major portions of the implementation while managing another developer. The tool ensures concise, compliant addresses at scale while preserving key travel information.
 
 ### Features
 The tool:
@@ -174,8 +164,7 @@ The tool:
 ### Notes
 - Led the project while managing another developer and contributing heavily to architecture and core implementation.
 - Reduced compliance issues in ads by standardizing addresses and helped scale SEM campaigns by automating manual QA.",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
-RSA Generator,RSA Generator,"An AI-powered automation tool that extracts high-quality, validated ad headlines from hotel descriptions and amenities for responsive search ads.","### Overview
-The RSA (Responsive Search Ad) Generator is a Python + AWS Lambda service that automates the creation of ad headlines for hotel campaigns. The tool takes hotel descriptions and amenities as input and generates marketable headlines that comply with Google Ads policies while staying accurate to the source content. I built this end-to-end to ensure factual accuracy through strict validation, preventing hallucinations—a key requirement for large-scale SEM automation.
+RSA Generator,RSA Generator,"A Python + AWS Lambda service that automates the creation of ad headlines for hotel campaigns.","A Python + AWS Lambda service that automates the creation of ad headlines for hotel campaigns. The tool takes hotel descriptions and amenities as input and generates marketable headlines that comply with Google Ads policies while staying accurate to the source content. I built this end-to-end to ensure factual accuracy through strict validation, preventing hallucinations - a key requirement for large-scale SEM automation.
 
 ### Features
 The tool:
@@ -189,8 +178,7 @@ The tool:
 - **Language/Framework:** Python, LangChain, OpenAI API
 - **Infrastructure:** AWS Lambda
 - **Database:** Snowflake",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
-Asset Frequency Report,Asset Frequency Report,"An AI-powered analysis tool that identifies underperforming ad assets and enables brand-specific and device-specific ad copy optimization at scale.","### Overview
-The Asset Frequency Report is an AI-powered tool that analyzes the performance of ad assets at scale for Search Engine Marketing. The tool queries every headline and description across all Google Ads accounts, identifies which assets are winners or wasting space, and determines what should replace them. I built this to unlock brand-specific and device-specific ad copy optimization, enabling more precise campaign tailoring than ever before.
+Asset Frequency Report,Asset Frequency Report,"An AI-powered tool that analyzes the performance of ad assets at scale for Search Engine Marketing.","An AI-powered tool that analyzes the performance of ad assets at scale for Search Engine Marketing. The tool queries every headline and description across all Google Ads accounts, identifies which assets are winners or wasting space, and determines what should replace them. I built this to unlock brand-specific and device-specific ad copy optimization, enabling more precise campaign tailoring than ever before.
 
 ### Features
 The tool:
@@ -212,8 +200,7 @@ What this enables:
 ### Notes
 - Identified hundreds of thousands (if not millions) of assets for replacement.
 - Represents one of the most impactful SEM automation systems delivered to date.",AI Engineer; Product Manager; Data Engineer; Marketer,None,None
-Slack -> Linear Workflow,Slack to Linear Workflow,"An AI-powered workflow automation that categorizes Slack project requests and auto-creates Linear tickets for review, reducing manual project intake work.","### Overview
-The Slack → Linear Workflow is an automation that streamlines how coworkers submit project requests. Instead of manually formatting and logging details, teammates fill out a Slack form, which is then processed by an LLM. I built this workflow to categorize, format, and automatically enter requests into Linear as projects for review, saving time and ensuring consistency.
+Slack -> Linear Workflow,Slack to Linear Workflow,"An automation that streamlines how coworkers submit project requests.","An automation that streamlines how coworkers submit project requests. Instead of manually formatting and logging details, teammates fill out a Slack form, which is then processed by an LLM. I built this workflow to categorize, format, and automatically enter requests into Linear as projects for review, saving time and ensuring consistency.
 
 ### Features
 The tool:
@@ -232,8 +219,7 @@ The tool:
 - Eliminates manual copy/paste of Slack requests into Linear.
 - Ensures that projects are consistently formatted and categorized before review.
 - Demonstrates the power of combining AI with workflow automation to reduce friction in everyday processes.",AI Engineer; Product Manager,None,None
-This website!,Matt-Hulme.com,"A professional portfolio website with filterable projects, modal details, and resume page to showcase frontend, AI, and SEM automation work.","### Overview
-Matt-Hulme.com is a professional showcase that highlights work across frontend development, AI engineering, product management, and SEM automation. I built this site to help hiring managers, industry colleagues, and others quickly understand skills, experience, and impact through a curated set of projects. The experience is polished, responsive, and optimized for clarity: a project grid for browsing, filter-driven exploration, and modal-based detail views that let users dive deeper without losing context.
+This website!,Matt-Hulme.com,"A professional showcase that highlights work across frontend development, AI engineering, product management, and SEM automation.","A professional showcase that highlights work across frontend development, AI engineering, product management, and SEM automation. I built this site to help hiring managers, industry colleagues, and others quickly understand skills, experience, and impact through a curated set of projects. The experience is polished, responsive, and optimized for clarity: a project grid for browsing, filter-driven exploration, and modal-based detail views that let users dive deeper without losing context.
 
 ### Features
 The site includes:
