@@ -15,7 +15,7 @@ export function PageLayout() {
       </a>
 
       {/* Header */}
-      <header className="border-muted bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b backdrop-blur">
+      <header className="border-muted bg-background border-b">
         <Container>
           <div className="flex h-16 items-center justify-between">
             <Navigation />

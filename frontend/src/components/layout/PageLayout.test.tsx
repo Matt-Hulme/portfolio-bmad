@@ -70,11 +70,11 @@ describe('PageLayout', () => {
     expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('has sticky header', () => {
+  it('has static header with border', () => {
     renderWithRouter();
     const header = document.querySelector('header');
-    expect(header?.className).toContain('sticky');
-    expect(header?.className).toContain('top-0');
+    expect(header?.className).toContain('border-b');
+    expect(header?.className).toContain('bg-background');
   });
 
   it('uses flexbox layout with flex-1 main', () => {
