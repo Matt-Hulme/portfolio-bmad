@@ -73,7 +73,7 @@ export function Projects() {
             </h1>
             <p className="text-lg text-gray-400">
               A showcase of diverse projects spanning AI engineering, fullstack
-              development, data analysis, product work, and marketing.
+              development, data engineering, product work, and marketing.
             </p>
           </div>
 

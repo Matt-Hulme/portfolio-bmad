@@ -60,7 +60,9 @@ describe('App', () => {
     await waitFor(
       () => {
         expect(
-          screen.getByText('Applied AI Engineer & Full-Stack Developer'),
+          screen.getByText(
+            'AI Engineer, Full Stack Developer, Data Engineer, and Marketer',
+          ),
         ).toBeInTheDocument();
       },
       { timeout: 3000 },

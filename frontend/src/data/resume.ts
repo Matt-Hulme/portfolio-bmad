@@ -39,7 +39,7 @@ export const resumeData: ResumeData = {
   },
   experience: [
     {
-      title: 'Applied AI Engineer',
+      title: 'AI Engineer',
       company: 'Travelpass Group',
       period: 'Apr 2025-Sept 2025',
       responsibilities: [
