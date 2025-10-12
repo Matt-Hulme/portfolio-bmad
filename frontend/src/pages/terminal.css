@@ -1,0 +1,25 @@
+/* Terminal blinking cursor */
+.terminal-cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.2em;
+  background-color: #74fb4c;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* Dark cursor for green buttons (View Projects, Download PDF) */
+.bg-primary .terminal-cursor {
+  background-color: #0f0f0f;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.1%,
+  100% {
+    opacity: 0;
+  }
+}

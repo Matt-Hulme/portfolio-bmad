@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Menu } from 'lucide-react';
-import { navLinks } from '@/routes';
+import { navLinks, homeLink } from '@/routes';
 import { cn } from '@/lib/utils';
 import {
   Sheet,
@@ -28,33 +28,40 @@ export function Navigation({ className }: NavigationProps) {
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'font-mono text-sm transition-colors hover:text-muted-foreground',
+      'font-mono text-sm transition-colors hover:text-primary/80',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-      isActive ? 'text-primary' : 'text-foreground',
+      isActive ? 'text-primary' : 'text-gray-300',
     );
 
   return (
     <>
       {/* Desktop Navigation */}
-      <nav
-        className={cn('hidden gap-6 md:flex', className)}
-        aria-label="Main navigation"
+      <div
+        className={cn(
+          'hidden w-full items-center justify-between md:flex',
+          className,
+        )}
       >
-        {navLinks.map((link) => (
-          <NavLink key={link.path} to={link.path} className={navLinkClasses}>
-            {link.label}
-          </NavLink>
-        ))}
-      </nav>
+        <NavLink to={homeLink.path} className={navLinkClasses}>
+          {homeLink.label}
+        </NavLink>
+        <nav className="flex gap-6" aria-label="Main navigation">
+          {navLinks.map((link) => (
+            <NavLink key={link.path} to={link.path} className={navLinkClasses}>
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
 
       {/* Mobile Navigation */}
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <SheetTrigger asChild className="md:hidden">
+        <SheetTrigger asChild>
           <Button
             variant="ghost"
             size="icon"
             aria-label="Open navigation menu"
-            className="text-foreground hover:text-primary"
+            className="text-primary hover:text-primary/80 md:hidden"
           >
             <Menu className="h-6 w-6" />
           </Button>
@@ -63,22 +70,32 @@ export function Navigation({ className }: NavigationProps) {
           side="right"
           className="bg-background border-muted w-[250px]"
         >
-          <SheetHeader>
-            <SheetTitle className="text-primary font-mono">Menu</SheetTitle>
-            <SheetDescription>Navigate to different sections</SheetDescription>
+          <SheetHeader className="sr-only">
+            <SheetTitle>Navigation Menu</SheetTitle>
+            <SheetDescription>Site navigation</SheetDescription>
           </SheetHeader>
           <nav
             className="mt-8 flex flex-col gap-4"
             aria-label="Mobile navigation"
           >
+            <button
+              onClick={() => handleMobileNavClick(homeLink.path)}
+              className={cn(
+                'hover:text-primary/80 text-left font-mono text-sm transition-colors',
+                'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+                'text-gray-300',
+              )}
+            >
+              {homeLink.label}
+            </button>
             {navLinks.map((link) => (
               <button
                 key={link.path}
                 onClick={() => handleMobileNavClick(link.path)}
                 className={cn(
-                  'hover:text-primary text-left font-mono text-sm transition-colors',
+                  'hover:text-primary/80 text-left font-mono text-sm transition-colors',
                   'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
-                  'text-foreground',
+                  'text-gray-300',
                 )}
               >
                 {link.label}

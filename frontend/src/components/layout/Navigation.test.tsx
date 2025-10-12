@@ -13,6 +13,7 @@ describe('Navigation', () => {
         </BrowserRouter>,
       );
 
+      expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
       expect(
         screen.getByRole('link', { name: /projects/i }),
       ).toBeInTheDocument();
@@ -38,9 +39,13 @@ describe('Navigation', () => {
         </BrowserRouter>,
       );
 
-      expect(screen.getByRole('link', { name: /projects/i })).toHaveAttribute(
+      expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute(
         'href',
         '/',
+      );
+      expect(screen.getByRole('link', { name: /projects/i })).toHaveAttribute(
+        'href',
+        '/projects',
       );
       expect(screen.getByRole('link', { name: /resume/i })).toHaveAttribute(
         'href',
@@ -68,7 +73,7 @@ describe('Navigation', () => {
 
       const projectsLink = screen.getByRole('link', { name: /projects/i });
 
-      expect(projectsLink.className).toContain('text-foreground');
+      expect(projectsLink.className).toContain('text-gray-300');
     });
 
     it('applies custom className prop', () => {
@@ -78,8 +83,8 @@ describe('Navigation', () => {
         </BrowserRouter>,
       );
 
-      const nav = container.querySelector('nav');
-      expect(nav).toHaveClass('custom-class');
+      const wrapper = container.querySelector('.custom-class');
+      expect(wrapper).toBeInTheDocument();
     });
 
     it('has keyboard navigation support (focus-visible styles)', () => {
@@ -123,7 +128,6 @@ describe('Navigation', () => {
       });
       await user.click(menuButton);
 
-      expect(screen.getByText('Menu')).toBeInTheDocument();
       expect(screen.getByLabelText('Mobile navigation')).toBeInTheDocument();
     });
 
@@ -142,9 +146,10 @@ describe('Navigation', () => {
 
       const mobileNav = screen.getByLabelText('Mobile navigation');
       const buttons = mobileNav.querySelectorAll('button');
-      expect(buttons).toHaveLength(2);
-      expect(buttons[0]).toHaveTextContent('Projects');
-      expect(buttons[1]).toHaveTextContent('Resume');
+      expect(buttons).toHaveLength(3);
+      expect(buttons[0]).toHaveTextContent('Home');
+      expect(buttons[1]).toHaveTextContent('Projects');
+      expect(buttons[2]).toHaveTextContent('Resume');
     });
 
     it('closes mobile menu when a navigation item is clicked', async () => {
@@ -162,12 +167,14 @@ describe('Navigation', () => {
 
       const mobileNav = screen.getByLabelText('Mobile navigation');
       const resumeButton = mobileNav.querySelector(
-        'button:nth-of-type(2)',
+        'button:nth-of-type(3)',
       ) as HTMLButtonElement;
       await user.click(resumeButton);
 
-      // Menu should close - checking by seeing if Menu title is gone
-      expect(screen.queryByText('Menu')).not.toBeInTheDocument();
+      // Menu should close - checking by seeing if mobile nav is gone
+      expect(
+        screen.queryByLabelText('Mobile navigation'),
+      ).not.toBeInTheDocument();
     });
   });
 });

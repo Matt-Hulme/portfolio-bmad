@@ -1,119 +1,161 @@
-import { useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Container } from '@/components/layout/Container';
-import { ProjectGrid } from '@/components/projects/ProjectGrid';
-import { ProjectFilters } from '@/components/projects/ProjectFilters';
-import { ProjectDetailModal } from '@/components/projects/ProjectDetailModal';
-import { ErrorMessage } from '@/components/common/ErrorMessage';
-import { useProjects } from '@/hooks/useProjects';
-import {
-  filterProjects,
-  getUniqueTechnologies,
-  getUniqueRoles,
-} from '@/lib/projectUtils';
-import { useProjectFilters } from '@/hooks/useProjectFilters';
-import type { ProjectResponse } from '@/lib/api';
+import { Button } from '@/components/ui/button';
+import './terminal.css';
 
 export function Home() {
-  // Fetch projects from API
-  const { data: projects, isLoading, error, refetch } = useProjects();
+  const [nameText, setNameText] = useState('');
+  const [showTagline, setShowTagline] = useState(false);
+  const [taglineText, setTaglineText] = useState('');
+  const [projectsBtnText, setProjectsBtnText] = useState('');
+  const [showProjectsBtn, setShowProjectsBtn] = useState(false);
+  const [resumeBtnText, setResumeBtnText] = useState('');
+  const [showResumeBtn, setShowResumeBtn] = useState(false);
+  const [isSkipped, setIsSkipped] = useState(false);
 
-  const {
-    selectedTechnologies,
-    selectedRoles,
-    toggleTechnology,
-    toggleRole,
-    clearFilters,
-  } = useProjectFilters();
+  const name = 'Matt Hulme';
+  const tagline = 'Applied AI Engineer & Full-Stack Developer';
+  const projectsBtn = 'View Projects';
+  const resumeBtn = 'View Resume';
 
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectResponse | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Compute available technologies and roles from fetched projects
-  const availableTechnologies = useMemo(
-    () => (projects ? getUniqueTechnologies(projects) : []),
-    [projects],
-  );
-
-  const availableRoles = useMemo(
-    () => (projects ? getUniqueRoles(projects) : []),
-    [projects],
-  );
-
-  // Filter projects client-side
-  const filteredProjects = useMemo(
-    () =>
-      projects
-        ? filterProjects(projects, {
-            technologies: selectedTechnologies,
-            roles: selectedRoles,
-          })
-        : [],
-    [projects, selectedTechnologies, selectedRoles],
-  );
-
-  const handleProjectClick = (project: ProjectResponse) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
+  const skipAnimation = () => {
+    setIsSkipped(true);
+    setNameText(name);
+    setShowTagline(true);
+    setTaglineText(tagline);
+    setProjectsBtnText(projectsBtn);
+    setShowProjectsBtn(true);
+    setResumeBtnText(resumeBtn);
+    setShowResumeBtn(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedProject(null), 200);
-  };
+  useEffect(() => {
+    if (isSkipped) return;
+
+    // Type out the name
+    let nameIndex = 0;
+    const nameInterval = setInterval(() => {
+      if (nameIndex <= name.length) {
+        setNameText(name.substring(0, nameIndex));
+        nameIndex++;
+      } else {
+        clearInterval(nameInterval);
+        // Brief pause before showing tagline
+        setTimeout(() => setShowTagline(true), 300);
+      }
+    }, 80);
+
+    return () => clearInterval(nameInterval);
+  }, [isSkipped]);
+
+  useEffect(() => {
+    if (!showTagline || isSkipped) return;
+
+    // Type out the tagline
+    let taglineIndex = 0;
+    const taglineInterval = setInterval(() => {
+      if (taglineIndex <= tagline.length) {
+        setTaglineText(tagline.substring(0, taglineIndex));
+        taglineIndex++;
+      } else {
+        clearInterval(taglineInterval);
+        // Type Projects button after tagline is complete
+        setTimeout(() => {
+          let projectsIndex = 0;
+          const projectsInterval = setInterval(() => {
+            if (projectsIndex <= projectsBtn.length) {
+              setProjectsBtnText(projectsBtn.substring(0, projectsIndex));
+              projectsIndex++;
+            } else {
+              clearInterval(projectsInterval);
+              setShowProjectsBtn(true);
+              // Type Resume button after Projects button is complete
+              setTimeout(() => {
+                let resumeIndex = 0;
+                const resumeInterval = setInterval(() => {
+                  if (resumeIndex <= resumeBtn.length) {
+                    setResumeBtnText(resumeBtn.substring(0, resumeIndex));
+                    resumeIndex++;
+                  } else {
+                    clearInterval(resumeInterval);
+                    setShowResumeBtn(true);
+                  }
+                }, 40);
+              }, 100);
+            }
+          }, 40);
+        }, 300);
+      }
+    }, 40);
+
+    return () => clearInterval(taglineInterval);
+  }, [showTagline, isSkipped]);
 
   return (
-    <div className="bg-background overflow-x-hidden py-8 md:py-12">
+    <main
+      className="flex min-h-[calc(100vh-64px-80px)] flex-col py-12 md:py-20"
+      onClick={!showResumeBtn ? skipAnimation : undefined}
+      style={{ cursor: !showResumeBtn ? 'pointer' : 'default' }}
+    >
       <Container>
-        <div className="space-y-8">
-          {/* Hero Section */}
-          <div className="space-y-4">
-            <h1 className="text-primary text-4xl font-bold md:text-5xl">
-              Portfolio
-            </h1>
-            <p className="text-lg text-gray-400">
-              A showcase of diverse projects spanning AI engineering, fullstack
-              development, data analysis, product work, and marketing.
+        <div className="flex flex-col items-center space-y-8 text-center">
+          {/* Name with typing effect */}
+          <h1 className="text-primary font-mono text-5xl font-bold md:text-6xl">
+            {nameText}
+            {!showTagline && <span className="terminal-cursor"></span>}
+          </h1>
+
+          {/* Tagline with typing effect */}
+          {showTagline && (
+            <p className="max-w-2xl text-xl text-gray-300 md:text-2xl">
+              {taglineText}
+              {!showProjectsBtn && projectsBtnText === '' && (
+                <span className="terminal-cursor"></span>
+              )}
             </p>
-          </div>
-
-          {/* Error State */}
-          {error && <ErrorMessage error={error} onRetry={refetch} />}
-
-          {/* Filters Section - only show if not in error state */}
-          {!error && (
-            <aside className="p-y-4 md:p-y-6 bg-gray-900/30">
-              <ProjectFilters
-                selectedTechnologies={selectedTechnologies}
-                selectedRoles={selectedRoles}
-                availableTechnologies={availableTechnologies}
-                availableRoles={availableRoles}
-                onTechnologyToggle={toggleTechnology}
-                onRoleToggle={toggleRole}
-                onClearFilters={clearFilters}
-              />
-            </aside>
           )}
 
-          {/* Projects Grid - passes loading and error states */}
-          {!error && (
-            <section>
-              <ProjectGrid
-                projects={filteredProjects}
-                onProjectClick={handleProjectClick}
-                isLoading={isLoading}
-              />
-            </section>
+          {/* Quick Navigation - buttons type in sequentially */}
+          {projectsBtnText && (
+            <div className="flex gap-4 pt-4">
+              <Link
+                to="/projects"
+                onClick={(e) => {
+                  if (!showResumeBtn) e.preventDefault();
+                }}
+                style={{ pointerEvents: showResumeBtn ? 'auto' : 'none' }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-black"
+                >
+                  {projectsBtnText}
+                  {!showProjectsBtn && (
+                    <span className="terminal-cursor"></span>
+                  )}
+                </Button>
+              </Link>
+              {showProjectsBtn && (
+                <Link
+                  to="/resume"
+                  onClick={(e) => {
+                    if (!showResumeBtn) e.preventDefault();
+                  }}
+                  style={{ pointerEvents: showResumeBtn ? 'auto' : 'none' }}
+                >
+                  <Button size="lg" variant="outline">
+                    {resumeBtnText}
+                    {!showResumeBtn && (
+                      <span className="terminal-cursor"></span>
+                    )}
+                  </Button>
+                </Link>
+              )}
+            </div>
           )}
         </div>
       </Container>
-
-      {/* Project Detail Modal */}
-      <ProjectDetailModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
-    </div>
+    </main>
   );
 }

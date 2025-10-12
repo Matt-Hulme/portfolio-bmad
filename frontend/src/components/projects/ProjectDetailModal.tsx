@@ -69,7 +69,7 @@ export function ProjectDetailModal({
       <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto sm:max-w-[90vw] md:max-w-3xl">
         <DialogHeader className="space-y-2">
           <DialogTitle
-            className={`text-2xl ${
+            className={`text-primary text-2xl ${
               project.slug === 'Matt-Hulme.com' ? '' : 'capitalize'
             }`}
           >
@@ -128,7 +128,7 @@ export function ProjectDetailModal({
                     <Badge
                       key={role.id}
                       variant="default"
-                      className="text-sm text-gray-900"
+                      className="bg-primary text-sm text-black"
                     >
                       {role.name}
                     </Badge>
@@ -186,7 +186,7 @@ function ProjectLinkItem({
       rel="noopener noreferrer"
       className={`group flex flex-1 items-center justify-center gap-2 rounded-lg px-6 py-3 font-medium transition-all ${
         isLive
-          ? 'bg-primary hover:bg-primary/90 text-gray-900'
+          ? 'bg-primary hover:bg-primary/90 text-black'
           : 'border-primary/30 bg-primary/10 text-primary hover:border-primary/50 hover:bg-primary/20 border'
       }`}
     >

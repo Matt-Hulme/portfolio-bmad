@@ -5,7 +5,7 @@
 
 @theme inline {
   /* Hacker Minimalist Design Tokens */
-  --color-primary: #7fda89;
+  --color-primary: #74fb4c;
   --color-background: #0f0f0f;
 
   /* Gray scale */
@@ -185,7 +185,7 @@
 
   /* Links */
   a {
-    color: #7fda89;
+    color: #74fb4c;
     text-underline-offset: 4px;
     transition: color 150ms ease, text-decoration 150ms ease;
   }
