@@ -7,15 +7,15 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check if VPS_IP is provided
-if [ -z "$1" ]; then
-    echo -e "${YELLOW}Usage: ./local-deploy.sh <VPS_IP>${NC}"
-    echo "Example: ./local-deploy.sh 123.456.789.10"
+# Check if VPS_IP and VPS_USER are provided
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo -e "${YELLOW}Usage: ./local-deploy.sh <VPS_IP> <VPS_USER>${NC}"
+    echo "Example: ./local-deploy.sh 123.456.789.10 myuser"
     exit 1
 fi
 
 VPS_IP=$1
-VPS_USER="root"
+VPS_USER=$2
 
 echo -e "${BLUE}🚀 Starting deployment to VPS: ${VPS_IP}${NC}"
 echo ""
